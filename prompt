@@ -1,140 +1,134 @@
-Use the attached screenshot as the PRIMARY UI reference.
+Use the attached screenshots as the source of truth.
 
-I want my existing React application to match this layout as closely as possible.
+The Create Team page already has the correct layout. I want the Role Assignments and Review pages to use the EXACT SAME page shell.
 
 DO NOT redesign the application.
-DO NOT change any business logic.
-DO NOT change field names, validation, or functionality.
-
-Replicate the layout exactly.
+DO NOT change business logic.
+DO NOT change existing React components unless required for layout consistency.
 
 ========================================
-PAGE LAYOUT
+GLOBAL PAGE LAYOUT
 ========================================
 
-Create a three-region layout.
+Every step (Create Team, Role Assignments, Review) must share the same page shell.
 
-1. LEFT SIDEBAR
-- Fixed on the left.
-- Width approximately 200px.
-- Dark navy (#232B45).
-- Full viewport height.
-- Never scrolls.
-- Include menu groups exactly like the screenshot.
-- Orange highlight for the selected menu.
-- White icons and text.
+The page should consist of:
 
-2. TOP HEADER
-- Fixed across the top of the content area.
-- White background.
-- Height approximately 64px.
-- Right side contains:
-  - Notifications icon
-  - "Self Serve Home"
-  - User profile icon
-- Bottom border (#E5E7EB).
-
-3. MAIN CONTENT
-- Occupies remaining width.
-- Background #F8FAFC.
-- Only this section scrolls vertically.
-- Sidebar and header must remain fixed.
+• Fixed left navigation
+• Fixed top header
+• Scrollable content area
+• Fixed bottom action bar
 
 ========================================
-CONTENT AREA
+LEFT SIDEBAR
 ========================================
 
-Inside the scrollable content:
-
-Top spacing:
-- 32px from header.
-
-Title:
-ADO Team Onboarding
-
-Subtitle:
-Deploy services, provision environments, and manage resources with ease.
-
-32px spacing.
-
-Centered horizontal stepper.
-
-40px spacing.
-
-Large white Create Team card.
-
-Inside the card:
-- CREATE TEAM tab
-- Divider
-- Project Details
-- Existing form controls
-
-Keep all controls exactly where they are.
+- Fixed position
+- Full viewport height
+- Never scroll
+- Same width on every page
+- Preserve selected menu styling
 
 ========================================
-CARD
+TOP HEADER
 ========================================
 
-Background:
-White
-
-Border:
-1px solid #E5E7EB
-
-Border Radius:
-10px
-
-Shadow:
-0 2px 6px rgba(0,0,0,.05)
-
-Padding:
-24px
+- Fixed at top
+- White background
+- Full width excluding sidebar
+- Never scroll
+- Keep notification icon
+- Keep Self Serve Home
+- Keep profile icon
 
 ========================================
-SCROLLING
+MAIN CONTENT
 ========================================
 
-Only the form/card scrolls.
+Only this area scrolls.
 
-The following must NEVER move:
+Each page should contain:
 
-✓ Left sidebar
-✓ Top header
-✓ Bottom buttons
+Page title
+
+Subtitle
+
+Stepper
+
+Content Card
+
+Spacing should remain identical across all steps.
+
+========================================
+ROLE ASSIGNMENTS PAGE
+========================================
+
+Keep the existing UI exactly as it is.
+
+Do NOT move cards.
+
+Do NOT redesign role groups.
+
+Only improve layout consistency.
+
+The Role Assignments page should scroll smoothly even with many role groups.
 
 ========================================
 BOTTOM ACTION BAR
 ========================================
 
-Create a sticky footer inside the content area.
+Every step must have the same sticky footer.
 
-Height:
-72px
+Height: 72px
 
-Background:
-White
+White background
 
-Border top:
-1px solid #E5E7EB
+Border-top: #E5E7EB
 
 Buttons aligned right.
 
-Back
-Next
+Create Team page:
+Back | Next
 
-These buttons must remain visible while scrolling.
+Role Assignments page:
+Back | Next
+
+Review page:
+Back | Submit/Create
+
+The footer must remain visible while scrolling.
+
+========================================
+SCROLLING
+========================================
+
+Use this layout:
+
+App (100vh)
+ ├── Fixed Sidebar
+ ├── Fixed Header
+ └── Main
+      ├── Scrollable Content
+      └── Sticky Footer
+
+Only the content area should scroll.
+
+Sidebar must never move.
+
+Header must never move.
+
+Footer buttons must never move.
 
 ========================================
 IMPORTANT
 ========================================
 
-Do NOT redesign.
+Maintain the exact appearance of the current screenshots.
 
-Do NOT invent new layouts.
+Only make the layout consistent across all pages.
 
-Match the screenshot as closely as possible.
+Do not redesign.
 
-Return the complete updated App.jsx and styles.css.
+Do not remove components.
 
-
-"Treat the attached screenshot as the source of truth. If my current implementation differs from the screenshot, update my code to match the screenshot's spacing, alignment, colors, fixed sidebar, fixed header, sticky footer, and scrolling behavior."
+Return the complete updated React components and styles.css.
