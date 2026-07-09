@@ -1,0 +1,161 @@
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.review-header h2 {
+  margin: 0 0 6px;
+  font-size: 24px;
+}
+
+.review-header p {
+  margin: 0;
+  color: #64748b;
+}
+
+.review-status {
+  background: #eff6ff;
+  color: #2563eb;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.summary-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  background: #f8fbff;
+  border: 1px solid #dbeafe;
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 24px;
+}
+
+.summary-strip small {
+  display: block;
+  color: #64748b;
+  margin-bottom: 6px;
+}
+
+.summary-strip strong {
+  color: #0f172a;
+}
+
+.review-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.section {
+  background: #ffffff;
+  border: 1px solid #dbe3ef;
+  border-radius: 14px;
+  padding: 24px;
+}
+
+.section h3 {
+  margin-top: 0;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.section h4 {
+  margin: 22px 0 10px;
+  color: #1e40af;
+  font-size: 14px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 14px;
+}
+
+.row span {
+  color: #475569;
+}
+
+.row b {
+  color: #0f172a;
+}
+
+.resource-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.resource-cards div {
+  background: #f8fbff;
+  border: 1px solid #dbeafe;
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+}
+
+.resource-cards strong {
+  display: block;
+  font-size: 24px;
+  color: #2563eb;
+}
+
+.resource-cards span {
+  font-size: 13px;
+  color: #64748b;
+}
+
+.group-list {
+  display: grid;
+  gap: 10px;
+}
+
+.group-list div {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+  color: #0f172a;
+}
+
+.info-banner {
+  margin-top: 24px;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1e3a8a;
+  padding: 16px 18px;
+  border-radius: 12px;
+}
+
+.info-banner p {
+  margin: 6px 0 0;
+}
+
+.outline-btn {
+  margin-top: 22px;
+  color: #2563eb;
+  border-color: #2563eb;
+  background: white;
+}
+
+.form-body {
+  overflow-y: auto;
+  padding: 24px;
+  flex: 1;
+}
+
+.form-footer {
+  background: white;
+  border-top: 1px solid #e5e7eb;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+}
