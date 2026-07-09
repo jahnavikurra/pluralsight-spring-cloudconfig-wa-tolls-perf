@@ -1,0 +1,140 @@
+Use the attached screenshot as the PRIMARY UI reference.
+
+I want my existing React application to match this layout as closely as possible.
+
+DO NOT redesign the application.
+DO NOT change any business logic.
+DO NOT change field names, validation, or functionality.
+
+Replicate the layout exactly.
+
+========================================
+PAGE LAYOUT
+========================================
+
+Create a three-region layout.
+
+1. LEFT SIDEBAR
+- Fixed on the left.
+- Width approximately 200px.
+- Dark navy (#232B45).
+- Full viewport height.
+- Never scrolls.
+- Include menu groups exactly like the screenshot.
+- Orange highlight for the selected menu.
+- White icons and text.
+
+2. TOP HEADER
+- Fixed across the top of the content area.
+- White background.
+- Height approximately 64px.
+- Right side contains:
+  - Notifications icon
+  - "Self Serve Home"
+  - User profile icon
+- Bottom border (#E5E7EB).
+
+3. MAIN CONTENT
+- Occupies remaining width.
+- Background #F8FAFC.
+- Only this section scrolls vertically.
+- Sidebar and header must remain fixed.
+
+========================================
+CONTENT AREA
+========================================
+
+Inside the scrollable content:
+
+Top spacing:
+- 32px from header.
+
+Title:
+ADO Team Onboarding
+
+Subtitle:
+Deploy services, provision environments, and manage resources with ease.
+
+32px spacing.
+
+Centered horizontal stepper.
+
+40px spacing.
+
+Large white Create Team card.
+
+Inside the card:
+- CREATE TEAM tab
+- Divider
+- Project Details
+- Existing form controls
+
+Keep all controls exactly where they are.
+
+========================================
+CARD
+========================================
+
+Background:
+White
+
+Border:
+1px solid #E5E7EB
+
+Border Radius:
+10px
+
+Shadow:
+0 2px 6px rgba(0,0,0,.05)
+
+Padding:
+24px
+
+========================================
+SCROLLING
+========================================
+
+Only the form/card scrolls.
+
+The following must NEVER move:
+
+✓ Left sidebar
+✓ Top header
+✓ Bottom buttons
+
+========================================
+BOTTOM ACTION BAR
+========================================
+
+Create a sticky footer inside the content area.
+
+Height:
+72px
+
+Background:
+White
+
+Border top:
+1px solid #E5E7EB
+
+Buttons aligned right.
+
+Back
+Next
+
+These buttons must remain visible while scrolling.
+
+========================================
+IMPORTANT
+========================================
+
+Do NOT redesign.
+
+Do NOT invent new layouts.
+
+Match the screenshot as closely as possible.
+
+Return the complete updated App.jsx and styles.css.
+
+
+"Treat the attached screenshot as the source of truth. If my current implementation differs from the screenshot, update my code to match the screenshot's spacing, alignment, colors, fixed sidebar, fixed header, sticky footer, and scrolling behavior."
