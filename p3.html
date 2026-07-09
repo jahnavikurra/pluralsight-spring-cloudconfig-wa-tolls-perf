@@ -1,0 +1,105 @@
+<section id="reviewPage" class="card">
+  <div class="tab-title">
+    <span>CREATE TEAM</span>
+  </div>
+
+  <div class="form-body">
+
+    <div class="review-header">
+      <div>
+        <h2>Review Before Submit</h2>
+        <p>Please verify the team details and resources before submitting.</p>
+      </div>
+      <div class="review-status">Step 3 of 3</div>
+    </div>
+
+    <div class="summary-strip">
+      <div>
+        <small>Project</small>
+        <strong>AEM Platform</strong>
+      </div>
+      <div>
+        <small>Team</small>
+        <strong>AI</strong>
+      </div>
+      <div>
+        <small>Resources</small>
+        <strong>10 Groups</strong>
+      </div>
+      <div>
+        <small>Board Type</small>
+        <strong>Open</strong>
+      </div>
+    </div>
+
+    <div class="review-grid">
+
+      <div class="section">
+        <h3>Team Details</h3>
+
+        <h4>Project</h4>
+        <div class="row"><span>Project Name</span><b>AEM Platform</b></div>
+        <div class="row"><span>Solution Name</span><b>AI</b></div>
+
+        <h4>Team</h4>
+        <div class="row"><span>Team Name</span><b>AEM Platform</b></div>
+        <div class="row"><span>Team Prefix</span><b>AEC_PS</b></div>
+        <div class="row"><span>Domain Prefix</span><b>AI</b></div>
+
+        <h4>Configuration</h4>
+        <div class="row"><span>Repository Name</span><b>ai-aec_ps</b></div>
+        <div class="row"><span>Build Type</span><b>Not specified</b></div>
+        <div class="row"><span>Deploy Type</span><b>Not specified</b></div>
+        <div class="row"><span>Justification</span><b>test</b></div>
+
+        <button class="outline-btn" onclick="showDetails()">Edit Details</button>
+      </div>
+
+      <div class="section">
+        <h3>Resources to be Created</h3>
+
+        <div class="resource-cards">
+          <div>
+            <strong>10</strong>
+            <span>Groups</span>
+          </div>
+          <div>
+            <strong>1</strong>
+            <span>Repository</span>
+          </div>
+          <div>
+            <strong>3</strong>
+            <span>Role Sets</span>
+          </div>
+        </div>
+
+        <h4>Groups</h4>
+
+        <div class="group-list">
+          <div>✓ Board Users</div>
+          <div>✓ Product Managers</div>
+          <div>✓ Prod Release Engineers</div>
+          <div>✓ Non-Prod Release Engineers</div>
+          <div>✓ Prod Tech Leads</div>
+          <div>✓ Non-Prod Tech Leads</div>
+          <div>✓ Testers</div>
+          <div>✓ Prod Contributors</div>
+          <div>✓ Non-Prod Contributors</div>
+          <div>✓ Team Admins</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="info-banner">
+      <strong>ⓘ Provisioning starts immediately after submission.</strong>
+      <p>Changes cannot be made after the request is submitted.</p>
+    </div>
+
+  </div>
+
+  <div class="form-footer">
+    <button onclick="showDetails()">Back</button>
+    <button class="primary" onclick="showSubmitted()">Submit</button>
+  </div>
+</section>
