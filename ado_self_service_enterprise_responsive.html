@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ADO Self Service Home</title>
+  <style>
+    :root{
+      --sidebar: 242px;
+      --topbar: 82px;
+      --navy:#06336f;
+      --navy-2:#0a448d;
+      --blue:#0b63e6;
+      --blue-soft:#eef5ff;
+      --ink:#0b1a3c;
+      --muted:#55627a;
+      --line:#dce5f1;
+      --page:#fbfdff;
+      --card:#fff;
+      --shadow:0 6px 18px rgba(24,62,116,.06);
+      --content-max:1600px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;font-family:Inter,"Segoe UI",Arial,sans-serif;background:var(--page);color:var(--ink)}
+    body{overflow-x:hidden}
+    a{text-decoration:none;color:inherit}
+    button,input{font:inherit}
+
+    .app{
+      min-height:100vh;
+      display:grid;
+      grid-template-columns:var(--sidebar) minmax(0,1fr);
+      background:linear-gradient(180deg,#fff 0%,#fbfdff 100%);
+    }
+
+    /* Sidebar */
+    .sidebar{
+      position:sticky;
+      top:0;
+      height:100vh;
+      padding:26px 18px 22px;
+      display:flex;
+      flex-direction:column;
+      color:#fff;
+      background:linear-gradient(180deg,#062e67 0%,#073d82 52%,#062f6a 100%);
+    }
+    .brand-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{font-size:21px;font-weight:750;letter-spacing:-.35px}
+    .collapse{border:0;background:transparent;color:#fff;font-size:28px;cursor:pointer}
+    .version{font-size:13px;color:rgba(255,255,255,.72);margin-top:9px}
+
+    .nav-section{margin-top:42px}
+    .nav-section.history{margin-top:24px;padding-top:24px;border-top:1px solid rgba(255,255,255,.16)}
+    .nav-label{font-size:13px;letter-spacing:.5px;text-transform:uppercase;color:rgba(255,255,255,.66);margin:0 10px 10px}
+    .nav{display:grid;gap:6px}
+    .nav a{
+      min-height:46px;
+      padding:0 12px;
+      border-radius:8px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-size:14.5px;
+      color:rgba(255,255,255,.94);
+    }
+    .nav a:hover{background:rgba(255,255,255,.07)}
+    .nav a.active{background:#0d55ad}
+    .nav svg{width:20px;height:20px;flex:0 0 auto}
+    .sidebar-bottom{margin-top:auto;padding-top:18px;border-top:1px solid rgba(255,255,255,.16);display:grid;gap:7px}
+    .sidebar-bottom a{min-height:38px;padding:0 8px;display:flex;align-items:center;gap:11px;font-size:14px}
+    .sidebar-bottom svg{width:19px;height:19px}
+
+    /* Main */
+    .main{min-width:0}
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:20;
+      height:var(--topbar);
+      padding:0 clamp(22px,2.3vw,42px);
+      border-bottom:1px solid #e6edf5;
+      background:rgba(255,255,255,.96);
+      backdrop-filter:blur(8px);
+      display:grid;
+      grid-template-columns:auto minmax(300px,560px) 1fr auto;
+      align-items:center;
+      gap:18px;
+    }
+
+    .mini-logo{
+      width:30px;height:30px;
+      display:grid;
+      grid-template-columns:repeat(2,10px);
+      grid-template-rows:repeat(2,10px);
+      gap:4px;
+      place-content:center;
+    }
+    .mini-logo span{border-radius:4px}
+    .mini-logo span:nth-child(1){background:#1386d8}
+    .mini-logo span:nth-child(2){background:#f0a000}
+    .mini-logo span:nth-child(3){background:#169d9d}
+    .mini-logo span:nth-child(4){background:#f2b11a}
+
+    .search{
+      height:46px;
+      display:flex;
+      align-items:center;
+      gap:11px;
+      border:1px solid #d6dfeb;
+      border-radius:10px;
+      padding:0 14px;
+      background:#fff;
+      color:#6a7890;
+    }
+    .search svg{width:21px;height:21px}
+    .search input{width:100%;border:0;outline:0;background:transparent;font-size:15.5px;color:var(--ink)}
+    .search input::placeholder{color:#8d99ad}
+    .page-name{justify-self:end;font-weight:700;font-size:15.5px;white-space:nowrap}
+    .top-actions{display:flex;align-items:center;gap:12px}
+    .top-btn{width:34px;height:34px;border:0;background:transparent;color:var(--ink);padding:4px;display:grid;place-items:center;cursor:pointer;position:relative}
+    .top-btn svg{width:24px;height:24px}
+    .profile{color:var(--blue)}
+    .dot{position:absolute;width:8px;height:8px;border-radius:50%;background:#ff3b30;right:3px;top:2px;box-shadow:0 0 0 2px #fff}
+
+    .content{
+      width:min(calc(100% - clamp(34px,5vw,84px)),var(--content-max));
+      margin:0 auto;
+      padding:clamp(34px,4.5vh,58px) 0 42px;
+    }
+
+    /* Hero */
+    .hero{
+      display:grid;
+      grid-template-columns:minmax(390px,.95fr) minmax(520px,1.05fr);
+      align-items:center;
+      gap:clamp(30px,4vw,70px);
+      margin-bottom:clamp(34px,4.6vh,54px);
+    }
+    .hero h1{margin:0 0 12px;font-size:clamp(34px,2.5vw,48px);line-height:1.06;letter-spacing:-1.2px}
+    .hero p{margin:0;max-width:650px;color:var(--muted);font-size:clamp(15px,1vw,18px);line-height:1.62}
+
+    .flow{
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      gap:8px;
+      min-width:0;
+    }
+    .ado{
+      width:68px;height:68px;display:grid;place-items:center;flex:0 0 auto
+    }
+    .ado svg{width:60px;height:60px}
+    .connector{
+      height:2px;
+      min-width:20px;
+      max-width:46px;
+      flex:1 1 36px;
+      background:repeating-linear-gradient(to right,#9fc0f3 0 8px,transparent 8px 14px);
+    }
+    .flow-item{width:88px;text-align:center;flex:0 0 auto}
+    .flow-circle{
+      width:70px;height:70px;margin:0 auto;border-radius:50%;
+      border:1px solid #ccdafa;background:#f8fbff;color:var(--blue);
+      display:grid;place-items:center;
+    }
+    .flow-circle svg{width:31px;height:31px}
+    .flow-label{margin-top:8px;font-size:13px;color:#536078}
+
+    /* Cards */
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:clamp(18px,1.7vw,28px);
+      align-items:stretch;
+    }
+    .card{
+      min-height:220px;
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:12px;
+      box-shadow:var(--shadow);
+      padding:26px 26px 22px;
+      display:flex;
+      flex-direction:column;
+      transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;
+    }
+    .card:hover{
+      transform:translateY(-2px);
+      border-color:#aac7f4;
+      box-shadow:0 10px 24px rgba(24,62,116,.09);
+    }
+    .card-icon{width:44px;height:44px;color:var(--blue);display:grid;place-items:center;margin-bottom:15px}
+    .card-icon svg{width:38px;height:38px}
+    .card h2{font-size:clamp(17px,1.03vw,20px);margin:0 0 10px;line-height:1.25}
+    .card p{margin:0;color:var(--muted);font-size:clamp(13.5px,.86vw,15.5px);line-height:1.62;max-width:34ch}
+    .arrow{width:27px;height:27px;margin-top:auto;margin-left:auto;color:var(--blue);transition:transform .18s ease}
+    .card:hover .arrow{transform:translateX(4px)}
+    .environment{grid-column:1}
+
+    /* 24" / common 1920px screens */
+    @media (min-width:1500px) and (max-width:2199px){
+      :root{--content-max:1540px}
+      .card{min-height:228px}
+    }
+
+    /* 27" QHD / large desktop */
+    @media (min-width:2200px){
+      :root{
+        --sidebar:270px;
+        --topbar:88px;
+        --content-max:1780px;
+      }
+      .sidebar{padding-left:22px;padding-right:22px}
+      .brand{font-size:23px}
+      .content{padding-top:60px}
+      .hero{margin-bottom:58px}
+      .card{min-height:245px;padding:30px 30px 24px}
+      .card h2{font-size:21px}
+      .card p{font-size:16px}
+      .flow-circle{width:76px;height:76px}
+      .flow-item{width:94px}
+    }
+
+    /* 32" / 4K */
+    @media (min-width:3000px){
+      :root{
+        --sidebar:300px;
+        --topbar:96px;
+        --content-max:1950px;
+      }
+      .content{width:min(calc(100% - 120px),var(--content-max))}
+      .hero h1{font-size:54px}
+      .hero p{font-size:20px}
+      .card{min-height:260px}
+      .card h2{font-size:22px}
+      .card p{font-size:17px}
+    }
+
+    /* Reduced effective width due to Windows scaling / browser zoom */
+    @media (max-width:1280px){
+      :root{--sidebar:215px}
+      .sidebar{padding-left:14px;padding-right:14px}
+      .content{width:calc(100% - 42px)}
+      .hero{grid-template-columns:minmax(340px,.9fr) minmax(470px,1.1fr);gap:24px}
+      .flow-item{width:72px}
+      .flow-circle{width:62px;height:62px}
+      .flow-circle svg{width:28px;height:28px}
+      .flow-label{font-size:12px}
+      .ado{width:58px;height:58px}
+      .ado svg{width:52px;height:52px}
+      .cards{gap:18px}
+      .card{min-height:205px;padding:22px}
+    }
+
+    /* 3 -> 2 columns when available content becomes tight */
+    @media (max-width:1080px){
+      .app{grid-template-columns:1fr}
+      .sidebar{display:none}
+      .topbar{grid-template-columns:auto minmax(220px,1fr) auto;padding:0 16px}
+      .page-name{display:none}
+      .content{width:min(calc(100% - 30px),980px)}
+      .hero{grid-template-columns:1fr;gap:24px}
+      .flow{justify-content:center}
+      .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .environment{grid-column:auto}
+    }
+
+    /* Mobile / narrow tablet */
+    @media (max-width:650px){
+      :root{--topbar:68px}
+      .topbar{grid-template-columns:auto 1fr auto;gap:8px;padding:0 10px}
+      .mini-logo{transform:scale(.82)}
+      .search{height:40px;padding:0 10px}
+      .search input{font-size:13px}
+      .top-actions{gap:3px}
+      .top-actions .top-btn:nth-child(2){display:none}
+      .content{width:calc(100% - 22px);padding-top:24px}
+      .hero{gap:18px;margin-bottom:24px}
+      .hero h1{font-size:29px;margin-bottom:8px}
+      .hero p{font-size:14px;line-height:1.5}
+      .flow{overflow-x:auto;justify-content:flex-start;padding-bottom:4px}
+      .ado{width:48px;height:48px}
+      .ado svg{width:44px;height:44px}
+      .flow-item{width:58px}
+      .flow-circle{width:50px;height:50px}
+      .flow-circle svg{width:24px;height:24px}
+      .flow-label{font-size:10.5px}
+      .connector{min-width:10px}
+      .cards{grid-template-columns:1fr;gap:13px}
+      .card{
+        min-height:150px;
+        padding:18px;
+        display:grid;
+        grid-template-columns:48px 1fr;
+        grid-template-rows:auto auto auto;
+        column-gap:13px;
+      }
+      .card-icon{width:44px;height:44px;margin:0;grid-row:1/3}
+      .card-icon svg{width:34px;height:34px}
+      .card h2{grid-column:2;font-size:17px;margin:1px 0 6px}
+      .card p{grid-column:2;font-size:13px;line-height:1.5;max-width:none}
+      .arrow{grid-column:2;width:24px;height:24px;margin-top:8px}
+    }
+
+    .card:focus-visible,.nav a:focus-visible,.top-btn:focus-visible{
+      outline:3px solid rgba(11,99,230,.3);
+      outline-offset:3px;
+    }
+    @media (prefers-reduced-motion:reduce){
+      *{transition:none!important}
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div>
+        <div class="brand-row">
+          <div class="brand">Developer Hub</div>
+          <button class="collapse" aria-label="Collapse navigation">‹</button>
+        </div>
+        <div class="version">v1.0.0</div>
+      </div>
+
+      <section class="nav-section">
+        <div class="nav-label">Actions</div>
+        <nav class="nav">
+          <a class="active" href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="9" cy="8" r="3"/><path d="M3 20v-1a6 6 0 0 1 12 0v1"/><circle cx="17" cy="9" r="2.2"/><path d="M15.5 15.5a5 5 0 0 1 5.5 4.5"/></svg>
+            Create ADO Team
+          </a>
+          <a href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="7" cy="4" r="2"/><circle cx="7" cy="19" r="2"/><circle cx="17" cy="10" r="2"/><path d="M7 6v11M9 17c5 0 8-2 8-5"/></svg>
+            Create Repos
+          </a>
+          <a href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="5" cy="12" r="2"/><circle cx="16" cy="5" r="2"/><circle cx="17" cy="18" r="2"/><path d="M7 12h4a5 5 0 0 0 5-5M7 12h4a6 6 0 0 1 6 6"/></svg>
+            Create Pipelines
+          </a>
+        </nav>
+      </section>
+
+      <section class="nav-section history">
+        <div class="nav-label">History</div>
+        <nav class="nav">
+          <a href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l-3 2"/></svg>
+            Recent Actions
+          </a>
+          <a href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v5h5M9 13h6M9 17h6"/></svg>
+            My Requests
+          </a>
+        </nav>
+      </section>
+
+      <div class="sidebar-bottom">
+        <a href="#">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 3h11l3 3v15H5z"/><path d="M8 8h7M8 12h7M8 16h5"/></svg>
+          Documentation
+        </a>
+        <a href="#">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9.7 9a2.5 2.5 0 1 1 3.4 2.3c-.8.4-1.1.9-1.1 1.7"/><circle cx="12" cy="17" r=".7" fill="currentColor"/></svg>
+          Support
+        </a>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="mini-logo" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+        <label class="search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.8-3.8"/></svg>
+          <input type="search" placeholder="Search services, docs, and more..." />
+        </label>
+        <div class="page-name">ADO Self Service Home</div>
+        <div class="top-actions">
+          <button class="top-btn" aria-label="Notifications">
+            <span class="dot"></span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/></svg>
+          </button>
+          <button class="top-btn" aria-label="Settings">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1l2-1.5-2-3.4-2.5 1a7 7 0 0 0-1.7-1L14.3 3h-4.6l-.4 3.1a7 7 0 0 0-1.7 1l-2.5-1-2 3.4 2 1.5a7 7 0 0 0 0 2l-2 1.5 2 3.4 2.5-1a7 7 0 0 0 1.7 1l.4 3.1h4.6l.4-3.1a7 7 0 0 0 1.7-1l2.5 1 2-3.4-2-1.5c.1-.3.1-.7.1-1Z"/></svg>
+          </button>
+          <button class="top-btn profile" aria-label="Profile">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="9" r="3"/><path d="M6.7 18a6.2 6.2 0 0 1 10.6 0"/></svg>
+          </button>
+        </div>
+      </header>
+
+      <section class="content">
+        <div class="hero">
+          <div>
+            <h1>ADO Self Service Home</h1>
+            <p>Choose an Azure DevOps self-service action for teams, repositories, pipelines, or environments.</p>
+          </div>
+
+          <div class="flow" aria-label="ADO workflow">
+            <div class="ado">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <path fill="#0878df" d="M7 23 26 9l30 6v34l-31 7L7 43l15-5V28Z"/>
+                <path fill="#0c63c9" d="M22 28l13-7v24l-13-7Z"/>
+              </svg>
+            </div>
+            <div class="connector"></div>
+            <div class="flow-item">
+              <div class="flow-circle">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="9" cy="8" r="3"/><path d="M3 20v-1a6 6 0 0 1 12 0v1"/><circle cx="17" cy="9" r="2.2"/><path d="M15.5 15.5a5 5 0 0 1 5.5 4.5"/></svg>
+              </div>
+              <div class="flow-label">Team</div>
+            </div>
+            <div class="connector"></div>
+            <div class="flow-item">
+              <div class="flow-circle">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="7" cy="4" r="2"/><circle cx="7" cy="19" r="2"/><circle cx="17" cy="10" r="2"/><path d="M7 6v11M9 17c5 0 8-2 8-5"/></svg>
+              </div>
+              <div class="flow-label">Repos</div>
+            </div>
+            <div class="connector"></div>
+            <div class="flow-item">
+              <div class="flow-circle">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="5" cy="12" r="2"/><circle cx="16" cy="5" r="2"/><circle cx="17" cy="18" r="2"/><path d="M7 12h4a5 5 0 0 0 5-5M7 12h4a6 6 0 0 1 6 6"/></svg>
+              </div>
+              <div class="flow-label">Pipelines</div>
+            </div>
+            <div class="connector"></div>
+            <div class="flow-item">
+              <div class="flow-circle">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9"/></svg>
+              </div>
+              <div class="flow-label">Environments</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cards">
+          <a href="#" class="card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="8" r="3"/><path d="M3 20v-1a6 6 0 0 1 12 0v1"/><circle cx="17" cy="9" r="2.2"/><path d="M15.5 15.5a5 5 0 0 1 5.5 4.5"/></svg>
+            </div>
+            <h2>Create ADO Team</h2>
+            <p>Set up a new team, boards, roles, and ADO DevOps resources under your ADO Project.</p>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+
+          <a href="#" class="card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="7" cy="4" r="2"/><circle cx="7" cy="19" r="2"/><circle cx="17" cy="10" r="2"/><path d="M7 6v11M9 17c5 0 8-2 8-5"/></svg>
+            </div>
+            <h2>Create Repos</h2>
+            <p>Provision a new repository for your existing team under the ADO Project.</p>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+
+          <a href="#" class="card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="5" cy="12" r="2"/><circle cx="16" cy="5" r="2"/><circle cx="17" cy="18" r="2"/><path d="M7 12h4a5 5 0 0 0 5-5M7 12h4a6 6 0 0 1 6 6"/></svg>
+            </div>
+            <h2>Create Pipelines</h2>
+            <p>Provision a new pipeline for your existing team's repository under the ADO Project.</p>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+
+          <a href="#" class="card environment">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9"/></svg>
+            </div>
+            <h2>Provision Environment</h2>
+            <p>Set up environments such as DEV, UAT, and PROD for your existing ADO team's pipelines.</p>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
