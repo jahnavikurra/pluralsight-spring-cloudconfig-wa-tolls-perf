@@ -1,8 +1,8 @@
-# Copilot Prompt — Trace Manage Delivery Plans Permission
+# Trace the final Azure DevOps ACL write
 
-I am debugging why Azure DevOps still shows **Manage delivery plans = Not set** for the TeamAdmins group.
+Do not change `NS_ID_DELIVERY_PLANS`, line 2389, or the existing Manage Delivery Plans special case.
 
-In `utils.py`, the permission is already handled here:
+We have confirmed that `Manage delivery plans` is handled earlier with:
 
 ```python
 if field_key == normalize_perm_name(_S_MANAGE_DELIVERY_PLANS):
@@ -13,32 +13,33 @@ if field_key == normalize_perm_name(_S_MANAGE_DELIVERY_PLANS):
     continue
 ```
 
-And:
+and `_MANAGE_DELIVERY_PLANS_ALLOW_MASK = 33554432`.
 
-```python
-_MANAGE_DELIVERY_PLANS_ALLOW_MASK = 33554432
-```
+Now trace what happens AFTER `resolve_permission_bits_from_fields()`.
 
-Do **not change this code yet**.
+Please:
 
-Please trace the code flow after `resolve_permission_bits_from_fields()` and find:
+1. Find every caller of `resolve_permission_bits_from_fields()`.
+2. Identify which caller is used during TeamAdmins onboarding.
+3. Show where the returned `allow_masks` is iterated.
+4. Show where `token_candidates_for_namespace()` is called.
+5. Show the exact function that POSTs/PUTs the ACL to Azure DevOps.
+6. For `NS_ID_PROJECT`, show the final:
 
-1. Every place where `resolve_permission_bits_from_fields()` is called.
-2. Where the returned `allow_masks` is processed.
-3. Where `token_candidates_for_namespace()` is called.
-4. Where the Azure DevOps `accesscontrolentries` or `accesscontrollists` REST API is called.
-5. What namespace ID, token, descriptor, allow mask, deny mask, and payload are actually sent for `NS_ID_PROJECT`.
-6. Whether `33554432` is preserved in the final `allow` value or gets overwritten/filtered.
-7. Whether an existing `deny` bit for `33554432` needs to be removed.
-8. Which exact token is ultimately used for the Project namespace.
-9. Whether the code considers an HTTP success on an incorrect token as successful and stops trying other tokens.
+   * namespace ID
+   * token selected
+   * group descriptor
+   * allow value
+   * deny value
+   * request URL
+   * JSON payload
+7. Verify whether bit `33554432` is still present in `allow` immediately before the REST call.
+8. Verify whether `33554432` is present in `deny`. If it is, identify where the deny bit must be cleared.
+9. Verify whether the code stops after the first successful HTTP response even if that token does not correspond to the Project Permissions UI.
+10. Do not modify any code yet.
 
-Please **do not make broad refactoring changes** and do not change existing permissions that are already working.
+At the end, tell me the exact function name and line numbers where the final ACL write happens, and identify the smallest likely fix for why Azure DevOps still shows:
 
-First show me the exact functions and line numbers involved in this flow:
+`Manage delivery plans = Not set`
 
-`TeamAdmins → Manage delivery plans → allow_masks[NS_ID_PROJECT] → token → ACL payload → Azure DevOps API`
-
-Then identify the most likely reason the UI remains `Not set`.
-
-Finally, recommend the **smallest targeted code change** needed to make only `Manage delivery plans` become `Allow` without affecting the other existing ADO permissions.
+for the TeamAdmins group.
