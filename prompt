@@ -1,45 +1,46 @@
-# Trace the final Azure DevOps ACL write
+Implement the smallest targeted fix based on the trace you just completed.
 
-Do not change `NS_ID_DELIVERY_PLANS`, line 2389, or the existing Manage Delivery Plans special case.
+Do NOT change:
+- NS_ID_DELIVERY_PLANS
+- line 2389
+- _MANAGE_DELIVERY_PLANS_ALLOW_MASK
+- permission_fields_for_suffix()
+- the existing special case in resolve_permission_bits_from_fields()
+- behavior for unrelated permissions
 
-We have confirmed that `Manage delivery plans` is handled earlier with:
+Problem confirmed:
+For NS_ID_PROJECT, token_candidates_for_namespace() currently returns "/{project_id}" first.
+AdoGroup.ensure_group_permissions_from_fields() tries tokens sequentially and stops on HTTP 200/201/204.
+Therefore "/{project_id}" can be accepted before the actual Project namespace token is tried.
 
-```python
-if field_key == normalize_perm_name(_S_MANAGE_DELIVERY_PLANS):
-    allow_masks[NS_ID_PROJECT] = int(
-        allow_masks.get(NS_ID_PROJECT, 0)
-        | _MANAGE_DELIVERY_PLANS_ALLOW_MASK
-    )
-    continue
-```
+For Manage Delivery Plans, allow_mask contains bit 33554432.
 
-and `_MANAGE_DELIVERY_PLANS_ALLOW_MASK = 33554432`.
+Make a targeted change in AdoGroup.ensure_group_permissions_from_fields() (or the smallest appropriate caller) so that:
 
-Now trace what happens AFTER `resolve_permission_bits_from_fields()`.
+if namespace_id == NS_ID_PROJECT
+and (allow_mask & 33554432) != 0
 
-Please:
+then the FIRST token attempted is exactly:
 
-1. Find every caller of `resolve_permission_bits_from_fields()`.
-2. Identify which caller is used during TeamAdmins onboarding.
-3. Show where the returned `allow_masks` is iterated.
-4. Show where `token_candidates_for_namespace()` is called.
-5. Show the exact function that POSTs/PUTs the ACL to Azure DevOps.
-6. For `NS_ID_PROJECT`, show the final:
+$PROJECT:vstfs:///Classification/TeamProject/{project_id}
 
-   * namespace ID
-   * token selected
-   * group descriptor
-   * allow value
-   * deny value
-   * request URL
-   * JSON payload
-7. Verify whether bit `33554432` is still present in `allow` immediately before the REST call.
-8. Verify whether `33554432` is present in `deny`. If it is, identify where the deny bit must be cleared.
-9. Verify whether the code stops after the first successful HTTP response even if that token does not correspond to the Project Permissions UI.
-10. Do not modify any code yet.
+Keep the existing token candidates afterward as fallbacks.
 
-At the end, tell me the exact function name and line numbers where the final ACL write happens, and identify the smallest likely fix for why Azure DevOps still shows:
+Do NOT globally remove existing token candidates because other permissions are already working.
 
-`Manage delivery plans = Not set`
+Also add temporary debug logging before each ACL write showing:
+- namespace_id
+- token
+- descriptor
+- allow_mask
+- deny_mask
+- response status
 
-for the TeamAdmins group.
+Do not change deny behavior yet.
+
+Before applying the edit, show me:
+1. exact file name
+2. exact line numbers
+3. current code
+4. proposed replacement code
+5. why the change affects Manage Delivery Plans without changing unrelated permissions.
