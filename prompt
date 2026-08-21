@@ -1,109 +1,44 @@
-I need help fixing the **Azure DevOps "Manage delivery plans" permission** in this Python `utils.py` file.
+# Copilot Prompt — Trace Manage Delivery Plans Permission
 
-Current issue:
+I am debugging why Azure DevOps still shows **Manage delivery plans = Not set** for the TeamAdmins group.
 
-* My automation is supposed to set **Project Settings → Permissions → Other → Manage delivery plans = Allow**.
-* The code runs without an obvious error, but Azure DevOps still shows **Not set**.
-* Please inspect the existing code carefully and make the **smallest possible change**. Do not refactor or change unrelated permission logic.
-
-Important details:
+In `utils.py`, the permission is already handled here:
 
 ```python
-_S_MANAGE_DELIVERY_PLANS = "Manage delivery plans"
-
-_MANAGE_DELIVERY_PLANS_ALLOW_MASK = 33554432
-```
-
-`33554432` is the project-level `AGILETOOLS_PLANS` permission.
-
-The correct project security namespace should be:
-
-```text
-52d39943-cb85-4d7f-8fa8-c6baac873819
-```
-
-Currently I have logic similar to:
-
-```python
-matches = _find_matches_for_field(field, index)
-
-if not matches:
-    if field_key == normalize_perm_name(_S_MANAGE_DELIVERY_PLANS):
-        allow_masks[NS_ID_PROJECT] = int(
-            allow_masks.get(NS_ID_PROJECT, 0)
-            | _MANAGE_DELIVERY_PLANS_ALLOW_MASK
-        )
-        continue
-
-    missing.append(field)
-    continue
-```
-
-I suspect this is wrong because the special handling for `"Manage delivery plans"` only executes when `not matches`.
-
-Please do the following:
-
-1. Trace this function end-to-end and confirm how `field`, `field_key`, `matches`, and `allow_masks` are processed.
-
-2. Move/special-case `"Manage delivery plans"` **before** `_find_matches_for_field()` so it is always mapped to the Project namespace and doesn't accidentally match the Delivery Plan security namespace.
-
-The intended logic should be approximately:
-
-```python
-field_key = normalize_perm_name(field)
-
 if field_key == normalize_perm_name(_S_MANAGE_DELIVERY_PLANS):
-    allow_masks[NS_ID_PROJECT] = (
-        int(allow_masks.get(NS_ID_PROJECT, 0))
+    allow_masks[NS_ID_PROJECT] = int(
+        allow_masks.get(NS_ID_PROJECT, 0)
         | _MANAGE_DELIVERY_PLANS_ALLOW_MASK
     )
     continue
-
-matches = _find_matches_for_field(field, index)
-
-if not matches:
-    missing.append(field)
-    continue
 ```
 
-3. Check the rest of `utils.py` to make sure `allow_masks[NS_ID_PROJECT]` is actually sent to Azure DevOps.
-
-4. Verify that the code that applies the permission uses the correct **Project security namespace**:
-
-```text
-52d39943-cb85-4d7f-8fa8-c6baac873819
-```
-
-5. Verify that the permission is applied using the correct **project-level token**, based on the existing project's ID. It should correspond to:
-
-```text
-$PROJECT:vstfs:///Classification/TeamProject/{project_id}
-```
-
-6. Make sure the `33554432` bit is added to the existing allow mask using bitwise OR, without removing other project permissions:
+And:
 
 ```python
-existing_allow | 33554432
+_MANAGE_DELIVERY_PLANS_ALLOW_MASK = 33554432
 ```
 
-7. Check whether the same permission bit exists in a deny mask. If the current code manages deny masks, make sure an existing explicit deny is not preventing Allow from becoming effective. Do not change unrelated deny permissions.
+Do **not change this code yet**.
 
-8. Do NOT change existing permission behavior for:
+Please trace the code flow after `resolve_permission_bits_from_fields()` and find:
 
-* Boards
-* Repositories
-* Pipelines
-* Test Plans
-* Analytics
-* Other project permissions
+1. Every place where `resolve_permission_bits_from_fields()` is called.
+2. Where the returned `allow_masks` is processed.
+3. Where `token_candidates_for_namespace()` is called.
+4. Where the Azure DevOps `accesscontrolentries` or `accesscontrollists` REST API is called.
+5. What namespace ID, token, descriptor, allow mask, deny mask, and payload are actually sent for `NS_ID_PROJECT`.
+6. Whether `33554432` is preserved in the final `allow` value or gets overwritten/filtered.
+7. Whether an existing `deny` bit for `33554432` needs to be removed.
+8. Which exact token is ultimately used for the Project namespace.
+9. Whether the code considers an HTTP success on an incorrect token as successful and stops trying other tokens.
 
-9. Do NOT change function signatures, existing constants, API authentication, or unrelated namespace handling unless absolutely necessary.
+Please **do not make broad refactoring changes** and do not change existing permissions that are already working.
 
-10. Show me:
+First show me the exact functions and line numbers involved in this flow:
 
-* the exact root cause,
-* the exact lines that need to change,
-* the updated code block,
-* and explain the change in beginner-friendly terms.
+`TeamAdmins → Manage delivery plans → allow_masks[NS_ID_PROJECT] → token → ACL payload → Azure DevOps API`
 
-Before editing, first trace where `allow_masks` is created and where it is finally sent to the Azure DevOps REST API. I want to make sure the problem is not only in the permission-matching section.
+Then identify the most likely reason the UI remains `Not set`.
+
+Finally, recommend the **smallest targeted code change** needed to make only `Manage delivery plans` become `Allow` without affecting the other existing ADO permissions.
