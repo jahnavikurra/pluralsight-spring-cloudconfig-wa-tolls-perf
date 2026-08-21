@@ -1,46 +1,84 @@
-Implement the smallest targeted fix based on the trace you just completed.
+# Implement targeted Manage Delivery Plans token fix
+
+Based on the trace you just completed, implement the smallest safe code change.
+
+Confirmed behavior:
+
+* `Manage delivery plans` correctly produces:
+
+  * namespace: `NS_ID_PROJECT`
+  * allow bit: `33554432`
+* `AdoGroup.ensure_group_permissions_from_fields()` gets the Project token candidates.
+* The first token currently attempted is `/{project_id}`.
+* The code stops after the first successful HTTP 200/201/204 response.
+* Therefore the correct Project token may never be attempted.
 
 Do NOT change:
-- NS_ID_DELIVERY_PLANS
-- line 2389
-- _MANAGE_DELIVERY_PLANS_ALLOW_MASK
-- permission_fields_for_suffix()
-- the existing special case in resolve_permission_bits_from_fields()
-- behavior for unrelated permissions
 
-Problem confirmed:
-For NS_ID_PROJECT, token_candidates_for_namespace() currently returns "/{project_id}" first.
-AdoGroup.ensure_group_permissions_from_fields() tries tokens sequentially and stops on HTTP 200/201/204.
-Therefore "/{project_id}" can be accepted before the actual Project namespace token is tried.
+* `NS_ID_DELIVERY_PLANS`
+* line 2389
+* `_MANAGE_DELIVERY_PLANS_ALLOW_MASK`
+* `resolve_permission_bits_from_fields()`
+* `permission_fields_for_suffix()`
+* behavior for other permissions
 
-For Manage Delivery Plans, allow_mask contains bit 33554432.
+Modify the production caller in `group.py` so that ONLY when:
 
-Make a targeted change in AdoGroup.ensure_group_permissions_from_fields() (or the smallest appropriate caller) so that:
+```python
+namespace_id == NS_ID_PROJECT
+```
 
-if namespace_id == NS_ID_PROJECT
-and (allow_mask & 33554432) != 0
+and:
 
-then the FIRST token attempted is exactly:
+```python
+allow_mask & 33554432
+```
 
-$PROJECT:vstfs:///Classification/TeamProject/{project_id}
+is true, the first token attempted is:
 
-Keep the existing token candidates afterward as fallbacks.
+```python
+f"$PROJECT:vstfs:///Classification/TeamProject/{project_id}"
+```
 
-Do NOT globally remove existing token candidates because other permissions are already working.
+Keep all existing tokens afterward as fallbacks and do not remove them.
 
-Also add temporary debug logging before each ACL write showing:
-- namespace_id
-- token
-- descriptor
-- allow_mask
-- deny_mask
-- response status
+The intended behavior should be equivalent to:
 
-Do not change deny behavior yet.
+```python
+tokens = token_candidates_for_namespace(namespace_id, project_id)
 
-Before applying the edit, show me:
-1. exact file name
-2. exact line numbers
-3. current code
-4. proposed replacement code
-5. why the change affects Manage Delivery Plans without changing unrelated permissions.
+if (
+    namespace_id.lower() == NS_ID_PROJECT.lower()
+    and (allow_mask & _MANAGE_DELIVERY_PLANS_ALLOW_MASK)
+):
+    project_token = (
+        f"$PROJECT:vstfs:///Classification/TeamProject/{project_id}"
+    )
+
+    tokens = [
+        project_token,
+        *[token for token in tokens if token != project_token],
+    ]
+```
+
+Reuse the existing constants/imports where possible rather than hardcoding duplicate values.
+
+Before applying the change, show me:
+
+1. Exact file.
+2. Exact line numbers.
+3. Current code.
+4. Proposed replacement code.
+5. Any import required.
+6. Confirm that no unrelated permissions change behavior.
+
+Also add temporary debug logging before each ACE request showing:
+
+* namespace ID
+* token attempted
+* allow mask
+* deny mask
+* resolved descriptor
+* HTTP response status
+
+Do not change deny handling yet.
