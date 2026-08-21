@@ -1,84 +1,12 @@
-# Implement targeted Manage Delivery Plans token fix
+Keep the group.py token-order fix and the regression test.
 
-Based on the trace you just completed, implement the smallest safe code change.
+Remove/undo all temporary changes in base.py.
 
-Confirmed behavior:
+Then run:
+1. the targeted delivery plans regression test
+2. all test_ado_group.py tests
+3. all test_ado_utils.py tests
 
-* `Manage delivery plans` correctly produces:
+Do not make any additional production code changes.
 
-  * namespace: `NS_ID_PROJECT`
-  * allow bit: `33554432`
-* `AdoGroup.ensure_group_permissions_from_fields()` gets the Project token candidates.
-* The first token currently attempted is `/{project_id}`.
-* The code stops after the first successful HTTP 200/201/204 response.
-* Therefore the correct Project token may never be attempted.
-
-Do NOT change:
-
-* `NS_ID_DELIVERY_PLANS`
-* line 2389
-* `_MANAGE_DELIVERY_PLANS_ALLOW_MASK`
-* `resolve_permission_bits_from_fields()`
-* `permission_fields_for_suffix()`
-* behavior for other permissions
-
-Modify the production caller in `group.py` so that ONLY when:
-
-```python
-namespace_id == NS_ID_PROJECT
-```
-
-and:
-
-```python
-allow_mask & 33554432
-```
-
-is true, the first token attempted is:
-
-```python
-f"$PROJECT:vstfs:///Classification/TeamProject/{project_id}"
-```
-
-Keep all existing tokens afterward as fallbacks and do not remove them.
-
-The intended behavior should be equivalent to:
-
-```python
-tokens = token_candidates_for_namespace(namespace_id, project_id)
-
-if (
-    namespace_id.lower() == NS_ID_PROJECT.lower()
-    and (allow_mask & _MANAGE_DELIVERY_PLANS_ALLOW_MASK)
-):
-    project_token = (
-        f"$PROJECT:vstfs:///Classification/TeamProject/{project_id}"
-    )
-
-    tokens = [
-        project_token,
-        *[token for token in tokens if token != project_token],
-    ]
-```
-
-Reuse the existing constants/imports where possible rather than hardcoding duplicate values.
-
-Before applying the change, show me:
-
-1. Exact file.
-2. Exact line numbers.
-3. Current code.
-4. Proposed replacement code.
-5. Any import required.
-6. Confirm that no unrelated permissions change behavior.
-
-Also add temporary debug logging before each ACE request showing:
-
-* namespace ID
-* token attempted
-* allow mask
-* deny mask
-* resolved descriptor
-* HTTP response status
-
-Do not change deny handling yet.
+Show me the final git diff. The only modified production file should be group.py, plus the regression test file test_ado_group.py.
