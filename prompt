@@ -1,12 +1,23 @@
-Keep the group.py token-order fix and the regression test.
 
-Remove/undo all temporary changes in base.py.
+SELECT
+    OBJECT_NAME(fkc.parent_object_id) AS ChildTable,
+    COL_NAME(
+        fkc.parent_object_id,
+        fkc.parent_column_id
+    ) AS ChildColumn,
 
-Then run:
-1. the targeted delivery plans regression test
-2. all test_ado_group.py tests
-3. all test_ado_utils.py tests
+    OBJECT_NAME(fkc.referenced_object_id) AS ParentTable,
+    COL_NAME(
+        fkc.referenced_object_id,
+        fkc.referenced_column_id
+    ) AS ParentColumn
 
-Do not make any additional production code changes.
+FROM sys.foreign_key_columns fkc
 
-Show me the final git diff. The only modified production file should be group.py, plus the regression test file test_ado_group.py.
+WHERE
+    OBJECT_SCHEMA_NAME(fkc.parent_object_id) = 'dbo'
+    AND OBJECT_SCHEMA_NAME(fkc.referenced_object_id) = 'dbo'
+
+ORDER BY
+    ParentTable,
+    ChildTable;
