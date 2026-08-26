@@ -21,3 +21,145 @@ WHERE
 ORDER BY
     ParentTable,
     ChildTable;
+
+
+SELECT
+    p.project_name,
+    p.ado_project_id,
+
+    t.*,
+    tp.*,
+    dp.domain_prefix,
+    dp.description AS domain_description
+
+FROM dbo.teams t
+
+LEFT JOIN dbo.projects p
+    ON t.project_id = p.id
+
+LEFT JOIN dbo.team_prefixes tp
+    ON tp.team_id = t.id
+
+LEFT JOIN dbo.domain_prefixes dp
+    ON dp.id = tp.domain_prefix_id
+
+ORDER BY
+    p.project_name,
+    t.id;
+
+
+
+SELECT
+    p.project_name,
+
+    t.*,
+    tp.*,
+
+    dp.domain_prefix,
+
+    tor.*
+
+FROM dbo.team_onboarding_requests tor
+
+LEFT JOIN dbo.teams t
+    ON tor.team_id = t.id
+
+LEFT JOIN dbo.projects p
+    ON t.project_id = p.id
+
+LEFT JOIN dbo.team_prefixes tp
+    ON tor.team_prefix_id = tp.id
+
+LEFT JOIN dbo.domain_prefixes dp
+    ON tor.domain_prefix_id = dp.id
+
+ORDER BY
+    p.project_name,
+    tor.team_id;
+
+
+
+SELECT
+    p.project_name,
+
+    t.*,
+    tp.*,
+
+    dp.domain_prefix,
+
+    rcr.*
+
+FROM dbo.repo_creation_requests rcr
+
+LEFT JOIN dbo.teams t
+    ON rcr.team_id = t.id
+
+LEFT JOIN dbo.projects p
+    ON t.project_id = p.id
+
+LEFT JOIN dbo.team_prefixes tp
+    ON rcr.team_prefix_id = tp.id
+
+LEFT JOIN dbo.domain_prefixes dp
+    ON rcr.domain_prefix_id = dp.id
+
+ORDER BY
+    p.project_name,
+    rcr.team_id;
+
+
+SELECT
+    p.project_name,
+
+    t.*,
+    tp.*,
+
+    dp.domain_prefix,
+
+    pcr.*
+
+FROM dbo.pipeline_creation_requests pcr
+
+LEFT JOIN dbo.teams t
+    ON pcr.team_id = t.id
+
+LEFT JOIN dbo.projects p
+    ON t.project_id = p.id
+
+LEFT JOIN dbo.team_prefixes tp
+    ON pcr.team_prefix_id = tp.id
+
+LEFT JOIN dbo.domain_prefixes dp
+    ON pcr.domain_prefix_id = dp.id
+
+ORDER BY
+    p.project_name,
+    pcr.team_id;
+
+SELECT
+    p.project_name,
+
+    t.*,
+    tp.*,
+
+    dp.domain_prefix,
+
+    ecr.*
+
+FROM dbo.environment_creation_requests ecr
+
+LEFT JOIN dbo.teams t
+    ON ecr.team_id = t.id
+
+LEFT JOIN dbo.projects p
+    ON t.project_id = p.id
+
+LEFT JOIN dbo.team_prefixes tp
+    ON ecr.team_prefix_id = tp.id
+
+LEFT JOIN dbo.domain_prefixes dp
+    ON ecr.domain_prefix_id = dp.id
+
+ORDER BY
+    p.project_name,
+    ecr.team_id;
