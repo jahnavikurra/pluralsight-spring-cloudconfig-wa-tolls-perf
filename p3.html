@@ -1,105 +1,283 @@
-<section id="reviewPage" class="card">
-  <div class="tab-title">
-    <span>CREATE TEAM</span>
-  </div>
+SELECT
+    'UAT' AS source_environment,
+    *
+FROM dbo.projects
+ORDER BY project_name;
 
-  <div class="form-body">
 
-    <div class="review-header">
-      <div>
-        <h2>Review Before Submit</h2>
-        <p>Please verify the team details and resources before submitting.</p>
-      </div>
-      <div class="review-status">Step 3 of 3</div>
-    </div>
+----------------------------
 
-    <div class="summary-strip">
-      <div>
-        <small>Project</small>
-        <strong>AEM Platform</strong>
-      </div>
-      <div>
-        <small>Team</small>
-        <strong>AI</strong>
-      </div>
-      <div>
-        <small>Resources</small>
-        <strong>10 Groups</strong>
-      </div>
-      <div>
-        <small>Board Type</small>
-        <strong>Open</strong>
-      </div>
-    </div>
+SELECT
+    'UAT' AS source_environment,
 
-    <div class="review-grid">
+    p.project_name,
+    p.ado_project_id,
 
-      <div class="section">
-        <h3>Team Details</h3>
+    t.id AS team_id,
+    t.project_id,
+    t.team_name,
+    t.ado_team_id,
+    t.created_at AS team_created_at,
+    t.updated_at AS team_updated_at,
+    t.is_active AS team_is_active,
 
-        <h4>Project</h4>
-        <div class="row"><span>Project Name</span><b>AEM Platform</b></div>
-        <div class="row"><span>Solution Name</span><b>AI</b></div>
+    tp.id AS team_prefix_id,
+    tp.team_id AS prefix_team_id,
+    tp.team_prefix,
+    tp.realized_at,
+    tp.created_at AS team_prefix_created_at,
+    tp.updated_at AS team_prefix_updated_at,
+    tp.is_active AS team_prefix_is_active
 
-        <h4>Team</h4>
-        <div class="row"><span>Team Name</span><b>AEM Platform</b></div>
-        <div class="row"><span>Team Prefix</span><b>AEC_PS</b></div>
-        <div class="row"><span>Domain Prefix</span><b>AI</b></div>
+FROM dbo.teams t
 
-        <h4>Configuration</h4>
-        <div class="row"><span>Repository Name</span><b>ai-aec_ps</b></div>
-        <div class="row"><span>Build Type</span><b>Not specified</b></div>
-        <div class="row"><span>Deploy Type</span><b>Not specified</b></div>
-        <div class="row"><span>Justification</span><b>test</b></div>
+LEFT JOIN dbo.projects p
+    ON t.project_id = p.id
 
-        <button class="outline-btn" onclick="showDetails()">Edit Details</button>
-      </div>
+LEFT JOIN dbo.team_prefixes tp
+    ON tp.team_id = t.id
 
-      <div class="section">
-        <h3>Resources to be Created</h3>
+ORDER BY
+    p.project_name,
+    t.team_name,
+    tp.team_prefix;
 
-        <div class="resource-cards">
-          <div>
-            <strong>10</strong>
-            <span>Groups</span>
-          </div>
-          <div>
-            <strong>1</strong>
-            <span>Repository</span>
-          </div>
-          <div>
-            <strong>3</strong>
-            <span>Role Sets</span>
-          </div>
-        </div>
 
-        <h4>Groups</h4>
+    -------------------------
 
-        <div class="group-list">
-          <div>✓ Board Users</div>
-          <div>✓ Product Managers</div>
-          <div>✓ Prod Release Engineers</div>
-          <div>✓ Non-Prod Release Engineers</div>
-          <div>✓ Prod Tech Leads</div>
-          <div>✓ Non-Prod Tech Leads</div>
-          <div>✓ Testers</div>
-          <div>✓ Prod Contributors</div>
-          <div>✓ Non-Prod Contributors</div>
-          <div>✓ Team Admins</div>
-        </div>
-      </div>
+    SELECT
+    'UAT' AS source_environment,
+    *
+FROM dbo.domain_prefixes
+ORDER BY domain_prefix;
 
-    </div>
 
-    <div class="info-banner">
-      <strong>ⓘ Provisioning starts immediately after submission.</strong>
-      <p>Changes cannot be made after the request is submitted.</p>
-    </div>
+--------------------------
 
-  </div>
+SELECT
+    'UAT' AS source_environment,
 
-  <div class="form-footer">
-    <button onclick="showDetails()">Back</button>
-    <button class="primary" onclick="showSubmitted()">Submit</button>
-  </div>
-</section>
+    p.project_name,
+    p.ado_project_id,
+
+    t.team_name,
+    t.ado_team_id,
+
+    tp.team_prefix,
+
+    dp.domain_prefix,
+    dp.description AS domain_description,
+
+    tor.*
+
+FROM dbo.team_onboarding_requests tor
+
+LEFT JOIN dbo.teams t
+    ON tor.team_id = t.id
+
+LEFT JOIN dbo.projects p
+    ON t.project_id = p.id
+
+LEFT JOIN dbo.team_prefixes tp
+    ON tor.team_prefix_id = tp.id
+
+LEFT JOIN dbo.domain_prefixes dp
+    ON tor.domain_prefix_id = dp.id
+
+ORDER BY
+    p.project_name,
+    t.team_name,
+    tp.team_prefix;
+
+
+    ----------------------
+
+    SELECT
+    'UAT' AS source_environment,
+
+    p.project_name,
+    p.ado_project_id,
+
+    t.team_name,
+    t.ado_team_id,
+
+    tp.team_prefix,
+
+    dp.domain_prefix,
+    dp.description AS domain_description,
+
+    rcr.*
+
+FROM dbo.repo_creation_requests rcr
+
+LEFT JOIN dbo.teams t
+    ON rcr.team_id = t.id
+
+LEFT JOIN dbo.projects p
+    ON t.project_id = p.id
+
+LEFT JOIN dbo.team_prefixes tp
+    ON rcr.team_prefix_id = tp.id
+
+LEFT JOIN dbo.domain_prefixes dp
+    ON rcr.domain_prefix_id = dp.id
+
+ORDER BY
+    p.project_name,
+    t.team_name,
+    tp.team_prefix;
+
+    ------------------------
+
+
+
+    SELECT
+    'UAT' AS source_environment,
+
+    p.project_name,
+    p.ado_project_id,
+
+    t.team_name,
+    t.ado_team_id,
+
+    tp.team_prefix,
+
+    dp.domain_prefix,
+    dp.description AS domain_description,
+
+    pcr.*
+
+FROM dbo.pipeline_creation_requests pcr
+
+LEFT JOIN dbo.teams t
+    ON pcr.team_id = t.id
+
+LEFT JOIN dbo.projects p
+    ON t.project_id = p.id
+
+LEFT JOIN dbo.team_prefixes tp
+    ON pcr.team_prefix_id = tp.id
+
+LEFT JOIN dbo.domain_prefixes dp
+    ON pcr.domain_prefix_id = dp.id
+
+ORDER BY
+    p.project_name,
+    t.team_name,
+    tp.team_prefix;
+
+    -------------------------
+
+SELECT
+    'UAT' AS source_environment,
+
+    p.project_name,
+    p.ado_project_id,
+
+    t.team_name,
+    t.ado_team_id,
+
+    tp.team_prefix,
+
+    dp.domain_prefix,
+    dp.description AS domain_description,
+
+    pcr.*
+
+FROM dbo.pipeline_creation_requests pcr
+
+LEFT JOIN dbo.teams t
+    ON pcr.team_id = t.id
+
+LEFT JOIN dbo.projects p
+    ON t.project_id = p.id
+
+LEFT JOIN dbo.team_prefixes tp
+    ON pcr.team_prefix_id = tp.id
+
+LEFT JOIN dbo.domain_prefixes dp
+    ON pcr.domain_prefix_id = dp.id
+
+ORDER BY
+    p.project_name,
+    t.team_name,
+    tp.team_prefix;
+
+------------------------
+
+SELECT
+    'UAT' AS source_environment,
+
+    p.project_name,
+    p.ado_project_id,
+
+    t.team_name,
+    t.ado_team_id,
+
+    tp.team_prefix,
+
+    dp.domain_prefix,
+    dp.description AS domain_description,
+
+    ecr.*
+
+FROM dbo.environment_creation_requests ecr
+
+LEFT JOIN dbo.teams t
+    ON ecr.team_id = t.id
+
+LEFT JOIN dbo.projects p
+    ON t.project_id = p.id
+
+LEFT JOIN dbo.team_prefixes tp
+    ON ecr.team_prefix_id = tp.id
+
+LEFT JOIN dbo.domain_prefixes dp
+    ON ecr.domain_prefix_id = dp.id
+
+ORDER BY
+    p.project_name,
+    t.team_name,
+    tp.team_prefix;
+
+
+------------------------
+
+
+WITH referenced_run_ids AS
+(
+    SELECT run_id
+    FROM dbo.team_onboarding_requests
+    WHERE run_id IS NOT NULL
+
+    UNION
+
+    SELECT run_id
+    FROM dbo.repo_creation_requests
+    WHERE run_id IS NOT NULL
+
+    UNION
+
+    SELECT run_id
+    FROM dbo.pipeline_creation_requests
+    WHERE run_id IS NOT NULL
+
+    UNION
+
+    SELECT run_id
+    FROM dbo.environment_creation_requests
+    WHERE run_id IS NOT NULL
+)
+
+SELECT
+    'UAT' AS source_environment,
+    wr.*
+FROM dbo.workflow_runs wr
+
+INNER JOIN referenced_run_ids r
+    ON wr.run_id = r.run_id
+
+ORDER BY
+    wr.run_id;
+
+    
