@@ -1,283 +1,73 @@
-SELECT
-    'UAT' AS source_environment,
-    *
-FROM dbo.projects
-ORDER BY project_name;
-
-
-----------------------------
-
-SELECT
-    'UAT' AS source_environment,
-
-    p.project_name,
-    p.ado_project_id,
-
-    t.id AS team_id,
-    t.project_id,
-    t.team_name,
-    t.ado_team_id,
-    t.created_at AS team_created_at,
-    t.updated_at AS team_updated_at,
-    t.is_active AS team_is_active,
-
-    tp.id AS team_prefix_id,
-    tp.team_id AS prefix_team_id,
-    tp.team_prefix,
-    tp.realized_at,
-    tp.created_at AS team_prefix_created_at,
-    tp.updated_at AS team_prefix_updated_at,
-    tp.is_active AS team_prefix_is_active
-
-FROM dbo.teams t
-
-LEFT JOIN dbo.projects p
-    ON t.project_id = p.id
-
-LEFT JOIN dbo.team_prefixes tp
-    ON tp.team_id = t.id
-
-ORDER BY
-    p.project_name,
-    t.team_name,
-    tp.team_prefix;
-
-
-    -------------------------
-
-    SELECT
-    'UAT' AS source_environment,
-    *
-FROM dbo.domain_prefixes
-ORDER BY domain_prefix;
-
-
---------------------------
-
-SELECT
-    'UAT' AS source_environment,
-
-    p.project_name,
-    p.ado_project_id,
-
-    t.team_name,
-    t.ado_team_id,
-
-    tp.team_prefix,
-
-    dp.domain_prefix,
-    dp.description AS domain_description,
-
-    tor.*
-
-FROM dbo.team_onboarding_requests tor
-
-LEFT JOIN dbo.teams t
-    ON tor.team_id = t.id
-
-LEFT JOIN dbo.projects p
-    ON t.project_id = p.id
-
-LEFT JOIN dbo.team_prefixes tp
-    ON tor.team_prefix_id = tp.id
-
-LEFT JOIN dbo.domain_prefixes dp
-    ON tor.domain_prefix_id = dp.id
-
-ORDER BY
-    p.project_name,
-    t.team_name,
-    tp.team_prefix;
-
-
-    ----------------------
-
-    SELECT
-    'UAT' AS source_environment,
-
-    p.project_name,
-    p.ado_project_id,
-
-    t.team_name,
-    t.ado_team_id,
-
-    tp.team_prefix,
-
-    dp.domain_prefix,
-    dp.description AS domain_description,
-
-    rcr.*
-
-FROM dbo.repo_creation_requests rcr
-
-LEFT JOIN dbo.teams t
-    ON rcr.team_id = t.id
-
-LEFT JOIN dbo.projects p
-    ON t.project_id = p.id
-
-LEFT JOIN dbo.team_prefixes tp
-    ON rcr.team_prefix_id = tp.id
-
-LEFT JOIN dbo.domain_prefixes dp
-    ON rcr.domain_prefix_id = dp.id
-
-ORDER BY
-    p.project_name,
-    t.team_name,
-    tp.team_prefix;
-
-    ------------------------
-
-
-
-    SELECT
-    'UAT' AS source_environment,
-
-    p.project_name,
-    p.ado_project_id,
-
-    t.team_name,
-    t.ado_team_id,
-
-    tp.team_prefix,
-
-    dp.domain_prefix,
-    dp.description AS domain_description,
-
-    pcr.*
-
-FROM dbo.pipeline_creation_requests pcr
-
-LEFT JOIN dbo.teams t
-    ON pcr.team_id = t.id
-
-LEFT JOIN dbo.projects p
-    ON t.project_id = p.id
-
-LEFT JOIN dbo.team_prefixes tp
-    ON pcr.team_prefix_id = tp.id
-
-LEFT JOIN dbo.domain_prefixes dp
-    ON pcr.domain_prefix_id = dp.id
-
-ORDER BY
-    p.project_name,
-    t.team_name,
-    tp.team_prefix;
-
-    -------------------------
-
-SELECT
-    'UAT' AS source_environment,
-
-    p.project_name,
-    p.ado_project_id,
-
-    t.team_name,
-    t.ado_team_id,
-
-    tp.team_prefix,
-
-    dp.domain_prefix,
-    dp.description AS domain_description,
-
-    pcr.*
-
-FROM dbo.pipeline_creation_requests pcr
-
-LEFT JOIN dbo.teams t
-    ON pcr.team_id = t.id
-
-LEFT JOIN dbo.projects p
-    ON t.project_id = p.id
-
-LEFT JOIN dbo.team_prefixes tp
-    ON pcr.team_prefix_id = tp.id
-
-LEFT JOIN dbo.domain_prefixes dp
-    ON pcr.domain_prefix_id = dp.id
-
-ORDER BY
-    p.project_name,
-    t.team_name,
-    tp.team_prefix;
-
-------------------------
-
-SELECT
-    'UAT' AS source_environment,
-
-    p.project_name,
-    p.ado_project_id,
-
-    t.team_name,
-    t.ado_team_id,
-
-    tp.team_prefix,
-
-    dp.domain_prefix,
-    dp.description AS domain_description,
-
-    ecr.*
-
-FROM dbo.environment_creation_requests ecr
-
-LEFT JOIN dbo.teams t
-    ON ecr.team_id = t.id
-
-LEFT JOIN dbo.projects p
-    ON t.project_id = p.id
-
-LEFT JOIN dbo.team_prefixes tp
-    ON ecr.team_prefix_id = tp.id
-
-LEFT JOIN dbo.domain_prefixes dp
-    ON ecr.domain_prefix_id = dp.id
-
-ORDER BY
-    p.project_name,
-    t.team_name,
-    tp.team_prefix;
-
-
-------------------------
-
-
-WITH referenced_run_ids AS
+WITH team_domain_mapping AS
 (
-    SELECT run_id
+    SELECT
+        team_id,
+        team_prefix_id,
+        domain_prefix_id,
+        run_id,
+        'TEAM_ONBOARDING' AS request_type
     FROM dbo.team_onboarding_requests
-    WHERE run_id IS NOT NULL
 
-    UNION
+    UNION ALL
 
-    SELECT run_id
+    SELECT
+        team_id,
+        team_prefix_id,
+        domain_prefix_id,
+        run_id,
+        'REPO_CREATION' AS request_type
     FROM dbo.repo_creation_requests
-    WHERE run_id IS NOT NULL
 
-    UNION
+    UNION ALL
 
-    SELECT run_id
+    SELECT
+        team_id,
+        team_prefix_id,
+        domain_prefix_id,
+        run_id,
+        'PIPELINE_CREATION' AS request_type
     FROM dbo.pipeline_creation_requests
-    WHERE run_id IS NOT NULL
 
-    UNION
+    UNION ALL
 
-    SELECT run_id
+    SELECT
+        team_id,
+        team_prefix_id,
+        domain_prefix_id,
+        run_id,
+        'ENVIRONMENT_CREATION' AS request_type
     FROM dbo.environment_creation_requests
-    WHERE run_id IS NOT NULL
 )
 
-SELECT
-    'UAT' AS source_environment,
-    wr.*
-FROM dbo.workflow_runs wr
+SELECT DISTINCT
+    'DEV' AS source_environment,
 
-INNER JOIN referenced_run_ids r
-    ON wr.run_id = r.run_id
+    p.project_name,
+    t.team_name,
+    tp.team_prefix,
+    dp.domain_prefix,
+
+    m.request_type,
+    m.run_id
+
+FROM team_domain_mapping m
+
+LEFT JOIN dbo.teams t
+    ON m.team_id = t.id
+
+LEFT JOIN dbo.projects p
+    ON t.project_id = p.id
+
+LEFT JOIN dbo.team_prefixes tp
+    ON m.team_prefix_id = tp.id
+
+LEFT JOIN dbo.domain_prefixes dp
+    ON m.domain_prefix_id = dp.id
 
 ORDER BY
-    wr.run_id;
-
-    
+    p.project_name,
+    t.team_name,
+    tp.team_prefix,
+    dp.domain_prefix,
+    m.request_type,
+    m.run_id;
