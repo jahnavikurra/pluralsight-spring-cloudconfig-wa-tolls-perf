@@ -1,73 +1,20 @@
-WITH team_domain_mapping AS
-(
-    SELECT
-        team_id,
-        team_prefix_id,
-        domain_prefix_id,
-        run_id,
-        'TEAM_ONBOARDING' AS request_type
-    FROM dbo.team_onboarding_requests
-
-    UNION ALL
-
-    SELECT
-        team_id,
-        team_prefix_id,
-        domain_prefix_id,
-        run_id,
-        'REPO_CREATION' AS request_type
-    FROM dbo.repo_creation_requests
-
-    UNION ALL
-
-    SELECT
-        team_id,
-        team_prefix_id,
-        domain_prefix_id,
-        run_id,
-        'PIPELINE_CREATION' AS request_type
-    FROM dbo.pipeline_creation_requests
-
-    UNION ALL
-
-    SELECT
-        team_id,
-        team_prefix_id,
-        domain_prefix_id,
-        run_id,
-        'ENVIRONMENT_CREATION' AS request_type
-    FROM dbo.environment_creation_requests
-)
-
-SELECT DISTINCT
-    'DEV' AS source_environment,
-
-    p.project_name,
-    t.team_name,
-    tp.team_prefix,
-    dp.domain_prefix,
-
-    m.request_type,
-    m.run_id
-
-FROM team_domain_mapping m
-
-LEFT JOIN dbo.teams t
-    ON m.team_id = t.id
-
-LEFT JOIN dbo.projects p
-    ON t.project_id = p.id
-
-LEFT JOIN dbo.team_prefixes tp
-    ON m.team_prefix_id = tp.id
-
-LEFT JOIN dbo.domain_prefixes dp
-    ON m.domain_prefix_id = dp.id
-
-ORDER BY
-    p.project_name,
-    t.team_name,
-    tp.team_prefix,
-    dp.domain_prefix,
-    m.request_type,
-    m.run_id;
+= if [Source] = "DEV" then
+    Text.Combine(
+        List.Transform(
+            List.Distinct(
+                List.RemoveNulls(
+                    Table.Column(
+                        Table.SelectRows(
+                            [Rows],
+                            each [source_environment] = "DEV"
+                        ),
+                        "run_id"
+                    )
+                )
+            ),
+            each Text.From(_)
+        ),
+        "#(lf)"
+    )
+else
+    null
