@@ -1,4 +1,4 @@
-= if Text.Contains(Text.Upper(Text.Trim(Text.From([Source]))), "UAT") then
+= if Text.Upper(Text.Trim(Text.From([Source]))) = "UAT" then
     Text.Combine(
         List.Transform(
             List.Distinct(
