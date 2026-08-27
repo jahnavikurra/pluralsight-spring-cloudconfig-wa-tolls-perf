@@ -1,4 +1,4 @@
-= if [Source] = "UAT" then
+= if Text.Contains(Text.Upper(Text.Trim(Text.From([Source]))), "UAT") then
     Text.Combine(
         List.Transform(
             List.Distinct(
@@ -6,7 +6,7 @@
                     Table.Column(
                         Table.SelectRows(
                             [Rows],
-                            each [source_environment] = "UAT"
+                            each Text.Upper(Text.Trim(Text.From([source_environment]))) = "UAT"
                         ),
                         "run_id"
                     )
