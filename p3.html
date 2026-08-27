@@ -1,4 +1,4 @@
-= if [Source] = "DEV" then
+= if [Source] = "UAT" then
     Text.Combine(
         List.Transform(
             List.Distinct(
@@ -6,7 +6,7 @@
                     Table.Column(
                         Table.SelectRows(
                             [Rows],
-                            each [source_environment] = "DEV"
+                            each [source_environment] = "UAT"
                         ),
                         "run_id"
                     )
