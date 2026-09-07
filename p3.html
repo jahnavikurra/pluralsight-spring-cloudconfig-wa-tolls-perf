@@ -1,6 +1,3 @@
-Get-WinEvent -FilterHashtable @{
-    LogName='Microsoft-Windows-CodeIntegrity/Operational'
-    StartTime=(Get-Date).AddHours(-1)
-} | Where-Object {
-    $_.Message -match 'msiexec|Windows Installer'
-} | Format-List TimeCreated, Id, LevelDisplayName, Message
+Get-WinEvent -LogName "Microsoft-Windows-AppLocker/EXE and DLL" -MaxEvents 50 |
+Where-Object { $_.Message -match 'msiexec' } |
+Format-List TimeCreated, Id, LevelDisplayName, Message
