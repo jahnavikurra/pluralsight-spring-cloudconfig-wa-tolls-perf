@@ -1,371 +1,75 @@
-Act as a senior React architect and enterprise frontend engineer.
+I am working in a new feature branch of a production Next.js + React + TypeScript application.
 
-I have an existing React UI repository that is already in production. A lot of the code was generated from Figma/AI and developed incrementally, so the repository may not be following consistent React standards.
+This repository is already running in production, so the highest priority is:
+- DO NOT change existing application behavior.
+- DO NOT refactor application source code.
+- DO NOT make these new quality checks block developers or deployments yet.
+
+I want to implement PR0 only: a report-only frontend quality baseline.
+
+Before changing anything, analyze the repository and show me:
+
+1. Current package.json scripts and relevant devDependencies.
+2. Current tsconfig.json configuration.
+3. Current next.config.js / next.config.ts configuration.
+4. Existing Azure DevOps CI/CD YAML files.
+5. Whether ESLint, Prettier, TypeScript checking, Vitest/Jest, or other quality tools already exist.
+6. Whether `next.config` currently has:
+   typescript.ignoreBuildErrors = true
+   or any ESLint/build bypass settings.
+7. Which files you recommend changing for PR0.
 
 IMPORTANT:
-- Do NOT change any code yet.
-- Do NOT refactor anything yet.
-- Do NOT delete or rename files.
-- Do NOT change functionality, UI behavior, API calls, routes, or business logic.
-- First analyze the complete repository and give me a detailed assessment.
-- Assume this is a production application and changes must be introduced gradually without blocking current development.
-
-Please analyze the repository end-to-end.
-
-1. REPOSITORY STRUCTURE
-Analyze:
-- folder structure
-- src organization
-- components
-- pages
-- layouts
-- hooks
-- services
-- API layer
-- utilities
-- constants
-- types/interfaces
-- styles
-- assets
-- routing
-- state management
-
-Identify:
-- files in incorrect locations
-- overly large components
-- duplicated components
-- duplicated logic
-- missing reusable components
-- inconsistent folder organization
-- circular dependencies
-- unnecessary files
-- dead code
-
-Do not propose moving files until you explain why.
-
-2. REACT CODE QUALITY
-Review the React implementation for:
-- component design
-- component responsibilities
-- prop usage
-- state management
-- useState
-- useEffect
-- useMemo
-- useCallback
-- custom hooks
-- conditional rendering
-- event handlers
-- forms
-- API calls
-- error handling
-- loading states
-
-Identify:
-- unnecessary re-renders
-- incorrect hooks usage
-- large components
-- business logic mixed with UI
-- duplicate logic
-- deeply nested JSX
-- hardcoded values
-- bad React patterns
-- maintainability concerns
-
-3. TYPESCRIPT / JAVASCRIPT
-If TypeScript is used, check:
-- use of any
-- missing interfaces/types
-- duplicate types
-- weak type definitions
-- optional fields
-- unsafe casting
-- null/undefined handling
-
-If JavaScript is used, identify areas where stronger typing or validation would reduce risk.
-
-4. CSS / STYLING
-Analyze:
-- global CSS
-- component CSS
-- inline styles
-- CSS modules
-- styled components if used
-- duplicate styles
-- hardcoded dimensions
-- responsiveness
-- media queries
-
-Specifically check whether the UI will work properly on:
-- 24-inch monitors
-- 27-inch monitors
-- 32-inch monitors
-- common laptop resolutions
-
-Identify:
-- unnecessary page scrolling
-- fixed width/height problems
-- overflow issues
-- inconsistent spacing
-- inconsistent typography
-- repeated colors
-- repeated CSS values
-- places where design tokens should be used
-
-5. UI CONSISTENCY
-Check whether screens follow consistent enterprise UI standards for:
-- headers
-- side navigation
-- page titles
-- cards
-- buttons
-- forms
-- inputs
-- dropdowns
-- search controls
-- modals
-- tables
-- empty states
-- loaders
-- validation messages
-- spacing
-- typography
-- colors
-
-Point out inconsistent patterns between pages.
-
-6. ACCESSIBILITY
-Check:
-- labels
-- aria attributes
-- keyboard navigation
-- focus state
-- semantic HTML
-- button vs div usage
-- contrast
-- screen-reader compatibility
-
-Do not change anything yet.
-
-7. ESLINT / PRETTIER / FORMATTING
-Analyze the current configuration.
-
-Tell me:
-- whether ESLint exists
-- whether Prettier exists
-- whether configurations are appropriate
-- which rules are missing
-- whether enabling new rules would break the existing code
-
-Classify recommended rules as:
-A. Safe to enable immediately
-B. Enable as warnings first
-C. Enable only after cleanup
-
-Do NOT recommend enabling strict rules that would immediately block current development.
-
-8. SONARQUBE
-Assume this repo is scanned by SonarQube.
-
-Identify code patterns likely to cause:
-- bugs
-- vulnerabilities
-- security hotspots
-- code smells
-- duplication
-- high cognitive complexity
-- poor maintainability
-
-Also identify frontend-specific checks we should use for:
-- React
-- TypeScript
-- JavaScript
-
-Do not blindly recommend enabling every Sonar rule.
-
-Classify Sonar recommendations as:
-- Critical
-- Important
-- Nice to have
-
-9. SECURITY
-Review frontend security risks including:
-- secrets in UI
-- tokens
-- console.log statements
-- sensitive data logging
-- localStorage/sessionStorage usage
-- API token handling
-- dangerouslySetInnerHTML
-- XSS risks
-- insecure URLs
-- authorization assumptions in UI
-- exposed environment variables
-
-Pay special attention to console.log statements that could log tokens, credentials, headers, user information, or API responses.
-
-10. TESTING
-Analyze existing:
-- unit tests
-- component tests
-- integration tests
-- end-to-end tests
-- test framework
-- coverage configuration
-
-Identify critical areas that currently have no tests.
-
-Do NOT suggest trying to reach 100% coverage.
-
-Recommend a realistic testing strategy for an existing production application.
-
-Classify tests into:
-A. Must-have before refactoring
-B. Important
-C. Nice to have
-
-11. DEPENDENCIES
-Analyze package.json and identify:
-- unused packages
-- duplicate packages
-- outdated patterns
-- risky dependencies
-- unnecessary dependencies
-- packages that could be replaced by native React/browser functionality
-
-Do not recommend package upgrades yet unless there is a security or compatibility concern.
-
-12. PERFORMANCE
-Check for:
-- unnecessary rendering
-- large bundles
-- repeated API calls
-- unnecessary state updates
-- large imports
-- inefficient list rendering
-- missing lazy loading
-- inappropriate memoization
-- expensive calculations
-
-Separate real performance issues from theoretical optimizations.
-
-13. API / SERVICE LAYER
-Analyze how the React UI communicates with backend APIs.
-
-Check for:
-- API calls directly inside components
-- duplicated fetch/axios logic
-- inconsistent error handling
-- hardcoded URLs
-- authentication handling
-- retry behavior
-- loading behavior
-- timeout handling
-- environment configuration
-
-Recommend a consistent pattern, but do not change it yet.
-
-14. ERROR HANDLING
-Identify whether the application has proper:
-- API error messages
-- form validation
-- global error handling
-- React error boundaries
-- fallback UI
-- empty state handling
-
-15. PRODUCTION-SAFE REFACTORING PLAN
-After the analysis, create a phased plan.
-
-Phase 0 – Baseline / safety
-Phase 1 – Non-breaking standards
-Phase 2 – Linting and formatting
-Phase 3 – Testing safety net
-Phase 4 – Shared components/utilities
-Phase 5 – Component refactoring
-Phase 6 – Architecture cleanup
-Phase 7 – Performance improvements
-
-For every phase provide:
-- exact changes
-- risk level
-- estimated impact
-- whether behavior changes
-- whether developers can continue working in parallel
-- validation required before merge
-
-16. DO NOT BLOCK EXISTING DEVELOPMENT
-The most important requirement:
-
-This repository is already in production.
-
-I want to improve standards gradually.
-
-Do NOT suggest:
-- rewriting the application
-- converting everything at once
-- reorganizing the entire src folder in one PR
-- enabling hundreds of lint rules immediately
-- massive formatting changes in one PR
-- changing UI/UX unnecessarily
-
-Prefer small, reviewable PRs.
-
-17. FINAL REPORT FORMAT
-
-Give me the final analysis in this format:
-
-A. Executive Summary
-
-B. Current Repository Architecture
-
-C. What Is Already Good
-
-D. Problems Found
-   - Critical
-   - High
-   - Medium
-   - Low
-
-E. React Issues
-
-F. Repository Structure Issues
-
-G. CSS / Responsive Design Issues
-
-H. Security Issues
-
-I. SonarQube Findings
-
-J. ESLint / Prettier Recommendations
-
-K. Testing Gaps
-
-L. Dependency Issues
-
-M. Performance Concerns
-
-N. Recommended Target Architecture
-
-O. Production-Safe Refactoring Roadmap
-
-P. First 5 Pull Requests I Should Create
-
-For the "First 5 Pull Requests", make them very small and low risk.
-
-For each PR include:
-- PR title
-- files likely to change
-- reason
-- risk
-- testing required
-- rollback approach
-
-At the end, give me a prioritized checklist:
-
-DO NOW
-DO NEXT
-DO LATER
-DO NOT TOUCH YET
-
-Again: analyze first. Do not modify the repository until I explicitly ask you to implement a specific recommendation.
+Do not make changes yet.
+First give me the analysis and proposed file-by-file change plan.
+
+The goal for PR0 is:
+
+- Add a TypeScript typecheck command using:
+  tsc --noEmit
+
+- Prepare scripts for:
+  npm run typecheck
+  npm run lint
+  npm run format:check
+
+- Run these checks in Azure DevOps CI in REPORT-ONLY / NON-BLOCKING mode.
+
+- If lint/typecheck/format currently fail because of existing technical debt,
+  the CI pipeline must continue and existing development/deployment must not be blocked.
+
+- Keep the current production build and deployment steps unchanged.
+
+- Do NOT:
+  * enable strict TypeScript globally
+  * change ignoreBuildErrors yet
+  * mass-format existing files
+  * automatically fix all lint issues
+  * refactor components
+  * move folders
+  * remove duplicate code
+  * change NextAuth/authentication
+  * change API routes
+  * change token handling
+  * change Azure DevOps integrations
+  * change routing
+  * change application functionality
+  * upgrade packages unless absolutely required for PR0
+
+For Azure DevOps, new quality-check steps should initially behave like report-only checks, for example using continueOnError where appropriate.
+
+Existing build/deployment failures should continue behaving exactly as they do today.
+Only the newly introduced quality checks should be non-blocking.
+
+After your analysis, give me:
+
+- Files that need to change
+- Exact reason for each change
+- Risk level for each change
+- Whether any proposed change could affect production
+- Local validation commands
+- CI validation plan
+- Rollback plan
+
+STOP after giving me the analysis.
+Do not edit any files until I approve the plan.
