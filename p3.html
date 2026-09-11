@@ -1,3 +1,75 @@
-Get-WinEvent -LogName "Microsoft-Windows-AppLocker/EXE and DLL" -MaxEvents 50 |
-Where-Object { $_.Message -match 'msiexec' } |
-Format-List TimeCreated, Id, LevelDisplayName, Message
+Approved with the following guardrails. Implement PR0 only.
+
+Proceed with the proposed files:
+
+- package.json
+- package-lock.json, only as produced by adding the required devDependencies
+- eslint.config.mjs
+- .prettierrc.json
+- .prettierignore
+- frontend-idp-containerapp-pipeline.yml
+
+Requirements:
+
+1. Do NOT modify:
+   - next.config.js
+   - next.config.ts
+   - Dockerfile
+   - application source files
+   - authentication
+   - API routes
+   - routing
+   - deployment configuration
+
+2. Do NOT mass-format existing files.
+3. Do NOT run eslint --fix against the repository.
+4. Do NOT enable strict TypeScript.
+5. Do NOT change existing dependency versions unnecessarily.
+
+6. Add these package scripts:
+   - typecheck: tsc --noEmit
+   - lint: eslint .
+   - format:check: prettier --check .
+
+7. Add only the devDependencies required to support those commands.
+
+8. Add the quality checks to the existing additionalBuildJobList using the same safe pattern already used by the existing Sonar job.
+
+9. IMPORTANT:
+   The new quality-check job must be completely NON-BLOCKING.
+
+   Existing TypeScript, ESLint, or Prettier problems are expected.
+
+   If:
+   - typecheck fails
+   - lint fails
+   - format:check fails
+
+   the existing build and deployment must still continue exactly as before.
+
+10. Do not make the Docker/build/deployment jobs depend on successful completion of the quality checks.
+
+11. Keep existing build and deployment steps completely unchanged.
+
+12. Use npm ci in CI.
+
+After implementation, DO NOT fix any TypeScript, ESLint or Prettier findings.
+
+Instead, show me:
+
+A. All files changed
+B. Exact diff for each file
+C. Dependencies added
+D. Output of:
+   npm run typecheck
+   npm run lint
+   npm run format:check
+   npm run build:local
+
+E. Clearly separate:
+   - existing technical debt
+   - configuration/setup problems introduced by this PR
+
+F. Confirm that failures in the new quality checks cannot block the existing build/deployment.
+
+Stop after PR0. Do not proceed to PR1 or refactoring.
