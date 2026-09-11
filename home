@@ -12,3 +12,11 @@ Please analyze the existing pipeline/Docker build and determine:
 Also confirm whether package-lock.json should be removed from my feature branch based on the repository's existing convention.
 
 Stop after the analysis.
+
+
+
+
+git ls-tree -r origin/develop --name-only | Select-String "package-lock.json"
+
+
+
