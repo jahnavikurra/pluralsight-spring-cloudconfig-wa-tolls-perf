@@ -1,1 +1,10 @@
-Do not modify anything. Inspect global.css, tokens.css, typography.css, and components.css and confirm whether any selectors automatically affect existing App Router pages even when those pages do not reference the new classes or tokens. Specifically check for global selectors such as html, body, *, button, input, select, textarea, headings, links, and generic class names. Tell me exactly which existing behavior or appearance could change. I want this styling foundation to be opt-in for the new ADO License page and not visually change existing pages.
+Yes. Make the new styling foundation strictly opt-in with zero visual impact to existing pages.
+
+Remove any global element selectors from the new styling foundation that affect existing elements, including input, button, textarea, select, headings, body, etc.
+Do not modify existing application styles or Tailwind configuration.
+Scope the new design tokens and styles under a wrapper class named .idp-scope rather than applying new styling globally through :root where practical.
+Namespace all new CSS variables with --idp- to avoid collisions with existing theme.css, for example --idp-font-weight-medium, --idp-page-background, --idp-form-surface.
+Keep global.css only as the import/entry point for tokens.css, typography.css, and components.css. Do not add selectors that change existing pages.
+Keep all reusable new component classes namespaced with .idp-*.
+Do not modify _app.tsx, existing src/pages routes, carousel files, Tailwind configuration, or existing page/component CSS.
+After making the changes, show me the exact diff and confirm through a workspace-wide search that no existing page is using .idp-scope, .idp-*, or --idp-* yet.
