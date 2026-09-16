@@ -1,75 +1,1939 @@
-I am working in a new feature branch of a production Next.js + React + TypeScript application.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Developer Hub - Azure DevOps License</title>
 
-This repository is already running in production, so the highest priority is:
-- DO NOT change existing application behavior.
-- DO NOT refactor application source code.
-- DO NOT make these new quality checks block developers or deployments yet.
+  <style>
+    :root {
+      --navy: #073568;
+      --navy-2: #0b437f;
+      --blue: #0f5cc0;
+      --blue-2: #1f6feb;
+      --blue-soft: #eef6ff;
+      --border: #d7e0ea;
+      --border-2: #c9d5e3;
+      --text: #132238;
+      --muted: #63758c;
+      --page: #f7f9fc;
+      --card: #ffffff;
+      --success: #1f9d55;
+      --success-soft: #effaf3;
+      --warning: #c96b12;
+      --warning-soft: #fff8ef;
+      --danger: #c62828;
+      --shadow: 0 10px 30px rgba(31, 56, 88, 0.09);
+      --radius: 8px;
+    }
 
-I want to implement PR0 only: a report-only frontend quality baseline.
+    * {
+      box-sizing: border-box;
+    }
 
-Before changing anything, analyze the repository and show me:
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      color: var(--text);
+      background: var(--page);
+    }
 
-1. Current package.json scripts and relevant devDependencies.
-2. Current tsconfig.json configuration.
-3. Current next.config.js / next.config.ts configuration.
-4. Existing Azure DevOps CI/CD YAML files.
-5. Whether ESLint, Prettier, TypeScript checking, Vitest/Jest, or other quality tools already exist.
-6. Whether `next.config` currently has:
-   typescript.ignoreBuildErrors = true
-   or any ESLint/build bypass settings.
-7. Which files you recommend changing for PR0.
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
 
-IMPORTANT:
-Do not make changes yet.
-First give me the analysis and proposed file-by-file change plan.
+    button {
+      cursor: pointer;
+    }
 
-The goal for PR0 is:
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-- Add a TypeScript typecheck command using:
-  tsc --noEmit
+    .app {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+    }
 
-- Prepare scripts for:
-  npm run typecheck
-  npm run lint
-  npm run format:check
+    .sidebar {
+      position: fixed;
+      inset: 0 auto 0 0;
+      width: 220px;
+      background: linear-gradient(180deg, #0c3c70, #062d5a);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      z-index: 20;
+    }
 
-- Run these checks in Azure DevOps CI in REPORT-ONLY / NON-BLOCKING mode.
+    .brand {
+      padding: 18px 20px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
 
-- If lint/typecheck/format currently fail because of existing technical debt,
-  the CI pipeline must continue and existing development/deployment must not be blocked.
+    .brand h1 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 700;
+    }
 
-- Keep the current production build and deployment steps unchanged.
+    .brand small {
+      display: block;
+      margin-top: 3px;
+      color: #c5d6e8;
+      font-size: 12px;
+    }
 
-- Do NOT:
-  * enable strict TypeScript globally
-  * change ignoreBuildErrors yet
-  * mass-format existing files
-  * automatically fix all lint issues
-  * refactor components
-  * move folders
-  * remove duplicate code
-  * change NextAuth/authentication
-  * change API routes
-  * change token handling
-  * change Azure DevOps integrations
-  * change routing
-  * change application functionality
-  * upgrade packages unless absolutely required for PR0
+    .sidebar-nav {
+      padding: 14px 0;
+      overflow-y: auto;
+      flex: 1;
+    }
 
-For Azure DevOps, new quality-check steps should initially behave like report-only checks, for example using continueOnError where appropriate.
+    .nav-section-label {
+      color: #a9bfd6;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      padding: 14px 18px 6px;
+    }
 
-Existing build/deployment failures should continue behaving exactly as they do today.
-Only the newly introduced quality checks should be non-blocking.
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 18px;
+      font-size: 14px;
+      color: #eef5ff;
+      border-left: 3px solid transparent;
+      transition: .18s ease;
+    }
 
-After your analysis, give me:
+    .nav-item:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
 
-- Files that need to change
-- Exact reason for each change
-- Risk level for each change
-- Whether any proposed change could affect production
-- Local validation commands
-- CI validation plan
-- Rollback plan
+    .nav-item.active {
+      background: rgba(59, 130, 246, 0.22);
+      border-left-color: #5da2ff;
+      color: #fff;
+    }
 
-STOP after giving me the analysis.
-Do not edit any files until I approve the plan.
+    .nav-icon {
+      width: 18px;
+      text-align: center;
+      opacity: .92;
+    }
+
+    .sidebar-footer {
+      padding: 12px 0 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .main {
+      grid-column: 2;
+      min-width: 0;
+    }
+
+    .topbar {
+      height: 58px;
+      position: sticky;
+      top: 0;
+      z-index: 15;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 18px;
+      padding: 0 24px;
+      background: rgba(255, 255, 255, .96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .top-link {
+      font-size: 14px;
+      color: #17385f;
+      font-weight: 600;
+    }
+
+    .user-chip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #124b8b;
+      color: white;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .user-meta strong {
+      display: block;
+      font-size: 13px;
+    }
+
+    .user-meta span {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 2px;
+    }
+
+    .content {
+      width: min(1280px, calc(100vw - 260px));
+      margin: 0 auto;
+      padding: 16px 18px 36px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #174b86;
+      font-weight: 600;
+      font-size: 14px;
+      margin: 2px 0 14px;
+    }
+
+    .page-title-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .title-icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      font-size: 28px;
+      color: var(--blue);
+    }
+
+    .page-title-row h2 {
+      margin: 0;
+      font-size: 32px;
+      line-height: 1.15;
+      letter-spacing: -.02em;
+    }
+
+    .page-title-row p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .stepper {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      display: grid;
+      grid-template-columns: 1fr 80px 1fr 80px 1fr;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .step {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .step-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--border-2);
+      display: grid;
+      place-items: center;
+      background: #fff;
+      color: #2b4f78;
+      font-weight: 700;
+    }
+
+    .step.active .step-circle,
+    .step.done .step-circle {
+      border-color: var(--navy-2);
+      background: var(--navy-2);
+      color: #fff;
+    }
+
+    .step.done .step-circle {
+      background: var(--success);
+      border-color: var(--success);
+    }
+
+    .step-label strong {
+      display: block;
+      font-size: 13px;
+    }
+
+    .step-label span {
+      display: block;
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .step-line {
+      height: 1px;
+      background: #c9d5e4;
+    }
+
+    .step-line.active {
+      background: var(--blue-2);
+      height: 2px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: 0 1px 1px rgba(0, 0, 0, .02);
+    }
+
+    .card-body {
+      padding: 20px 26px 22px;
+    }
+
+    .section-title {
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .025em;
+      margin: 0 0 16px;
+      text-transform: uppercase;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 32px;
+      row-gap: 20px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 7px;
+    }
+
+    .required {
+      color: #d12f2f;
+      margin-left: 3px;
+    }
+
+    .input,
+    .textarea {
+      width: 100%;
+      border: 1px solid var(--border-2);
+      border-radius: 6px;
+      background: white;
+      color: var(--text);
+      transition: .15s ease;
+    }
+
+    .input {
+      height: 46px;
+      padding: 0 13px;
+    }
+
+    .textarea {
+      min-height: 110px;
+      resize: vertical;
+      padding: 12px 13px;
+      line-height: 1.45;
+    }
+
+    .input:focus,
+    .textarea:focus {
+      outline: none;
+      border-color: var(--blue-2);
+      box-shadow: 0 0 0 3px rgba(31, 111, 235, .10);
+    }
+
+    .input[readonly] {
+      background: #f5f7fa;
+      color: #617287;
+    }
+
+    .helper {
+      margin-top: 5px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .radio-row {
+      display: flex;
+      gap: 36px;
+      flex-wrap: wrap;
+      min-height: 46px;
+      align-items: center;
+    }
+
+    .radio-option {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .radio-option input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--blue-2);
+    }
+
+    .license-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .license-card {
+      position: relative;
+      min-height: 108px;
+      border: 1px solid var(--border-2);
+      border-radius: 7px;
+      padding: 16px 16px 14px 48px;
+      cursor: pointer;
+      background: #fff;
+      transition: .16s ease;
+    }
+
+    .license-card:hover {
+      border-color: #8cb9f6;
+    }
+
+    .license-card.selected {
+      border-color: #65a1ef;
+      background: #f2f8ff;
+      box-shadow: inset 0 0 0 1px rgba(31, 111, 235, .08);
+    }
+
+    .license-card.disabled {
+      opacity: .55;
+      cursor: not-allowed;
+      background: #f7f8fa;
+    }
+
+    .license-card input {
+      position: absolute;
+      left: 16px;
+      top: 19px;
+      width: 19px;
+      height: 19px;
+      accent-color: var(--blue-2);
+    }
+
+    .license-card strong {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .license-card span {
+      color: #48617e;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .info-box {
+      display: flex;
+      gap: 11px;
+      padding: 13px 15px;
+      border: 1px solid #c9e0fb;
+      border-radius: 6px;
+      background: var(--blue-soft);
+      color: #174b86;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .info-icon {
+      flex: 0 0 auto;
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--blue-2);
+      color: var(--blue-2);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 12px;
+      margin-top: 1px;
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .btn {
+      min-width: 108px;
+      height: 42px;
+      padding: 0 18px;
+      border-radius: 6px;
+      border: 1px solid var(--border-2);
+      background: #fff;
+      color: #1d3551;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .btn:hover {
+      background: #f7f9fc;
+    }
+
+    .btn-primary {
+      color: #fff;
+      background: linear-gradient(180deg, #165fae, #0d4b8f);
+      border-color: #0d4b8f;
+    }
+
+    .btn-primary:hover {
+      background: #0d4b8f;
+    }
+
+    .btn-linklike {
+      border-color: transparent;
+      background: transparent;
+      color: #0f5cc0;
+    }
+
+    .review-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .review-header h3 {
+      font-size: 24px;
+      margin: 0;
+    }
+
+    .review-header p {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .summary-table {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .summary-section {
+      padding: 10px 16px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .03em;
+      background: #f3f6fa;
+      border-bottom: 1px solid var(--border);
+      text-transform: uppercase;
+    }
+
+    .summary-row {
+      display: grid;
+      grid-template-columns: 290px minmax(0, 1fr);
+      min-height: 50px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .summary-row:last-child {
+      border-bottom: 0;
+    }
+
+    .summary-label,
+    .summary-value {
+      padding: 14px 16px;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .summary-label {
+      color: #526984;
+      font-weight: 700;
+      background: #fafbfd;
+    }
+
+    .summary-value {
+      font-weight: 500;
+    }
+
+    .license-change {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-weight: 700;
+    }
+
+    .license-arrow {
+      color: var(--success);
+      font-size: 21px;
+    }
+
+    .success-card {
+      overflow: hidden;
+    }
+
+    .success-banner {
+      padding: 26px 22px 24px;
+      text-align: center;
+      background: var(--success-soft);
+      border-bottom: 1px solid #cdebd8;
+    }
+
+    .success-icon {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 12px;
+      border-radius: 50%;
+      background: #24ae62;
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 30px;
+      font-weight: 700;
+    }
+
+    .success-banner h3 {
+      margin: 0;
+      font-size: 27px;
+    }
+
+    .success-banner p {
+      margin: 8px 0 0;
+      font-size: 15px;
+      color: #40566f;
+    }
+
+    .success-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 24px;
+    }
+
+    .success-list {
+      padding: 18px 22px;
+    }
+
+    .success-list h4 {
+      margin: 0 0 10px;
+      font-size: 17px;
+    }
+
+    .success-row {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid #e4eaf1;
+      font-size: 13px;
+    }
+
+    .success-row:last-child {
+      border-bottom: none;
+    }
+
+    .success-row strong {
+      color: #55708d;
+    }
+
+    .success-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .home-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    .home-tile {
+      padding: 22px;
+      min-height: 150px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: white;
+    }
+
+    .home-tile h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+
+    .home-tile p {
+      margin: 0 0 20px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .request-list {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 14px;
+    }
+
+    .request-list th,
+    .request-list td {
+      padding: 13px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+    }
+
+    .request-list th {
+      background: #f3f6fa;
+      color: #4b6078;
+    }
+
+    .status {
+      display: inline-flex;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: #e8f5ec;
+      color: #257444;
+      font-weight: 700;
+      font-size: 11px;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(12, 31, 53, .54);
+      display: none;
+      place-items: center;
+      z-index: 99;
+      padding: 20px;
+    }
+
+    .modal-backdrop.open {
+      display: grid;
+    }
+
+    .modal {
+      width: min(520px, 100%);
+      background: white;
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+
+    .modal-head {
+      display: flex;
+      gap: 13px;
+      align-items: flex-start;
+    }
+
+    .warn-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #fff0df;
+      color: #d56c11;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 21px;
+      flex: 0 0 auto;
+    }
+
+    .modal h3 {
+      margin: 0 0 8px;
+      font-size: 22px;
+    }
+
+    .modal p {
+      margin: 0;
+      color: #51657d;
+      line-height: 1.55;
+      font-size: 14px;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .error-text {
+      color: #b42318;
+      font-size: 12px;
+      margin-top: 5px;
+      display: none;
+    }
+
+    .field.error .input,
+    .field.error .textarea {
+      border-color: #e06666;
+    }
+
+    .field.error .error-text {
+      display: block;
+    }
+
+    @media (max-width: 1000px) {
+      .app {
+        grid-template-columns: 82px minmax(0, 1fr);
+      }
+
+      .sidebar {
+        width: 82px;
+      }
+
+      .brand h1,
+      .brand small,
+      .nav-item span:not(.nav-icon),
+      .nav-section-label {
+        display: none;
+      }
+
+      .nav-item {
+        justify-content: center;
+        padding: 12px 6px;
+      }
+
+      .main {
+        grid-column: 2;
+      }
+
+      .content {
+        width: calc(100vw - 98px);
+      }
+
+      .form-grid,
+      .success-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .license-grid,
+      .home-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .summary-row {
+        grid-template-columns: 180px minmax(0, 1fr);
+      }
+
+      .stepper {
+        grid-template-columns: 1fr 30px 1fr 30px 1fr;
+      }
+
+      .step-label span {
+        display: none;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .topbar {
+        padding: 0 12px;
+      }
+
+      .top-link,
+      .user-meta {
+        display: none;
+      }
+
+      .page-title-row h2 {
+        font-size: 25px;
+      }
+
+      .stepper {
+        padding: 10px 8px;
+      }
+
+      .step {
+        gap: 6px;
+      }
+
+      .step-circle {
+        width: 34px;
+        height: 34px;
+      }
+
+      .step-label strong {
+        font-size: 11px;
+      }
+
+      .card-body {
+        padding: 16px;
+      }
+
+      .summary-row {
+        grid-template-columns: 1fr;
+      }
+
+      .summary-label {
+        padding-bottom: 4px;
+      }
+
+      .summary-value {
+        padding-top: 4px;
+      }
+
+      .success-row {
+        grid-template-columns: 1fr;
+      }
+
+      .form-actions,
+      .success-actions {
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <h1>Developer Hub</h1>
+        <small>v1.0.0</small>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a class="nav-item" href="#/home" data-route-link="home">
+          <span class="nav-icon">⌂</span><span>Home</span>
+        </a>
+
+        <div class="nav-section-label">Azure DevOps</div>
+
+        <a class="nav-item" href="#/team">
+          <span class="nav-icon">◫</span><span>Create ADO Team</span>
+        </a>
+
+        <a class="nav-item" href="#/repos">
+          <span class="nav-icon">⑂</span><span>Create Repos</span>
+        </a>
+
+        <a class="nav-item" href="#/pipelines">
+          <span class="nav-icon">⌘</span><span>Create Pipelines</span>
+        </a>
+
+        <a class="nav-item" href="#/environment">
+          <span class="nav-icon">◇</span><span>Provision Environment</span>
+        </a>
+
+        <a class="nav-item active" href="#/license" data-route-link="license">
+          <span class="nav-icon">♙</span><span>Azure DevOps License</span>
+        </a>
+
+        <div class="nav-section-label">GitHub</div>
+
+        <a class="nav-item" href="#/github">
+          <span class="nav-icon">◈</span><span>GitHub</span>
+        </a>
+
+        <a class="nav-item" href="#/github/team">
+          <span class="nav-icon">♧</span><span>Team Onboarding</span>
+        </a>
+
+        <a class="nav-item" href="#/github/repository">
+          <span class="nav-icon">⑂</span><span>Create Repository</span>
+        </a>
+
+        <a class="nav-item" href="#/github/migrate">
+          <span class="nav-icon">⇄</span><span>Migrate Repository</span>
+        </a>
+
+        <div class="nav-section-label">History</div>
+
+        <a class="nav-item" href="#/recent">
+          <span class="nav-icon">↺</span><span>Recent Actions</span>
+        </a>
+
+        <a class="nav-item" href="#/my-requests" data-route-link="requests">
+          <span class="nav-icon">▣</span><span>My Requests</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a class="nav-item" href="#/docs">
+          <span class="nav-icon">▤</span><span>Documentation</span>
+        </a>
+
+        <a class="nav-item" href="#/support">
+          <span class="nav-icon">?</span><span>Support</span>
+        </a>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <a class="top-link" href="#/home">Self Serve Home</a>
+
+        <div class="user-chip">
+          <div class="avatar">JK</div>
+          <div class="user-meta">
+            <strong>Jahnavi Kurra</strong>
+            <span>Admin</span>
+          </div>
+        </div>
+      </header>
+
+      <div id="route-view"></div>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="cancelModal" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="cancelTitle">
+      <div class="modal-head">
+        <div class="warn-icon">!</div>
+        <div>
+          <h3 id="cancelTitle">Cancel request?</h3>
+          <p>
+            If you cancel, the current request will be discarded and you will return
+            to the Self Service Home page.
+          </p>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn" type="button" id="stayBtn">Stay on Page</button>
+        <button class="btn btn-primary" type="button" id="confirmCancelBtn">Yes, Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const routes = {
+      HOME: "#/home",
+      LICENSE_REQUEST: "#/license",
+      LICENSE_REVIEW: "#/license/review",
+      LICENSE_SUCCESS: "#/license/success",
+      MY_REQUESTS: "#/my-requests"
+    };
+
+    const state = {
+      email: "",
+      displayName: "",
+      actionType: "new",
+      currentLicense: "Stakeholder",
+      requestedLicense: "Stakeholder",
+      justification: "",
+      requestId: "",
+      submittedOn: ""
+    };
+
+    const view = document.getElementById("route-view");
+    const cancelModal = document.getElementById("cancelModal");
+    const stayBtn = document.getElementById("stayBtn");
+    const confirmCancelBtn = document.getElementById("confirmCancelBtn");
+
+    function stepper(activeStep) {
+      const steps = [
+        { number: 1, label: "Request Details" },
+        { number: 2, label: "Review" },
+        { number: 3, label: "Submit" }
+      ];
+
+      let html = '<div class="stepper">';
+
+      steps.forEach((step, index) => {
+        const status =
+          step.number < activeStep ? "done" :
+          step.number === activeStep ? "active" : "";
+
+        const circleText = step.number < activeStep ? "✓" : step.number;
+
+        html += `
+          <div class="step ${status}">
+            <div class="step-circle">${circleText}</div>
+            <div class="step-label">
+              <strong>Step ${step.number}</strong>
+              <span>${step.label}</span>
+            </div>
+          </div>
+        `;
+
+        if (index < steps.length - 1) {
+          html += `<div class="step-line ${step.number < activeStep ? "active" : ""}"></div>`;
+        }
+      });
+
+      html += "</div>";
+      return html;
+    }
+
+    function pageShell(bodyHtml, activeStep = null, backHref = routes.HOME) {
+      return `
+        <div class="content">
+          <a class="back-link" href="${backHref}">← Back</a>
+
+          <div class="page-title-row">
+            <div class="title-icon">♙</div>
+            <div>
+              <h2>Request Azure DevOps License</h2>
+              <p>Request or update Azure DevOps access and license level for a user.</p>
+            </div>
+          </div>
+
+          ${activeStep ? stepper(activeStep) : ""}
+          ${bodyHtml}
+        </div>
+      `;
+    }
+
+    function renderRequestPage() {
+      const isUpdate = state.actionType === "update";
+
+      const requestHtml = `
+        <section class="card">
+          <div class="card-body">
+            <h3 class="section-title">User Details</h3>
+
+            <div class="form-grid">
+              <div class="field" id="emailField">
+                <label for="email">User (UPN / Email)<span class="required">*</span></label>
+                <input
+                  class="input"
+                  id="email"
+                  type="email"
+                  placeholder="Enter user email or UPN (e.g., jane.doe@contoso.com)"
+                  value="${escapeHtml(state.email)}"
+                />
+                <div class="helper">Enter the Azure AD / Entra ID user who requires a license.</div>
+                <div class="error-text">Enter a valid user email.</div>
+              </div>
+
+              <div class="field">
+                <label for="displayName">Display Name</label>
+                <input
+                  class="input"
+                  id="displayName"
+                  type="text"
+                  value="${escapeHtml(state.displayName)}"
+                  placeholder="Auto populated"
+                  readonly
+                />
+                <div class="helper">Auto populated after user lookup.</div>
+              </div>
+
+              <div class="field full">
+                <label>Action Type<span class="required">*</span></label>
+
+                <div class="radio-row">
+                  <label class="radio-option">
+                    <input
+                      type="radio"
+                      name="actionType"
+                      value="new"
+                      ${state.actionType === "new" ? "checked" : ""}
+                    />
+                    New License
+                  </label>
+
+                  <label class="radio-option">
+                    <input
+                      type="radio"
+                      name="actionType"
+                      value="update"
+                      ${state.actionType === "update" ? "checked" : ""}
+                    />
+                    Update Existing License
+                  </label>
+                </div>
+              </div>
+
+              <div class="field full ${isUpdate ? "" : "hidden"}" id="currentLicenseField">
+                <label for="currentLicense">Current License</label>
+                <input
+                  class="input"
+                  id="currentLicense"
+                  type="text"
+                  value="${escapeHtml(state.currentLicense)}"
+                  readonly
+                />
+                <div class="helper">Retrieved from Azure DevOps for the selected user.</div>
+              </div>
+
+              <div class="field full" id="licenseField">
+                <label>${isUpdate ? "Requested License Type" : "License Type"}<span class="required">*</span></label>
+
+                <div class="license-grid">
+                  ${licenseCard(
+                    "Stakeholder",
+                    "Read-only access to boards, backlogs, and basic features.",
+                    isUpdate && state.currentLicense === "Stakeholder"
+                  )}
+
+                  ${licenseCard(
+                    "Basic",
+                    "Full access for development work (Repos, Boards, Pipelines).",
+                    isUpdate && state.currentLicense === "Basic"
+                  )}
+
+                  ${licenseCard(
+                    "Basic + Test Plans",
+                    "Includes Basic features plus Test Plans.",
+                    isUpdate && state.currentLicense === "Basic + Test Plans"
+                  )}
+                </div>
+
+                <div class="error-text">Select a license type.</div>
+              </div>
+
+              <div class="field full ${state.requestedLicense === "Basic + Test Plans" ? "" : "hidden"}" id="testPlansInfo">
+                <div class="info-box">
+                  <div class="info-icon">i</div>
+                  <div>
+                    <strong>Basic + Test Plans may require additional approval.</strong><br />
+                    Requests for Test Plans access can be routed through your organization's approval workflow.
+                  </div>
+                </div>
+              </div>
+
+              <div class="field full" id="justificationField">
+                <label for="justification">Business Justification<span class="required">*</span></label>
+                <textarea
+                  class="textarea"
+                  id="justification"
+                  maxlength="500"
+                  placeholder="Describe why this license or license change is required."
+                >${escapeHtml(state.justification)}</textarea>
+
+                <div class="helper">
+                  Include the user's role, required Azure DevOps access, or reason for the license change.
+                  <span style="float:right"><span id="charCount">${state.justification.length}</span>/500</span>
+                </div>
+
+                <div class="error-text">Enter a business justification.</div>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button class="btn" type="button" data-cancel>Cancel</button>
+              <button class="btn" type="button" data-home>Back</button>
+              <button class="btn btn-primary" type="button" id="nextBtn">Next</button>
+            </div>
+          </div>
+        </section>
+      `;
+
+      view.innerHTML = pageShell(requestHtml, 1, routes.HOME);
+
+      wireRequestEvents();
+      updateSidebar();
+    }
+
+    function licenseCard(name, description, disabled) {
+      const checked = state.requestedLicense === name && !disabled;
+
+      return `
+        <label class="license-card ${checked ? "selected" : ""} ${disabled ? "disabled" : ""}">
+          <input
+            type="radio"
+            name="licenseType"
+            value="${escapeHtml(name)}"
+            ${checked ? "checked" : ""}
+            ${disabled ? "disabled" : ""}
+          />
+          <strong>${escapeHtml(name)}${disabled ? " — Current license" : ""}</strong>
+          <span>${escapeHtml(description)}</span>
+        </label>
+      `;
+    }
+
+    function renderReviewPage() {
+      if (!state.email || !state.justification || !state.requestedLicense) {
+        location.hash = routes.LICENSE_REQUEST;
+        return;
+      }
+
+      const isUpdate = state.actionType === "update";
+      const licenseRows = isUpdate
+        ? `
+          <div class="summary-section">License Details</div>
+
+          <div class="summary-row">
+            <div class="summary-label">Current License</div>
+            <div class="summary-value">${escapeHtml(state.currentLicense)}</div>
+          </div>
+
+          <div class="summary-row">
+            <div class="summary-label">Requested License</div>
+            <div class="summary-value">
+              <span class="license-change">
+                ${escapeHtml(state.currentLicense)}
+                <span class="license-arrow">→</span>
+                ${escapeHtml(state.requestedLicense)}
+              </span>
+
+              ${
+                state.requestedLicense === "Basic + Test Plans"
+                  ? `
+                    <div class="info-box" style="margin-top:10px">
+                      <div class="info-icon">i</div>
+                      <div>Basic + Test Plans may require additional approval.</div>
+                    </div>
+                  `
+                  : ""
+              }
+            </div>
+          </div>
+        `
+        : `
+          <div class="summary-row">
+            <div class="summary-label">License Type</div>
+            <div class="summary-value">${escapeHtml(state.requestedLicense)}</div>
+          </div>
+        `;
+
+      const reviewHtml = `
+        <section class="card">
+          <div class="card-body">
+            <div class="review-header">
+              <div>
+                <h3>Review Your Request</h3>
+                <p>Please review the details below. Click Back or Edit to make changes.</p>
+              </div>
+
+              <button class="btn" type="button" id="editBtn">✎ Edit</button>
+            </div>
+
+            <div class="summary-table">
+              <div class="summary-section">User Details</div>
+
+              <div class="summary-row">
+                <div class="summary-label">User (UPN / Email)</div>
+                <div class="summary-value">${escapeHtml(state.email)}</div>
+              </div>
+
+              <div class="summary-row">
+                <div class="summary-label">Display Name</div>
+                <div class="summary-value">${escapeHtml(state.displayName)}</div>
+              </div>
+
+              <div class="summary-row">
+                <div class="summary-label">Action Type</div>
+                <div class="summary-value">
+                  ${isUpdate ? "Update Existing License" : "New License"}
+                </div>
+              </div>
+
+              ${licenseRows}
+
+              <div class="summary-row">
+                <div class="summary-label">Business Justification</div>
+                <div class="summary-value">${escapeHtml(state.justification)}</div>
+              </div>
+            </div>
+
+            <div class="info-box" style="margin-top:18px">
+              <div class="info-icon">i</div>
+              <div>
+                Once submitted, your request will be processed through the configured workflow.
+                You can track the request in <strong>My Requests</strong>.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="form-actions">
+          <button class="btn" type="button" data-cancel>Cancel</button>
+          <button class="btn" type="button" id="reviewBackBtn">Back</button>
+          <button class="btn btn-primary" type="button" id="submitBtn">Submit Request</button>
+        </div>
+      `;
+
+      view.innerHTML = pageShell(reviewHtml, 2, routes.LICENSE_REQUEST);
+
+      document.getElementById("editBtn").addEventListener("click", () => {
+        location.hash = routes.LICENSE_REQUEST;
+      });
+
+      document.getElementById("reviewBackBtn").addEventListener("click", () => {
+        location.hash = routes.LICENSE_REQUEST;
+      });
+
+      document.getElementById("submitBtn").addEventListener("click", submitRequest);
+
+      wireCancelButtons();
+      updateSidebar();
+    }
+
+    function renderSuccessPage() {
+      if (!state.requestId) {
+        location.hash = routes.LICENSE_REQUEST;
+        return;
+      }
+
+      const isUpdate = state.actionType === "update";
+
+      const rightRows = isUpdate
+        ? `
+          <div class="success-row">
+            <strong>Current License</strong>
+            <span>${escapeHtml(state.currentLicense)}</span>
+          </div>
+
+          <div class="success-row">
+            <strong>Requested License</strong>
+            <span>${escapeHtml(state.requestedLicense)}</span>
+          </div>
+        `
+        : `
+          <div class="success-row">
+            <strong>License Type</strong>
+            <span>${escapeHtml(state.requestedLicense)}</span>
+          </div>
+        `;
+
+      const successHtml = `
+        <section class="card success-card">
+          <div class="success-banner">
+            <div class="success-icon">✓</div>
+            <h3>Request Submitted Successfully!</h3>
+            <p>Your request has been submitted and is being processed.</p>
+          </div>
+
+          <div class="success-grid">
+            <div class="success-list">
+              <h4>Request Details</h4>
+
+              <div class="success-row">
+                <strong>Request ID</strong>
+                <span>${escapeHtml(state.requestId)}</span>
+              </div>
+
+              <div class="success-row">
+                <strong>User</strong>
+                <span>${escapeHtml(state.email)}</span>
+              </div>
+
+              <div class="success-row">
+                <strong>Display Name</strong>
+                <span>${escapeHtml(state.displayName)}</span>
+              </div>
+
+              <div class="success-row">
+                <strong>Action Type</strong>
+                <span>${isUpdate ? "Update Existing License" : "New License"}</span>
+              </div>
+            </div>
+
+            <div class="success-list">
+              <h4>License Details</h4>
+
+              ${rightRows}
+
+              <div class="success-row">
+                <strong>Business Justification</strong>
+                <span>${escapeHtml(state.justification)}</span>
+              </div>
+
+              <div class="success-row">
+                <strong>Submitted On</strong>
+                <span>${escapeHtml(state.submittedOn)}</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="padding: 0 22px 22px">
+            <div class="info-box">
+              <div class="info-icon">i</div>
+              <div>
+                You will be notified about the request status via email and in My Requests.
+                For questions, contact the DevOps Support team.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="success-actions">
+          <button class="btn" type="button" id="homeBtn">Go to Home</button>
+          <button class="btn btn-primary" type="button" id="requestsBtn">View My Requests</button>
+        </div>
+      `;
+
+      view.innerHTML = pageShell(successHtml, 3, routes.HOME);
+
+      document.getElementById("homeBtn").addEventListener("click", () => {
+        location.hash = routes.HOME;
+      });
+
+      document.getElementById("requestsBtn").addEventListener("click", () => {
+        location.hash = routes.MY_REQUESTS;
+      });
+
+      updateSidebar();
+    }
+
+    function renderHomePage() {
+      view.innerHTML = `
+        <div class="content">
+          <div class="page-title-row" style="margin-top:10px">
+            <div class="title-icon">⌂</div>
+            <div>
+              <h2>ADO Self Service Home</h2>
+              <p>Choose a self-service action for Teams, Repositories, Pipelines, Environments, and Licenses.</p>
+            </div>
+          </div>
+
+          <div class="home-grid">
+            <div class="home-tile">
+              <h3>Create ADO Team</h3>
+              <p>Set up a new Azure DevOps team, boards, roles, and related resources.</p>
+              <button class="btn">Open</button>
+            </div>
+
+            <div class="home-tile">
+              <h3>Create Repos</h3>
+              <p>Provision a new repository under an existing Azure DevOps project.</p>
+              <button class="btn">Open</button>
+            </div>
+
+            <div class="home-tile">
+              <h3>Create Pipelines</h3>
+              <p>Create a new pipeline for an existing team's repository.</p>
+              <button class="btn">Open</button>
+            </div>
+
+            <div class="home-tile">
+              <h3>Provision Environment</h3>
+              <p>Set up DEV, UAT, and PROD environments for an existing team.</p>
+              <button class="btn">Open</button>
+            </div>
+
+            <div class="home-tile">
+              <h3>Azure DevOps License</h3>
+              <p>Request a new Azure DevOps license or update an existing license.</p>
+              <button class="btn btn-primary" id="homeLicenseBtn">Open</button>
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById("homeLicenseBtn").addEventListener("click", () => {
+        resetDraft();
+        location.hash = routes.LICENSE_REQUEST;
+      });
+
+      updateSidebar();
+    }
+
+    function renderMyRequestsPage() {
+      const hasRequest = Boolean(state.requestId);
+
+      view.innerHTML = `
+        <div class="content">
+          <a class="back-link" href="${routes.HOME}">← Back to Home</a>
+
+          <div class="page-title-row">
+            <div class="title-icon">▣</div>
+            <div>
+              <h2>My Requests</h2>
+              <p>View Azure DevOps self-service requests submitted by you.</p>
+            </div>
+          </div>
+
+          <section class="card">
+            <div class="card-body">
+              ${
+                hasRequest
+                  ? `
+                    <table class="request-list">
+                      <thead>
+                        <tr>
+                          <th>Request ID</th>
+                          <th>User</th>
+                          <th>Request Type</th>
+                          <th>License</th>
+                          <th>Status</th>
+                          <th>Submitted</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        <tr>
+                          <td>${escapeHtml(state.requestId)}</td>
+                          <td>${escapeHtml(state.email)}</td>
+                          <td>${state.actionType === "update" ? "Update Existing License" : "New License"}</td>
+                          <td>${escapeHtml(state.requestedLicense)}</td>
+                          <td><span class="status">Submitted</span></td>
+                          <td>${escapeHtml(state.submittedOn)}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  `
+                  : `
+                    <div style="padding:30px 10px; text-align:center; color:#64748b">
+                      No license requests have been submitted in this prototype.
+                    </div>
+                  `
+              }
+            </div>
+          </section>
+        </div>
+      `;
+
+      updateSidebar();
+    }
+
+    function renderPlaceholder(title) {
+      view.innerHTML = `
+        <div class="content">
+          <a class="back-link" href="${routes.HOME}">← Back to Home</a>
+
+          <div class="page-title-row">
+            <div>
+              <h2>${escapeHtml(title)}</h2>
+              <p>This route is included as a placeholder in the HTML prototype.</p>
+            </div>
+          </div>
+
+          <section class="card">
+            <div class="card-body">
+              <p style="margin:0;color:#64748b">
+                Add the corresponding page component here.
+              </p>
+            </div>
+          </section>
+        </div>
+      `;
+
+      updateSidebar();
+    }
+
+    function wireRequestEvents() {
+      const emailInput = document.getElementById("email");
+      const displayNameInput = document.getElementById("displayName");
+      const justificationInput = document.getElementById("justification");
+      const charCount = document.getElementById("charCount");
+      const nextBtn = document.getElementById("nextBtn");
+
+      emailInput.addEventListener("input", e => {
+        state.email = e.target.value.trim();
+        state.displayName = deriveDisplayName(state.email);
+        displayNameInput.value = state.displayName;
+      });
+
+      document.querySelectorAll('input[name="actionType"]').forEach(input => {
+        input.addEventListener("change", e => {
+          state.actionType = e.target.value;
+
+          if (state.actionType === "update") {
+            state.currentLicense = state.currentLicense || "Stakeholder";
+
+            if (state.requestedLicense === state.currentLicense) {
+              state.requestedLicense = "Basic";
+            }
+          } else if (!state.requestedLicense) {
+            state.requestedLicense = "Stakeholder";
+          }
+
+          renderRequestPage();
+        });
+      });
+
+      document.querySelectorAll('input[name="licenseType"]').forEach(input => {
+        input.addEventListener("change", e => {
+          state.requestedLicense = e.target.value;
+
+          document.querySelectorAll(".license-card").forEach(card => {
+            card.classList.remove("selected");
+          });
+
+          e.target.closest(".license-card").classList.add("selected");
+
+          const info = document.getElementById("testPlansInfo");
+
+          if (state.requestedLicense === "Basic + Test Plans") {
+            info.classList.remove("hidden");
+          } else {
+            info.classList.add("hidden");
+          }
+        });
+      });
+
+      justificationInput.addEventListener("input", e => {
+        state.justification = e.target.value;
+        charCount.textContent = state.justification.length;
+      });
+
+      nextBtn.addEventListener("click", () => {
+        syncRequestState();
+
+        if (!validateRequest()) {
+          return;
+        }
+
+        location.hash = routes.LICENSE_REVIEW;
+      });
+
+      document.querySelector("[data-home]").addEventListener("click", () => {
+        location.hash = routes.HOME;
+      });
+
+      wireCancelButtons();
+    }
+
+    function syncRequestState() {
+      const email = document.getElementById("email");
+      const justification = document.getElementById("justification");
+      const action = document.querySelector('input[name="actionType"]:checked');
+      const license = document.querySelector('input[name="licenseType"]:checked');
+
+      if (email) {
+        state.email = email.value.trim();
+        state.displayName = deriveDisplayName(state.email);
+      }
+
+      if (justification) {
+        state.justification = justification.value.trim();
+      }
+
+      if (action) {
+        state.actionType = action.value;
+      }
+
+      if (license) {
+        state.requestedLicense = license.value;
+      }
+    }
+
+    function validateRequest() {
+      let valid = true;
+
+      const emailField = document.getElementById("emailField");
+      const justificationField = document.getElementById("justificationField");
+      const licenseField = document.getElementById("licenseField");
+
+      const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.email);
+
+      emailField.classList.toggle("error", !emailValid);
+
+      const justificationValid = state.justification.length >= 5;
+      justificationField.classList.toggle("error", !justificationValid);
+
+      const licenseValid = Boolean(state.requestedLicense);
+      licenseField.classList.toggle("error", !licenseValid);
+
+      valid = emailValid && justificationValid && licenseValid;
+
+      if (
+        valid &&
+        state.actionType === "update" &&
+        state.requestedLicense === state.currentLicense
+      ) {
+        licenseField.classList.add("error");
+        licenseField.querySelector(".error-text").textContent =
+          "Requested license must be different from the current license.";
+        valid = false;
+      }
+
+      return valid;
+    }
+
+    function submitRequest() {
+      state.requestId = generateRequestId();
+      state.submittedOn = new Intl.DateTimeFormat("en-US", {
+        dateStyle: "medium",
+        timeStyle: "short"
+      }).format(new Date());
+
+      location.hash = routes.LICENSE_SUCCESS;
+    }
+
+    function openCancelModal() {
+      cancelModal.classList.add("open");
+      cancelModal.setAttribute("aria-hidden", "false");
+    }
+
+    function closeCancelModal() {
+      cancelModal.classList.remove("open");
+      cancelModal.setAttribute("aria-hidden", "true");
+    }
+
+    function wireCancelButtons() {
+      document.querySelectorAll("[data-cancel]").forEach(button => {
+        button.addEventListener("click", openCancelModal);
+      });
+    }
+
+    stayBtn.addEventListener("click", closeCancelModal);
+
+    cancelModal.addEventListener("click", event => {
+      if (event.target === cancelModal) {
+        closeCancelModal();
+      }
+    });
+
+    confirmCancelBtn.addEventListener("click", () => {
+      closeCancelModal();
+      resetDraft();
+      location.hash = routes.HOME;
+    });
+
+    function route() {
+      const hash = location.hash || routes.HOME;
+
+      switch (hash) {
+        case routes.HOME:
+          renderHomePage();
+          break;
+
+        case routes.LICENSE_REQUEST:
+          renderRequestPage();
+          break;
+
+        case routes.LICENSE_REVIEW:
+          renderReviewPage();
+          break;
+
+        case routes.LICENSE_SUCCESS:
+          renderSuccessPage();
+          break;
+
+        case routes.MY_REQUESTS:
+          renderMyRequestsPage();
+          break;
+
+        case "#/team":
+          renderPlaceholder("Create ADO Team");
+          break;
+
+        case "#/repos":
+          renderPlaceholder("Create Repositories");
+          break;
+
+        case "#/pipelines":
+          renderPlaceholder("Create Pipelines");
+          break;
+
+        case "#/environment":
+          renderPlaceholder("Provision Environment");
+          break;
+
+        case "#/github":
+          renderPlaceholder("GitHub");
+          break;
+
+        case "#/github/team":
+          renderPlaceholder("GitHub Team Onboarding");
+          break;
+
+        case "#/github/repository":
+          renderPlaceholder("Create GitHub Repository");
+          break;
+
+        case "#/github/migrate":
+          renderPlaceholder("Migrate Repository");
+          break;
+
+        case "#/recent":
+          renderPlaceholder("Recent Actions");
+          break;
+
+        case "#/docs":
+          renderPlaceholder("Documentation");
+          break;
+
+        case "#/support":
+          renderPlaceholder("Support");
+          break;
+
+        default:
+          location.hash = routes.HOME;
+      }
+    }
+
+    function updateSidebar() {
+      document.querySelectorAll(".nav-item").forEach(item => {
+        item.classList.remove("active");
+      });
+
+      const hash = location.hash;
+
+      if (hash.startsWith("#/license")) {
+        document.querySelector('[data-route-link="license"]').classList.add("active");
+      } else if (hash === routes.MY_REQUESTS) {
+        document.querySelector('[data-route-link="requests"]').classList.add("active");
+      } else if (hash === routes.HOME) {
+        document.querySelector('[data-route-link="home"]').classList.add("active");
+      }
+    }
+
+    function deriveDisplayName(email) {
+      if (!email || !email.includes("@")) {
+        return "";
+      }
+
+      return email
+        .split("@")[0]
+        .replace(/[._-]+/g, " ")
+        .split(" ")
+        .filter(Boolean)
+        .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+        .join(" ");
+    }
+
+    function generateRequestId() {
+      const year = new Date().getFullYear();
+      const random = Math.floor(100000 + Math.random() * 900000);
+      return `REQ-${year}-${random}`;
+    }
+
+    function resetDraft() {
+      state.email = "";
+      state.displayName = "";
+      state.actionType = "new";
+      state.currentLicense = "Stakeholder";
+      state.requestedLicense = "Stakeholder";
+      state.justification = "";
+      state.requestId = "";
+      state.submittedOn = "";
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    window.addEventListener("hashchange", route);
+    window.addEventListener("DOMContentLoaded", route);
+  </script>
+</body>
+</html>
