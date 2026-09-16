@@ -1,1 +1,7 @@
-Leave src/pages/_app.tsx and all existing src/pages routes unchanged. Do not include legacy routing cleanup in this branch. This branch should only contain the global styling foundation: tokens, global styles, reusable component styles, and the required import through the active App Router layout.tsx. Do not change existing application behavior.
+Do not modify anything. Verify the current global styling setup after the reverts. Show me:
+
+Which new styling files currently exist under src/styles.
+The exact CSS import added to src/app/layout.tsx.
+How tokens.css, global.css, and components.css are loaded from that import.
+Confirm that existing pages are not consuming any of the new classes/tokens yet.
+Confirm that the future ADO License page can use these tokens/classes without requiring changes to _app.tsx or the legacy src/pages routes.
