@@ -1,7 +1,1 @@
-Do not modify anything. Verify the current global styling setup after the reverts. Show me:
-
-Which new styling files currently exist under src/styles.
-The exact CSS import added to src/app/layout.tsx.
-How tokens.css, global.css, and components.css are loaded from that import.
-Confirm that existing pages are not consuming any of the new classes/tokens yet.
-Confirm that the future ADO License page can use these tokens/classes without requiring changes to _app.tsx or the legacy src/pages routes.
+Do not modify anything. Inspect global.css, tokens.css, typography.css, and components.css and confirm whether any selectors automatically affect existing App Router pages even when those pages do not reference the new classes or tokens. Specifically check for global selectors such as html, body, *, button, input, select, textarea, headings, links, and generic class names. Tell me exactly which existing behavior or appearance could change. I want this styling foundation to be opt-in for the new ADO License page and not visually change existing pages.
