@@ -1,73 +1,60 @@
-Act as a senior React/Next.js engineer working on an existing production repository.
+Act as a senior React/Next.js engineer working in an existing production repository.
 
-Goal:
-Convert only the new opt-in IDP styling foundation from CSS to SCSS without changing the appearance or behavior of any existing page.
+I want to proceed with Option A: restore the clean opt-in styling foundation first, then convert only that new foundation to SCSS.
 
-Current safety requirements:
-- Existing production pages must remain visually unchanged.
-- The new styling foundation must remain strictly opt-in.
-- Keep `.idp-scope` as the styling boundary.
-- Keep all CSS custom properties namespaced with `--idp-*`.
-- Keep all reusable classes namespaced with `.idp-*`.
-- Do not move tokens to `:root`.
-- Do not introduce global selectors such as `html`, `body`, `*`, `button`, `input`, `select`, `textarea`, `h1-h6`, `a`, etc.
-- Do not modify existing application CSS.
-- Do not modify Tailwind configuration.
-- Do not modify `_app.tsx`.
-- Do not modify legacy `src/pages/*` routes.
-- Do not modify carousel/slick files.
-- Do not modify existing React components/pages.
-- Do not modify CI, linting, testing, or unrelated dependencies.
+Follow this order exactly and do not perform any unrelated cleanup or refactoring.
 
-Convert only these new foundation files:
+1. First restore the new styling foundation to the last known safe state:
+   - tokens.css must be scoped under .idp-scope, not :root
+   - all new CSS variables must use the --idp-* prefix
+   - all reusable classes must use the .idp-* prefix
+   - global.css must be import-only and must not contain selectors that affect existing pages
+   - remove any global selectors such as html, body, *, button, input, select, textarea, headings, or links
+   - fix any malformed/corrupted lines in tokens.css, global.css, and components.css
+   - restore the single styling-foundation import in src/app/layout.tsx
 
-1. `src/styles/tokens.css`
-   → `src/styles/_tokens.scss`
+2. Do not touch:
+   - src/pages/_app.tsx
+   - any legacy src/pages/* routes
+   - existing page/component CSS
+   - Tailwind configuration
+   - carousel files
+   - routing
+   - authentication
+   - application logic
 
-2. `src/styles/typography.css`
-   → `src/styles/_typography.scss`
+3. After restoring the safe CSS version, validate that the CSS is syntactically valid. Show me the restored files/state before converting.
 
-3. `src/styles/components.css`
-   → `src/styles/_components.scss`
+4. Check whether sass is installed.
+   - If not installed, install it as a dev dependency with:
+     npm install -D sass
+   - It is acceptable for only package.json and package-lock.json to change for this dependency.
 
-4. `src/styles/global.css`
-   → `src/styles/global.scss`
+5. Convert only the new styling foundation:
+   - tokens.css → _tokens.scss
+   - typography.css → _typography.scss
+   - components.css → _components.scss
+   - global.css → global.scss
 
-SCSS requirements:
-- Use modern Sass `@use`, not deprecated `@import`, where appropriate.
-- `global.scss` should be the single entry point.
-- It should load the token, typography, and component partials.
-- Preserve the existing generated CSS behavior exactly.
-- Do not unnecessarily replace CSS custom properties with Sass `$variables`; keep the runtime `--idp-*` tokens because they are scoped under `.idp-scope`.
-- SCSS nesting may be used only when it produces the exact same `.idp-*` selectors and improves readability.
-- Do not create deeply nested selectors.
+6. Use modern Sass @use from global.scss.
 
-Next.js integration:
-- Check whether `sass` is already installed before making dependency changes.
-- If `sass` is NOT installed, stop and tell me. Do not modify `package.json` or `package-lock.json` yet.
-- If `sass` is already installed, update `src/app/layout.tsx` so it imports:
-  `../styles/global.scss`
-  instead of the old CSS entry file.
+7. Preserve exactly:
+   - .idp-scope
+   - every --idp-* CSS custom property
+   - every .idp-* class name
 
-Validation after conversion:
-Do not make additional cleanup changes.
+8. Do not replace the --idp-* runtime CSS custom properties with Sass $variables.
 
-Perform a workspace-wide verification and report:
+9. Update src/app/layout.tsx so it imports:
+   ../styles/global.scss
 
-1. Exact files added, deleted, renamed, or modified.
-2. The complete SCSS import/load chain.
-3. Whether `sass` is already installed and its version.
-4. Confirm that `.idp-scope` still contains the new token scope.
-5. Confirm all new custom properties still start with `--idp-`.
-6. Confirm all reusable new classes still start with `.idp-`.
-7. Confirm there are no new global element selectors.
-8. Confirm no existing page/component currently uses:
-   - `.idp-scope`
-   - `.idp-*`
-   - `--idp-*`
-9. Confirm no existing application CSS, Tailwind config, `_app.tsx`, legacy routes, carousel files, or page/component code was changed.
-10. Run the existing repository validation commands that are safe and already available, but do not fix unrelated pre-existing issues.
-11. Clearly separate any pre-existing errors from errors caused by this SCSS conversion.
-12. Show me the final diff before I accept the changes.
+10. After conversion, run the available lint/build/type checks. Report pre-existing errors separately from any errors introduced by this change.
 
-Do not perform any other refactoring or cleanup.
+11. Finally show me:
+   - the complete changed-file list
+   - the exact SCSS import chain
+   - whether sass was added
+   - confirmation that no existing page currently uses .idp-scope, .idp-*, or --idp-*
+   - confirmation that existing pages should have no visual impact from this new styling foundation
+
+Stop after that. Do not do any additional refactoring, cleanup, route deletion, CI changes, or test setup.
