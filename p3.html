@@ -1,240 +1,73 @@
-Act as a senior React/Next.js engineer reviewing an existing production repository. Our team is relatively new to React, so I want to establish safe engineering standards without breaking existing functionality or blocking current development.
+Act as a senior React/Next.js engineer working on an existing production repository.
 
-Do not modify, delete, move, rename, install, or generate any files yet. Analysis only.
+Goal:
+Convert only the new opt-in IDP styling foundation from CSS to SCSS without changing the appearance or behavior of any existing page.
 
-Analyze the entire repository and give me a current-state report.
+Current safety requirements:
+- Existing production pages must remain visually unchanged.
+- The new styling foundation must remain strictly opt-in.
+- Keep `.idp-scope` as the styling boundary.
+- Keep all CSS custom properties namespaced with `--idp-*`.
+- Keep all reusable classes namespaced with `.idp-*`.
+- Do not move tokens to `:root`.
+- Do not introduce global selectors such as `html`, `body`, `*`, `button`, `input`, `select`, `textarea`, `h1-h6`, `a`, etc.
+- Do not modify existing application CSS.
+- Do not modify Tailwind configuration.
+- Do not modify `_app.tsx`.
+- Do not modify legacy `src/pages/*` routes.
+- Do not modify carousel/slick files.
+- Do not modify existing React components/pages.
+- Do not modify CI, linting, testing, or unrelated dependencies.
 
-1. Application architecture
+Convert only these new foundation files:
 
-Identify:
-- React version
-- Next.js version
-- TypeScript version
-- Node/package-manager requirements
-- App Router vs Pages Router usage
-- Application entry points
-- layout.tsx, _app.tsx, providers, authentication setup
-- Routing structure
-- Client vs Server Components
-- API routes/route handlers
+1. `src/styles/tokens.css`
+   → `src/styles/_tokens.scss`
 
-Tell me if we have old/legacy routing or files that appear unused, but do not remove them.
+2. `src/styles/typography.css`
+   → `src/styles/_typography.scss`
 
-2. Current folder structure
+3. `src/styles/components.css`
+   → `src/styles/_components.scss`
 
-Review src and explain:
-- components
-- pages/app routes
-- services/API calls
-- hooks
-- utilities/helpers
-- types/interfaces
-- contexts/providers
-- feature-specific code
+4. `src/styles/global.css`
+   → `src/styles/global.scss`
 
-Identify:
-- overly large components
-- duplicated components
-- misplaced business logic
-- duplicated utilities
-- dead/possibly unused files
+SCSS requirements:
+- Use modern Sass `@use`, not deprecated `@import`, where appropriate.
+- `global.scss` should be the single entry point.
+- It should load the token, typography, and component partials.
+- Preserve the existing generated CSS behavior exactly.
+- Do not unnecessarily replace CSS custom properties with Sass `$variables`; keep the runtime `--idp-*` tokens because they are scoped under `.idp-scope`.
+- SCSS nesting may be used only when it produces the exact same `.idp-*` selectors and improves readability.
+- Do not create deeply nested selectors.
 
-Do not refactor anything yet.
+Next.js integration:
+- Check whether `sass` is already installed before making dependency changes.
+- If `sass` is NOT installed, stop and tell me. Do not modify `package.json` or `package-lock.json` yet.
+- If `sass` is already installed, update `src/app/layout.tsx` so it imports:
+  `../styles/global.scss`
+  instead of the old CSS entry file.
 
-3. Styling analysis
+Validation after conversion:
+Do not make additional cleanup changes.
 
-Identify all:
-- CSS files
-- SCSS/Sass usage
-- Tailwind usage
-- theme files
-- CSS variables
-- fonts
-- hard-coded colors
-- hard-coded spacing
-- typography definitions
-- duplicate styles
+Perform a workspace-wide verification and report:
 
-Check whether sass is already installed.
+1. Exact files added, deleted, renamed, or modified.
+2. The complete SCSS import/load chain.
+3. Whether `sass` is already installed and its version.
+4. Confirm that `.idp-scope` still contains the new token scope.
+5. Confirm all new custom properties still start with `--idp-`.
+6. Confirm all reusable new classes still start with `.idp-`.
+7. Confirm there are no new global element selectors.
+8. Confirm no existing page/component currently uses:
+   - `.idp-scope`
+   - `.idp-*`
+   - `--idp-*`
+9. Confirm no existing application CSS, Tailwind config, `_app.tsx`, legacy routes, carousel files, or page/component code was changed.
+10. Run the existing repository validation commands that are safe and already available, but do not fix unrelated pre-existing issues.
+11. Clearly separate any pre-existing errors from errors caused by this SCSS conversion.
+12. Show me the final diff before I accept the changes.
 
-We want to move toward this long-term styling structure:
-
-src/styles/
-  styles.scss
-  _tokens.scss
-  _base.scss
-  _typography.scss
-  _components.scss
-
-styles.scss should eventually be the single styling entry point imported by the App Router root layout.
-
-Do not convert existing pages yet.
-
-Recommend how we can introduce global design tokens safely for all new pages and future development, while gradually migrating existing production pages.
-
-Check for naming conflicts with existing theme.css, CSS variables, Tailwind, or other styling systems.
-
-4. Testing — important
-
-We currently have no automated tests.
-
-Check whether any of these already exist:
-- Jest
-- Vitest
-- React Testing Library
-- jest-dom
-- user-event
-- Playwright
-- Cypress
-- coverage tooling
-
-Recommend a testing foundation appropriate for this repo.
-
-Prefer:
-- Vitest
-- React Testing Library
-- @testing-library/jest-dom
-- @testing-library/user-event
-- jsdom
-
-unless there is a technical reason this repo should use something different.
-
-The future testing setup should support:
-- TypeScript
-- React component tests
-- path aliases
-- form validation tests
-- hooks
-- utility functions
-- API/service mocking
-- async loading/error/success states
-
-Recommend these scripts:
-- test
-- test:run
-- test:coverage
-
-Do not recommend a blocking coverage threshold yet because this is an existing production repository with zero current test coverage.
-
-Recommend how tests should be added gradually:
-- new code should get tests
-- bug fixes should get regression tests where practical
-- existing legacy pages should be tested when they are modified
-
-5. ESLint and TypeScript
-
-Analyze:
-- ESLint configuration
-- TypeScript configuration
-- current lint errors/warnings
-- use of any
-- unused imports
-- unsafe type patterns
-- console statements
-- dependency-array issues
-- other common React problems
-
-We already want to avoid blocking development because of existing technical debt.
-
-Recommend how to enforce stronger standards for new/modified code without requiring all old code to be fixed immediately.
-
-6. Build and CI/CD
-
-Identify:
-- build commands
-- lint commands
-- existing CI pipeline files
-- SonarQube configuration
-- Checkmarx/security scanning
-- quality gates if present
-
-Recommend a future validation order such as:
-
-install
-→ lint
-→ type-check
-→ unit/component tests
-→ build
-→ security/code-quality scanning
-
-Explain which checks should initially be blocking vs non-blocking.
-
-7. Dependencies
-
-Review package.json and lock files.
-
-Identify:
-- unused dependencies
-- duplicate libraries doing similar things
-- outdated patterns
-- risky dependencies
-
-Do not upgrade or remove anything yet.
-
-8. React engineering standards
-
-Recommend standards for future development covering:
-- component size/responsibility
-- reusable components
-- feature folders
-- API/service separation
-- hooks
-- TypeScript interfaces/types
-- error handling
-- loading states
-- accessibility
-- styling
-- testing
-- naming conventions
-
-9. Categorize all findings
-
-Put findings into:
-
-Critical
-- possible production/reliability/security issues
-
-High priority
-- foundations we should establish soon
-
-Technical debt
-- things we can migrate gradually
-
-Good existing practices
-- things we should keep
-
-10. Give me a phased plan
-
-Recommend a safe implementation sequence similar to:
-
-Phase 1 — Stabilize and establish baseline
-
-Phase 2 — SCSS/design-token foundation
-
-Phase 3 — Testing foundation
-
-Phase 4 — Standards for new development
-
-Phase 5 — Implement new ADO License feature using the new standards
-
-Phase 6 — Gradually refactor existing features
-
-Phase 7 — Tighten CI quality gates
-
-For every phase tell me:
-- files likely to change
-- risk level
-- whether it could affect existing production behavior
-- recommended validation
-- whether it should be its own PR
-
-Important constraints:
-- Do not modify anything yet.
-- Do not delete legacy files.
-- Do not refactor the whole repo at once.
-- Do not change existing UI behavior.
-- Do not make old lint/test/coverage debt block current development.
-- Do not introduce aggressive global CSS selectors that could change production pages.
-- Prioritize standards for new code first and gradual migration of existing code.
-
-Finish with a recommended first 3 PRs, but do not implement them.
+Do not perform any other refactoring or cleanup.
