@@ -1,60 +1,59 @@
-Act as a senior React/Next.js engineer working in an existing production repository.
+Yes, proceed with install + restore + convert.
 
-I want to proceed with Option A: restore the clean opt-in styling foundation first, then convert only that new foundation to SCSS.
+First install Sass as a dev dependency:
 
-Follow this order exactly and do not perform any unrelated cleanup or refactoring.
+npm install -D sass
 
-1. First restore the new styling foundation to the last known safe state:
-   - tokens.css must be scoped under .idp-scope, not :root
-   - all new CSS variables must use the --idp-* prefix
-   - all reusable classes must use the .idp-* prefix
-   - global.css must be import-only and must not contain selectors that affect existing pages
-   - remove any global selectors such as html, body, *, button, input, select, textarea, headings, or links
-   - fix any malformed/corrupted lines in tokens.css, global.css, and components.css
-   - restore the single styling-foundation import in src/app/layout.tsx
+Then restore the new styling foundation to the last safe opt-in state before converting anything.
 
-2. Do not touch:
-   - src/pages/_app.tsx
-   - any legacy src/pages/* routes
-   - existing page/component CSS
-   - Tailwind configuration
-   - carousel files
-   - routing
-   - authentication
-   - application logic
+Requirements for the restored state:
 
-3. After restoring the safe CSS version, validate that the CSS is syntactically valid. Show me the restored files/state before converting.
+tokens must be scoped under .idp-scope, not :root
+all new CSS variables must use the --idp-* prefix
+all reusable classes must use the .idp-* prefix
+global.css must contain imports only
+no global selectors such as html, body, *, input, button, select, textarea, headings, or links
+fix any malformed or corrupted CSS in tokens.css, global.css, and components.css
+restore the styling-foundation import in src/app/layout.tsx
 
-4. Check whether sass is installed.
-   - If not installed, install it as a dev dependency with:
-     npm install -D sass
-   - It is acceptable for only package.json and package-lock.json to change for this dependency.
+Validate the restored CSS first.
 
-5. Convert only the new styling foundation:
-   - tokens.css → _tokens.scss
-   - typography.css → _typography.scss
-   - components.css → _components.scss
-   - global.css → global.scss
+After that, convert only the new styling foundation:
 
-6. Use modern Sass @use from global.scss.
+tokens.css → _tokens.scss
+typography.css → _typography.scss
+components.css → _components.scss
+global.css → global.scss
 
-7. Preserve exactly:
-   - .idp-scope
-   - every --idp-* CSS custom property
-   - every .idp-* class name
+Use modern Sass @use from global.scss.
 
-8. Do not replace the --idp-* runtime CSS custom properties with Sass $variables.
+Preserve exactly:
 
-9. Update src/app/layout.tsx so it imports:
-   ../styles/global.scss
+.idp-scope
+all .idp-* class names
+all --idp-* CSS custom properties
 
-10. After conversion, run the available lint/build/type checks. Report pre-existing errors separately from any errors introduced by this change.
+Do not replace the CSS custom properties with Sass $variables.
 
-11. Finally show me:
-   - the complete changed-file list
-   - the exact SCSS import chain
-   - whether sass was added
-   - confirmation that no existing page currently uses .idp-scope, .idp-*, or --idp-*
-   - confirmation that existing pages should have no visual impact from this new styling foundation
+Update src/app/layout.tsx to import:
 
-Stop after that. Do not do any additional refactoring, cleanup, route deletion, CI changes, or test setup.
+../styles/global.scss
+
+Do not modify:
+
+src/pages/_app.tsx
+legacy src/pages/*
+existing application CSS
+Tailwind configuration
+carousel files
+routing
+authentication
+application logic
+CI
+tests
+
+After conversion, run the existing safe validation commands and clearly separate pre-existing errors from errors introduced by this change.
+
+Finally show me the complete changed-file list and final diff before I accept the changes.
+
+Do not perform any other refactoring or cleanup.
