@@ -1,75 +1,240 @@
-Approved with the following guardrails. Implement PR0 only.
+Act as a senior React/Next.js engineer reviewing an existing production repository. Our team is relatively new to React, so I want to establish safe engineering standards without breaking existing functionality or blocking current development.
 
-Proceed with the proposed files:
+Do not modify, delete, move, rename, install, or generate any files yet. Analysis only.
 
-- package.json
-- package-lock.json, only as produced by adding the required devDependencies
-- eslint.config.mjs
-- .prettierrc.json
-- .prettierignore
-- frontend-idp-containerapp-pipeline.yml
+Analyze the entire repository and give me a current-state report.
 
-Requirements:
+1. Application architecture
 
-1. Do NOT modify:
-   - next.config.js
-   - next.config.ts
-   - Dockerfile
-   - application source files
-   - authentication
-   - API routes
-   - routing
-   - deployment configuration
+Identify:
+- React version
+- Next.js version
+- TypeScript version
+- Node/package-manager requirements
+- App Router vs Pages Router usage
+- Application entry points
+- layout.tsx, _app.tsx, providers, authentication setup
+- Routing structure
+- Client vs Server Components
+- API routes/route handlers
 
-2. Do NOT mass-format existing files.
-3. Do NOT run eslint --fix against the repository.
-4. Do NOT enable strict TypeScript.
-5. Do NOT change existing dependency versions unnecessarily.
+Tell me if we have old/legacy routing or files that appear unused, but do not remove them.
 
-6. Add these package scripts:
-   - typecheck: tsc --noEmit
-   - lint: eslint .
-   - format:check: prettier --check .
+2. Current folder structure
 
-7. Add only the devDependencies required to support those commands.
+Review src and explain:
+- components
+- pages/app routes
+- services/API calls
+- hooks
+- utilities/helpers
+- types/interfaces
+- contexts/providers
+- feature-specific code
 
-8. Add the quality checks to the existing additionalBuildJobList using the same safe pattern already used by the existing Sonar job.
+Identify:
+- overly large components
+- duplicated components
+- misplaced business logic
+- duplicated utilities
+- dead/possibly unused files
 
-9. IMPORTANT:
-   The new quality-check job must be completely NON-BLOCKING.
+Do not refactor anything yet.
 
-   Existing TypeScript, ESLint, or Prettier problems are expected.
+3. Styling analysis
 
-   If:
-   - typecheck fails
-   - lint fails
-   - format:check fails
+Identify all:
+- CSS files
+- SCSS/Sass usage
+- Tailwind usage
+- theme files
+- CSS variables
+- fonts
+- hard-coded colors
+- hard-coded spacing
+- typography definitions
+- duplicate styles
 
-   the existing build and deployment must still continue exactly as before.
+Check whether sass is already installed.
 
-10. Do not make the Docker/build/deployment jobs depend on successful completion of the quality checks.
+We want to move toward this long-term styling structure:
 
-11. Keep existing build and deployment steps completely unchanged.
+src/styles/
+  styles.scss
+  _tokens.scss
+  _base.scss
+  _typography.scss
+  _components.scss
 
-12. Use npm ci in CI.
+styles.scss should eventually be the single styling entry point imported by the App Router root layout.
 
-After implementation, DO NOT fix any TypeScript, ESLint or Prettier findings.
+Do not convert existing pages yet.
 
-Instead, show me:
+Recommend how we can introduce global design tokens safely for all new pages and future development, while gradually migrating existing production pages.
 
-A. All files changed
-B. Exact diff for each file
-C. Dependencies added
-D. Output of:
-   npm run typecheck
-   npm run lint
-   npm run format:check
-   npm run build:local
+Check for naming conflicts with existing theme.css, CSS variables, Tailwind, or other styling systems.
 
-E. Clearly separate:
-   - existing technical debt
-   - configuration/setup problems introduced by this PR
+4. Testing — important
 
-F. Confirm that failures in the new quality checks cannot block the existing build/deployment.
+We currently have no automated tests.
 
-Stop after PR0. Do not proceed to PR1 or refactoring.
+Check whether any of these already exist:
+- Jest
+- Vitest
+- React Testing Library
+- jest-dom
+- user-event
+- Playwright
+- Cypress
+- coverage tooling
+
+Recommend a testing foundation appropriate for this repo.
+
+Prefer:
+- Vitest
+- React Testing Library
+- @testing-library/jest-dom
+- @testing-library/user-event
+- jsdom
+
+unless there is a technical reason this repo should use something different.
+
+The future testing setup should support:
+- TypeScript
+- React component tests
+- path aliases
+- form validation tests
+- hooks
+- utility functions
+- API/service mocking
+- async loading/error/success states
+
+Recommend these scripts:
+- test
+- test:run
+- test:coverage
+
+Do not recommend a blocking coverage threshold yet because this is an existing production repository with zero current test coverage.
+
+Recommend how tests should be added gradually:
+- new code should get tests
+- bug fixes should get regression tests where practical
+- existing legacy pages should be tested when they are modified
+
+5. ESLint and TypeScript
+
+Analyze:
+- ESLint configuration
+- TypeScript configuration
+- current lint errors/warnings
+- use of any
+- unused imports
+- unsafe type patterns
+- console statements
+- dependency-array issues
+- other common React problems
+
+We already want to avoid blocking development because of existing technical debt.
+
+Recommend how to enforce stronger standards for new/modified code without requiring all old code to be fixed immediately.
+
+6. Build and CI/CD
+
+Identify:
+- build commands
+- lint commands
+- existing CI pipeline files
+- SonarQube configuration
+- Checkmarx/security scanning
+- quality gates if present
+
+Recommend a future validation order such as:
+
+install
+→ lint
+→ type-check
+→ unit/component tests
+→ build
+→ security/code-quality scanning
+
+Explain which checks should initially be blocking vs non-blocking.
+
+7. Dependencies
+
+Review package.json and lock files.
+
+Identify:
+- unused dependencies
+- duplicate libraries doing similar things
+- outdated patterns
+- risky dependencies
+
+Do not upgrade or remove anything yet.
+
+8. React engineering standards
+
+Recommend standards for future development covering:
+- component size/responsibility
+- reusable components
+- feature folders
+- API/service separation
+- hooks
+- TypeScript interfaces/types
+- error handling
+- loading states
+- accessibility
+- styling
+- testing
+- naming conventions
+
+9. Categorize all findings
+
+Put findings into:
+
+Critical
+- possible production/reliability/security issues
+
+High priority
+- foundations we should establish soon
+
+Technical debt
+- things we can migrate gradually
+
+Good existing practices
+- things we should keep
+
+10. Give me a phased plan
+
+Recommend a safe implementation sequence similar to:
+
+Phase 1 — Stabilize and establish baseline
+
+Phase 2 — SCSS/design-token foundation
+
+Phase 3 — Testing foundation
+
+Phase 4 — Standards for new development
+
+Phase 5 — Implement new ADO License feature using the new standards
+
+Phase 6 — Gradually refactor existing features
+
+Phase 7 — Tighten CI quality gates
+
+For every phase tell me:
+- files likely to change
+- risk level
+- whether it could affect existing production behavior
+- recommended validation
+- whether it should be its own PR
+
+Important constraints:
+- Do not modify anything yet.
+- Do not delete legacy files.
+- Do not refactor the whole repo at once.
+- Do not change existing UI behavior.
+- Do not make old lint/test/coverage debt block current development.
+- Do not introduce aggressive global CSS selectors that could change production pages.
+- Prioritize standards for new code first and gradual migration of existing code.
+
+Finish with a recommended first 3 PRs, but do not implement them.
