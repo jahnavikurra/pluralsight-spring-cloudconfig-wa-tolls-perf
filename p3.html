@@ -1,1 +1,9 @@
-Add focused footer behavior tests for all 6 migrated wizard pages. Test Back/Next navigation, disabled/enabled states, final Submit behavior, loading/submitting states, GitHub Team spinner, and GitHub Repository disabled opacity behavior. Do not change application code. Run tests and show any failures.
+Review the ADO Team page and existing test setup. Do not change production code and do not mock Radix components. Keep API-only mocks.
+
+First, test render and disabled Next with empty data.
+
+Then check whether the existing component/test utilities support rendering the ADO Team page with pre-populated valid form state or an already-selected team. If supported, use that state to test enabled Next, Back/Next navigation, submit and loading behavior without opening CatalogCombobox.
+
+If there is no existing supported way to pre-populate the state, stop and report that this interaction requires a browser/E2E test instead of jsdom. Do not create hacks.
+
+Also compare the deleted wizard-form-layout-pages.test.ts against the new page-specific tests and tell me whether any useful coverage was lost. Do not modify anything for that comparison.
