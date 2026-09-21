@@ -1,6 +1,1 @@
-Review package.json, the current test setup, and existing CSS/SCSS structure. Update README only. Add:
-
-Local Testing: required Node version, dependency install command, test command, coverage command, build, lint, and how to run a single test file.
-SCSS/Styling Guidelines: where global/shared SCSS lives, how page/component SCSS should be organized, reuse existing tokens/shared classes, avoid duplicated styles and inline values, and keep page-specific styles local.
-Mention that existing baseline lint issues may remain, but new/changed files must not introduce new lint issues.
-Use only commands and paths that actually exist in this repo. Do not change application code or config.
+Trace every usage of token.idToken, token.accessToken, token.refreshToken, and githubAccessToken across the repo. For each one, show why it is needed and whether it can be replaced with a smaller derived value such as roles or user ID. Also identify current vs legacy session cookie names that can coexist. Do not change code. Propose the smallest safe fix for the 431 before considering database-backed sessions.
