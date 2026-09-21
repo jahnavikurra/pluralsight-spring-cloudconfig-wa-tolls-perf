@@ -1,9 +1,6 @@
-Review the ADO Team page and existing test setup. Do not change production code and do not mock Radix components. Keep API-only mocks.
+Review package.json, the current test setup, and existing CSS/SCSS structure. Update README only. Add:
 
-First, test render and disabled Next with empty data.
-
-Then check whether the existing component/test utilities support rendering the ADO Team page with pre-populated valid form state or an already-selected team. If supported, use that state to test enabled Next, Back/Next navigation, submit and loading behavior without opening CatalogCombobox.
-
-If there is no existing supported way to pre-populate the state, stop and report that this interaction requires a browser/E2E test instead of jsdom. Do not create hacks.
-
-Also compare the deleted wizard-form-layout-pages.test.ts against the new page-specific tests and tell me whether any useful coverage was lost. Do not modify anything for that comparison.
+Local Testing: required Node version, dependency install command, test command, coverage command, build, lint, and how to run a single test file.
+SCSS/Styling Guidelines: where global/shared SCSS lives, how page/component SCSS should be organized, reuse existing tokens/shared classes, avoid duplicated styles and inline values, and keep page-specific styles local.
+Mention that existing baseline lint issues may remain, but new/changed files must not introduce new lint issues.
+Use only commands and paths that actually exist in this repo. Do not change application code or config.
