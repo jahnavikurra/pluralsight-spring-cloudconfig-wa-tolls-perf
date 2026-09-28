@@ -1,88 +1,50 @@
-We now have three GitHub workflows:
+Proceed with Phase 1 only.
 
-1. Team Onboarding - already in production
-2. Create Repository - already in production
-3. Actions Workflow - new and not yet in production
+Goal:
+Protect the existing production GitHub behavior before any refactoring.
 
-We want all three GitHub workflows to eventually follow the same new repository standards.
+Production workflows:
+- GitHub Team Onboarding
+- GitHub Create Repository
+
+Do not modify implementation code yet.
+
+1. Run the existing GitHub tests.
+2. Identify missing coverage for the two production workflows.
+3. Add only the missing tests needed to freeze current behavior.
+
+Tests should cover where applicable:
+- initial rendering
+- GitHub authentication/sign-in state
+- organization loading
+- organization selection
+- search/select behavior
+- required field validation
+- disabled/enabled states
+- navigation between wizard steps
+- exact request payload sent to the API
+- successful submission
+- loading state
+- API error state
+- redirect/navigation after submission
 
 Important:
-- Production behavior for Team Onboarding and Create Repository must remain unchanged.
-- Actions Workflow can be refactored freely because it is not in production yet.
-- Existing ADO production functionality must remain unchanged.
+- Assert exact production request payloads.
+- Do not change API contracts.
+- Do not change page styling.
+- Do not change components.
+- Do not refactor shared logic yet.
+- Do not modify ADO files.
 
-Analyze and create an implementation plan for the following.
+After adding the tests, run:
+npm run test:run
+npm run typecheck
+npm run lint
 
-PRODUCTION GITHUB PAGES
-Team Onboarding and Create Repository:
+Then show me:
+1. tests added
+2. files changed
+3. current coverage gaps, if any
+4. test results
 
-1. Add/verify tests before refactoring.
-2. Preserve:
-   - API contracts
-   - form behavior
-   - validation
-   - navigation
-   - submission payloads
-   - loading/error behavior
-   - existing user-visible functionality
-
-3. Gradually migrate styling to:
-   - shared UI components
-   - existing design/theme tokens
-   - approved styles.scss / SCSS structure
-   - existing .idp-scope conventions where appropriate
-
-4. Remove only when safe:
-   - hardcoded colors
-   - arbitrary Tailwind values
-   - repeated font-family declarations
-   - duplicated styling
-   - duplicated controls
-
-5. Do not perform a large rewrite of production pages.
-
-ACTIONS WORKFLOW
-Because this page is not in production:
-
-1. Refactor it fully to the new standard.
-2. Reuse shared components.
-3. Reuse shared GitHub helpers.
-4. Reuse shared onboarding types where the contracts match.
-5. Use approved SCSS/design tokens.
-6. Remove arbitrary Tailwind and hardcoded styling.
-7. Remove duplicated sign-in, search/select, InfoTip, loading and error logic.
-8. Add full tests for the workflow.
-
-SHARED GITHUB CODE
-
-Identify common functionality across:
-- Team Onboarding
-- Create Repository
-- Actions Workflow
-
-Candidates include:
-- GitHub authentication/sign-in
-- organization selection
-- search/select controls
-- InfoTip/Tooltip
-- loading/error/status handling
-- WizardFormLayout
-- shared API response parsing
-- shared GitHub types
-- common form controls
-
-Do not force different GitHub business models into one type if their payloads genuinely differ.
-
-Before making any code changes, show me:
-
-1. Files for Team Onboarding that would change
-2. Files for Create Repository that would change
-3. Files for Actions Workflow that would change
-4. Shared files/components to create or reuse
-5. Tests that currently protect the production pages
-6. Missing tests
-7. Which changes are safe for production pages
-8. Which changes should only be applied to Actions Workflow first
-9. Recommended phased implementation order
-
-Do not modify any files yet.
+Stop after Phase 1.
