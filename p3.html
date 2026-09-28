@@ -1,73 +1,28 @@
-The GitHub workflow is NOT in production yet.
+Verify exactly how styling is currently working in this application.
 
-We do not need to preserve the current GitHub implementation if it does not follow our repository standards.
+Do not modify files.
 
-The existing ADO production functionality must remain unchanged, but the GitHub workflow can be refactored as needed.
+Check:
 
-Review and update the GitHub workflow to follow the standards already established in this repository.
+1. Is Tailwind actually active at runtime/build time?
+2. Where are classes such as:
+   - bg-card
+   - text-foreground
+   - border-border
+   - bg-primary
+   - text-primary
+   generated or defined?
+3. Is tailwind.css unused/dead?
+4. Are globals.css, index.css, and theme.css the actual active styling foundation?
+5. Check package.json, Tailwind config, PostCSS config, layout imports, and CSS imports.
+6. Identify which styling approach our recently added repo standards are using.
+7. Tell me what the NEW GitHub pages should use.
 
-Requirements:
+Do not assume Tailwind is our standard just because Tailwind packages or files exist.
 
-1. Reuse shared types
-   - Reuse existing generic types from src/types/onboarding.ts where appropriate.
-   - Do not create duplicate GitHub versions of Field, Repo, RiskTier, PipelineScope, OnboardingResponse, etc.
-   - Keep GitHub-specific types only when the data structure is genuinely different.
-   - Do not change shared API field names if existing ADO functionality depends on them.
-
-2. Follow the existing styling standards
-   - Use the shared SCSS architecture.
-   - Use existing design tokens for colors, spacing, typography, borders, radius, etc.
-   - Remove hardcoded colors, font sizes, spacing, and inline styles where shared tokens exist.
-   - Do not introduce new CSS styling patterns.
-
-3. Reuse components
-   - Compare GitHub pages with the existing ADO workflow.
-   - Reuse existing shared components where behavior is the same.
-   - Extract common components when ADO and GitHub contain duplicated UI.
-   - Do not duplicate controls such as search/select inputs, form fields, review sections, buttons, or status components.
-
-4. Follow repository structure
-   - Keep shared functionality in existing shared folders.
-   - Keep GitHub-specific code under the GitHub feature area.
-   - Do not create unnecessary new folder structures.
-
-5. TypeScript standards
-   - Avoid any.
-   - Avoid duplicated interfaces.
-   - Avoid unnecessary type assertions.
-   - Use shared exported types where available.
-   - Keep strict typing.
-
-6. Code quality
-   - Ensure GitHub code passes the existing ESLint rules.
-   - Ensure styling passes existing Stylelint rules.
-   - Ensure Prettier formatting.
-   - Remove unused imports, dead code, temporary console.log statements, and commented-out implementation code.
-
-7. Testing
-   - Add tests for the GitHub workflow using the test setup already established in this repository.
-   - Cover important rendering, validation, navigation, selection, submission, loading, and error states.
-   - Do not modify ADO behavior simply to make GitHub tests work.
-
-8. API/service standards
-   - Follow the existing repo pattern for API/service calls.
-   - Do not place direct API logic inside page components if the repo already uses helpers/services.
-   - Use existing error handling and loading patterns.
-
-9. Protect production ADO
-   - Existing ADO production functionality must not change.
-   - Shared refactoring is allowed only when it is backward compatible with ADO.
-   - Run existing tests/lint checks after shared changes.
-
-Before making changes, give me:
-
-1. Files that need refactoring
-2. What is duplicated
-3. What can be shared
-4. What should remain GitHub-specific
-5. Styling violations
-6. Missing tests
-7. Proposed target structure
-8. A step-by-step implementation plan
-
-Do not modify files until I approve the plan.
+Return:
+- Active styling pipeline
+- Unused styling files
+- Where semantic classes come from
+- Our current team standard
+- Recommended styling approach for new GitHub pages
