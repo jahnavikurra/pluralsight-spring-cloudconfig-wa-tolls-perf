@@ -1,29 +1,13 @@
-Approved. Proceed with Phase 3 only.
+Proceed with Phase 4 only.
 
-Keep these constraints:
+Migrate GitHub Team Onboarding first, then Create Repository, incrementally to the new standard.
 
-- Refactor only GitHub Actions Workflow and any already-approved shared GitHub helpers/components required by it.
-- Do not change ADO files.
-- Do not change Team Onboarding or Create Repository behavior.
-- Do not change production API contracts or payload field names.
-- Use the shared helpers/components extracted in Phase 2.
-- Use the approved SCSS/design-token standard.
-- Do not import tailwind.css.
-- Remove hardcoded/arbitrary styling from Actions Workflow where approved shared tokens/classes exist.
-- Keep Actions Workflow-specific business logic local to its feature.
+- reuse Phase 2/3 shared components and helpers
+- use approved SCSS/design tokens
+- remove hardcoded/arbitrary styling
+- preserve all production behavior and exact API payloads
+- do not change ADO files
+- make one small migration at a time
+- run focused tests and full tests after each change
 
-After implementation, run all planned validation.
-
-Before marking Phase 3 complete, report:
-1. files changed
-2. styling removed/replaced
-3. shared components/helpers reused
-4. Actions Workflow tests added
-5. exact payload test result
-6. focused GitHub test result
-7. full test result
-8. typecheck result and whether any new errors were introduced
-9. lint/format/stylelint/build results
-10. confirmation that ADO files and production GitHub behavior were unchanged
-
-Stop after Phase 3.
+Stop after Phase 4 and summarize results.
