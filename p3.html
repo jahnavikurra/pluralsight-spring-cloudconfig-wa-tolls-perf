@@ -1,28 +1,24 @@
-Verify exactly how styling is currently working in this application.
+The GitHub workflow is a NEW feature and is not in production.
 
-Do not modify files.
+Do not copy legacy styling patterns just because they already exist in the repository.
 
-Check:
+For GitHub, follow the standards we intentionally introduced for new development:
 
-1. Is Tailwind actually active at runtime/build time?
-2. Where are classes such as:
-   - bg-card
-   - text-foreground
-   - border-border
-   - bg-primary
-   - text-primary
-   generated or defined?
-3. Is tailwind.css unused/dead?
-4. Are globals.css, index.css, and theme.css the actual active styling foundation?
-5. Check package.json, Tailwind config, PostCSS config, layout imports, and CSS imports.
-6. Identify which styling approach our recently added repo standards are using.
-7. Tell me what the NEW GitHub pages should use.
+- reuse shared UI components first
+- reuse shared theme/design tokens
+- use the existing approved SCSS structure when custom styling is needed
+- avoid hardcoded colors, spacing, font sizes, borders, and inline styles
+- do not introduce a new GitHub-specific styling system
+- do not make Tailwind mandatory for new GitHub pages
+- only use existing Tailwind semantic classes where they are already part of approved shared components or established repo patterns
+- do not import tailwind.css
 
-Do not assume Tailwind is our standard just because Tailwind packages or files exist.
+Keep existing ADO production styling unchanged.
 
-Return:
-- Active styling pipeline
-- Unused styling files
-- Where semantic classes come from
-- Our current team standard
-- Recommended styling approach for new GitHub pages
+Analyze the GitHub pages and show which styling should:
+1. reuse shared components
+2. use existing tokens
+3. use SCSS
+4. remove hardcoded/arbitrary styling
+
+Do not modify files yet.
