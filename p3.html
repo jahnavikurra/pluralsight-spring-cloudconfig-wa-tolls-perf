@@ -1,14 +1,14 @@
-Proceed with final validation only.
+Review the final diff only.
 
-Do not change functionality or refactor further.
+Do not modify files.
 
-Run all tests, typecheck, lint, format check, SCSS/style lint, and production build.
+Confirm:
+- no accidental functional changes
+- no ADO changes
+- no API payload changes
+- no unnecessary files changed
+- no debug code or console.log
+- no commented-out temporary code
+- no hardcoded styling remaining in the migrated GitHub areas where shared tokens exist
 
-Then verify:
-- no ADO files changed
-- no GitHub API payloads changed
-- no new TypeScript errors
-- no new lint/style errors
-- Team Onboarding, Create Repository, and Actions Workflow all pass
-
-Finally show me the final changed-file list and any remaining pre-existing issues only.
+Flag anything risky before I commit.
