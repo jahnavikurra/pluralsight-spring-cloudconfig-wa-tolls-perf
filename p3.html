@@ -1,13 +1,14 @@
-Proceed with Phase 4 only.
+Proceed with final validation only.
 
-Migrate GitHub Team Onboarding first, then Create Repository, incrementally to the new standard.
+Do not change functionality or refactor further.
 
-- reuse Phase 2/3 shared components and helpers
-- use approved SCSS/design tokens
-- remove hardcoded/arbitrary styling
-- preserve all production behavior and exact API payloads
-- do not change ADO files
-- make one small migration at a time
-- run focused tests and full tests after each change
+Run all tests, typecheck, lint, format check, SCSS/style lint, and production build.
 
-Stop after Phase 4 and summarize results.
+Then verify:
+- no ADO files changed
+- no GitHub API payloads changed
+- no new TypeScript errors
+- no new lint/style errors
+- Team Onboarding, Create Repository, and Actions Workflow all pass
+
+Finally show me the final changed-file list and any remaining pre-existing issues only.
