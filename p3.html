@@ -1,50 +1,26 @@
-Proceed with Phase 1 only.
+Before starting Phase 2, close the remaining production payload coverage gaps.
 
-Goal:
-Protect the existing production GitHub behavior before any refactoring.
+Add tests only for:
 
-Production workflows:
-- GitHub Team Onboarding
-- GitHub Create Repository
+1. Create Repository template mode
+   - assert the exact API request payload
+   - preserve all current field names and values
 
-Do not modify implementation code yet.
+2. Team Onboarding single-team mode
+   - assert the exact API request payload
+   - preserve all current field names and values
 
-1. Run the existing GitHub tests.
-2. Identify missing coverage for the two production workflows.
-3. Add only the missing tests needed to freeze current behavior.
+Do not modify implementation code.
+Do not modify styling.
+Do not modify ADO files.
 
-Tests should cover where applicable:
-- initial rendering
-- GitHub authentication/sign-in state
-- organization loading
-- organization selection
-- search/select behavior
-- required field validation
-- disabled/enabled states
-- navigation between wizard steps
-- exact request payload sent to the API
-- successful submission
-- loading state
-- API error state
-- redirect/navigation after submission
+The external GitHub sign-in redirect does not need to be added as a unit test in this phase. Document it as an integration/E2E coverage gap.
 
-Important:
-- Assert exact production request payloads.
-- Do not change API contracts.
-- Do not change page styling.
-- Do not change components.
-- Do not refactor shared logic yet.
-- Do not modify ADO files.
+After adding these tests, run:
+- focused GitHub tests
+- full test suite
+- npm run lint
 
-After adding the tests, run:
-npm run test:run
-npm run typecheck
-npm run lint
+Also record the existing typecheck errors as the pre-refactor baseline if they are unrelated to these files.
 
-Then show me:
-1. tests added
-2. files changed
-3. current coverage gaps, if any
-4. test results
-
-Stop after Phase 1.
+Stop after reporting the results.
