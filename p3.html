@@ -1,66 +1,13 @@
-Audit all GitHub UI pages against our current repository standards.
+Fix only the NEEDS CLEANUP items from this GitHub standards audit.
 
-Scope:
-- GitHub Team Onboarding
-- GitHub Create Repository
-- GitHub Actions Workflow
+Priorities:
+1. Reuse existing shared components where possible.
+2. Reuse existing GitHub helpers instead of page-local logic.
+3. Replace remaining hardcoded/arbitrary styling with global tokens and approved .idp-* SCSS.
+4. Remove unused imports/dead code.
+5. Close only the identified test gaps.
 
-Do not modify files.
+Do not change API payloads, validation, navigation, or production behavior.
+Do not change ADO files.
 
-Check:
-
-1. Shared components
-- Are Button, Tooltip, Popover, Command, Checkbox, Switch, WizardFormLayout, StaticSearchSelect, InfoTip, etc. reused where appropriate?
-- Identify duplicated page-local components that should use an existing shared component.
-
-2. Shared GitHub helpers
-- Are authentication, API response parsing, error handling, and common loading/status logic reused?
-- Identify duplicated logic still remaining.
-
-3. Types
-- Are shared types from src/types/onboarding.ts reused where structures match?
-- Identify duplicate interfaces/types.
-- Keep genuinely different Team/Repo/Actions request models separate.
-
-4. Styling
-- Are global theme tokens used for colors?
-- Are approved .idp-* SCSS classes used?
-- Identify hardcoded hex/rgb colors, inline colors, arbitrary Tailwind values, repeated font-family declarations, or page-local styling.
-- Confirm no GitHub-specific color/theme system exists.
-
-5. SCSS
-- Check whether custom styles are using the existing styles.scss / _components.scss structure.
-- Confirm selectors are scoped and reusable.
-- Identify GitHub-only styles that should be shared or removed.
-
-6. API/service patterns
-- Confirm page components are not duplicating API parsing/auth logic.
-- Confirm API payload field names remain unchanged.
-
-7. Testing
-- Confirm each GitHub page has coverage for:
-  rendering
-  validation
-  navigation
-  loading
-  error
-  success
-  exact submission payload
-- Identify missing tests only.
-
-8. Code quality
-- Check for any, unsafe casts, console.log, dead code, commented-out code, unused imports, duplicated JSX, or large page-local helpers.
-
-Return the results as:
-
-PASS
-NEEDS CLEANUP
-INTENTIONALLY PAGE-SPECIFIC
-
-For every NEEDS CLEANUP item show:
-- file
-- line/code area
-- issue
-- existing shared component/helper/token that should be used
-
-Do not make changes.
+Before editing, show the exact files and changes you plan to make.
