@@ -1,26 +1,57 @@
-Before starting Phase 2, close the remaining production payload coverage gaps.
+Proceed with Phase 2 only: extract shared GitHub helpers and reusable controls.
 
-Add tests only for:
+Production workflows:
+- GitHub Team Onboarding
+- GitHub Create Repository
 
-1. Create Repository template mode
-   - assert the exact API request payload
-   - preserve all current field names and values
+New workflow:
+- GitHub Actions Workflow
 
-2. Team Onboarding single-team mode
-   - assert the exact API request payload
-   - preserve all current field names and values
+Important:
+- Existing production behavior must remain unchanged.
+- Existing API payloads must remain exactly the same.
+- Existing tests from Phase 1 must continue passing.
+- Do not modify ADO files.
+- Do not start the broad styling migration yet.
 
-Do not modify implementation code.
-Do not modify styling.
-Do not modify ADO files.
+Phase 2 goals:
 
-The external GitHub sign-in redirect does not need to be added as a unit test in this phase. Document it as an integration/E2E coverage gap.
+1. Extract duplicated GitHub authentication/sign-in logic into a shared GitHub helper.
 
-After adding these tests, run:
+2. Extract common GitHub API response/error parsing.
+   - Remove duplicated response parsing where safe.
+   - Use proper TypeScript types.
+   - Do not use `any`.
+
+3. Review duplicated InfoTip behavior.
+   - Reuse the existing Tooltip primitive if it supports the exact behavior.
+   - Otherwise create one shared reusable component.
+   - Preserve accessible name and user behavior.
+
+4. Extract duplicated search/select behavior used by GitHub pages.
+   - Preserve keyboard behavior.
+   - Preserve selected values.
+   - Preserve disabled states.
+   - Preserve option labels.
+   - Preserve validation/error rendering.
+
+5. Extract repeated GitHub loading/error/status presentation only when the behavior is identical.
+
+6. Keep GitHub-specific shared code under the GitHub feature area unless it is truly generic enough for the existing shared UI directory.
+
+7. Do not force different GitHub request models into one type.
+
+8. Reuse existing shared onboarding types where their structures truly match.
+
+After each extraction run:
 - focused GitHub tests
 - full test suite
-- npm run lint
+- lint
 
-Also record the existing typecheck errors as the pre-refactor baseline if they are unrelated to these files.
+Before making changes, show me:
+- files to create
+- files to modify
+- what duplication each extraction removes
+- whether the new code is GitHub-specific or truly generic
 
-Stop after reporting the results.
+Then wait for approval.
