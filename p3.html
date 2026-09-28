@@ -1,57 +1,27 @@
-Proceed with Phase 2 only: extract shared GitHub helpers and reusable controls.
+Approved. Proceed with Phase 2 using this extraction order.
 
-Production workflows:
-- GitHub Team Onboarding
-- GitHub Create Repository
+Important constraints:
 
-New workflow:
-- GitHub Actions Workflow
+- Do not change ADO files.
+- Do not change production API payloads.
+- Keep Team, Repository, and Actions Workflow request models separate.
+- Reuse onboarding.ts types only where the structures truly match.
+- Do not force multi-select into the shared control unless behavior is identical.
+- Do not start styling migration yet.
+- Do not refactor Actions Workflow broadly yet.
 
-Important:
-- Existing production behavior must remain unchanged.
-- Existing API payloads must remain exactly the same.
-- Existing tests from Phase 1 must continue passing.
-- Do not modify ADO files.
-- Do not start the broad styling migration yet.
+After each extraction:
+1. Run focused GitHub tests
+2. Run full test suite
+3. Run lint
+4. Confirm Phase 1 exact payload tests still pass
 
-Phase 2 goals:
+At the end of Phase 2, show:
+- files created
+- files modified
+- duplication removed
+- test results
+- any remaining duplicated GitHub logic
+- whether any existing production behavior changed
 
-1. Extract duplicated GitHub authentication/sign-in logic into a shared GitHub helper.
-
-2. Extract common GitHub API response/error parsing.
-   - Remove duplicated response parsing where safe.
-   - Use proper TypeScript types.
-   - Do not use `any`.
-
-3. Review duplicated InfoTip behavior.
-   - Reuse the existing Tooltip primitive if it supports the exact behavior.
-   - Otherwise create one shared reusable component.
-   - Preserve accessible name and user behavior.
-
-4. Extract duplicated search/select behavior used by GitHub pages.
-   - Preserve keyboard behavior.
-   - Preserve selected values.
-   - Preserve disabled states.
-   - Preserve option labels.
-   - Preserve validation/error rendering.
-
-5. Extract repeated GitHub loading/error/status presentation only when the behavior is identical.
-
-6. Keep GitHub-specific shared code under the GitHub feature area unless it is truly generic enough for the existing shared UI directory.
-
-7. Do not force different GitHub request models into one type.
-
-8. Reuse existing shared onboarding types where their structures truly match.
-
-After each extraction run:
-- focused GitHub tests
-- full test suite
-- lint
-
-Before making changes, show me:
-- files to create
-- files to modify
-- what duplication each extraction removes
-- whether the new code is GitHub-specific or truly generic
-
-Then wait for approval.
+Stop after Phase 2.
