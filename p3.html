@@ -1,14 +1,12 @@
-Review the final diff only.
+Clean up the final diff before commit.
 
-Do not modify files.
+Do not change functionality.
 
-Confirm:
-- no accidental functional changes
-- no ADO changes
-- no API payload changes
-- no unnecessary files changed
-- no debug code or console.log
-- no commented-out temporary code
-- no hardcoded styling remaining in the migrated GitHub areas where shared tokens exist
+- Revert unrelated formatting-only changes.
+- Keep only formatting required for the actual GitHub refactor.
+- Preserve all functional changes and tests.
+- Review _components.scss carefully and keep only the new scoped .idp-* styles required by GitHub.
+- Do not change ADO files.
+- Do not change API payloads.
 
-Flag anything risky before I commit.
+Then show the reduced changed-file diff and rerun tests, lint, stylelint, and build.
