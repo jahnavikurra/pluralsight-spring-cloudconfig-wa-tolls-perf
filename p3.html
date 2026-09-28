@@ -1,87 +1,29 @@
-Proceed with Phase 3 only: refactor GitHub Actions Workflow to the new repository standard.
+Approved. Proceed with Phase 3 only.
 
-Actions Workflow is not in production, so it can be refactored fully.
+Keep these constraints:
 
-Do not modify:
-- existing ADO pages
-- GitHub Team Onboarding behavior
-- GitHub Create Repository behavior
-- existing production API contracts
+- Refactor only GitHub Actions Workflow and any already-approved shared GitHub helpers/components required by it.
+- Do not change ADO files.
+- Do not change Team Onboarding or Create Repository behavior.
+- Do not change production API contracts or payload field names.
+- Use the shared helpers/components extracted in Phase 2.
+- Use the approved SCSS/design-token standard.
+- Do not import tailwind.css.
+- Remove hardcoded/arbitrary styling from Actions Workflow where approved shared tokens/classes exist.
+- Keep Actions Workflow-specific business logic local to its feature.
 
-Use the shared work completed in Phase 2.
+After implementation, run all planned validation.
 
-Requirements:
+Before marking Phase 3 complete, report:
+1. files changed
+2. styling removed/replaced
+3. shared components/helpers reused
+4. Actions Workflow tests added
+5. exact payload test result
+6. focused GitHub test result
+7. full test result
+8. typecheck result and whether any new errors were introduced
+9. lint/format/stylelint/build results
+10. confirmation that ADO files and production GitHub behavior were unchanged
 
-1. Reuse shared GitHub helpers
-   - authentication
-   - API response/error parsing
-   - InfoTip/Tooltip
-   - compatible search/select controls
-
-2. Reuse existing shared onboarding types where structures match.
-
-3. Keep Actions Workflow-specific request/payload types separate where required.
-
-4. Use shared UI primitives:
-   - WizardFormLayout
-   - Button
-   - Popover
-   - Command
-   - Tooltip
-   - Checkbox
-   - Switch
-   where appropriate.
-
-5. Styling
-   - use the approved styles.scss architecture
-   - use existing theme/design tokens
-   - wrap with .idp-scope if required by the established SCSS standard
-   - reuse existing .idp-* classes where appropriate
-   - remove hardcoded colors
-   - remove arbitrary Tailwind values
-   - remove repeated inline font-family declarations
-   - remove unnecessary page-local styling
-   - do not import tailwind.css
-   - do not create a GitHub-specific CSS/theme system
-
-6. TypeScript
-   - remove unnecessary any
-   - use typed API responses/errors
-   - avoid duplicate interfaces
-   - keep strict typing
-
-7. Code structure
-   - break up large page-local logic/components where it improves reuse/readability
-   - keep Actions Workflow business logic under selfservice/github/actions-workflow
-   - do not create unnecessary abstractions
-
-8. Testing
-   Add/complete tests for:
-   - initial rendering
-   - authentication state
-   - organization selection
-   - deploy target selection
-   - validation
-   - step navigation
-   - workflow configuration
-   - exact submission payload
-   - loading state
-   - success state
-   - API error state
-
-After implementation run:
-- focused GitHub tests
-- full tests
-- npm run typecheck
-- npm run lint
-- npm run format:check
-- npm run lint:styles:new
-- npm run build
-
-Confirm that:
-- no new TypeScript errors were introduced
-- existing production GitHub payload tests still pass
-- no ADO files changed
-- Team Onboarding and Create Repository behavior remains unchanged
-
-Before editing, show me the exact Phase 3 file plan and then wait for approval.
+Stop after Phase 3.
