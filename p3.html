@@ -1,13 +1,1 @@
-Fix only the NEEDS CLEANUP items from this GitHub standards audit.
-
-Priorities:
-1. Reuse existing shared components where possible.
-2. Reuse existing GitHub helpers instead of page-local logic.
-3. Replace remaining hardcoded/arbitrary styling with global tokens and approved .idp-* SCSS.
-4. Remove unused imports/dead code.
-5. Close only the identified test gaps.
-
-Do not change API payloads, validation, navigation, or production behavior.
-Do not change ADO files.
-
-Before editing, show the exact files and changes you plan to make.
+We are incrementally refactoring this React UI repository. Review the completed refactoring changes against the existing Vitest/React Testing Library tests. Identify missing tests for newly refactored shared components, helpers, layouts and affected ADO/GitHub workflows. Avoid expanding tests for legacy components scheduled for replacement. Add focused tests only for stable refactored code, preserve production ADO behavior, reuse existing mocks and utilities, and do not modify production code just to make tests pass. Keep coverage non-blocking. Run the full existing test suite and report remaining gaps.
