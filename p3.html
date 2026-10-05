@@ -1,12 +1,11 @@
-Refactor all completed ADO pages to use the same shared layout and styling, using ADO Create Team as the reference.
-Requirements:
-- Create or reuse one shared ADO page/form layout component.
-- Reuse the same header, content/card structure, spacing, labels, buttons and navigation area across ADO pages.
-- Use the same centralized color and typography tokens from Create Team.
-- Include Team, Environment, Pipeline, Repo and ADO License.
-- Move only genuinely common UI into shared components.
-- Keep page-specific fields, validation, APIs and business logic inside their respective pages.
-- Do not change functionality or routing.
-- Do not modify GitHub or Tailwind in this phase.
-- Reuse existing tests and update only if selectors/components change.
-Before editing, show which components/styles are duplicated across the ADO pages and the proposed shared component structure.
+Proceed with the ADO shared-layout refactor with these constraints:
+- Apply the Environment, Pipeline and Repo header spacing changes to match Create Team/Team.
+- Standardize InfoTip behavior across the ADO pages.
+- Refactor ADO License to use the same shared layout, typography, spacing and colors as ADO Create Team.
+- Keep .idp-scope if it is required by our repo standards; do not remove the scope just to reuse the shared layout.
+- Reuse existing shared success/completed-state styling instead of introducing a page-specific bg-green-100 if an equivalent token/component already exists.
+- Update tests only where assertions must change because of this approved refactor.
+- Defer the search-select hover behavior change for now.
+- Do not change APIs, routing, validation or business logic.
+- Run build and all existing tests after the refactor.
+Afterward, show which shared layout/components are now used by Create Team, Team, Environment, Pipeline, Repo and ADO License.
