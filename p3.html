@@ -1,15 +1,14 @@
-Let's start Phase 1 of our UI refactoring.
+Do we really need the new changes in tailwind.config.js?
 
-Scope: Completed ADO pages only. Do not modify GitHub pages.
+Our target is centralized SCSS styling, with the ADO Create Team page as the design reference.
 
-1. Audit all colors currently used across ADO-related CSS, SCSS and TSX files.
-2. Check our existing global styles and token files before creating anything new.
-3. Consolidate all actively used ADO colors at the top of the existing centralized token file, grouped by purpose (primary, background, surface, text, border, status, hover, focus, disabled).
-4. Replace hardcoded colors in ADO pages with references to centralized tokens.
-5. Identify duplicate and unused color declarations in global CSS/SCSS. Only remove declarations confirmed unused across the entire repository.
-6. Preserve existing colors, visual appearance and functionality exactly.
-7. Do not introduce new styling frameworks or unnecessary files.
-8. Do not modify shared styles in a way that changes GitHub or other pages.
-9. Run existing tests, lint and build checks after refactoring. Do not add more test coverage at this stage.
+Review all current Tailwind usage and dependencies.
 
-First show me the color inventory, proposed token changes and impacted files. Wait for my approval before implementing.
+- Keep existing Tailwind functionality for legacy pages.
+- Revert unnecessary new additions to tailwind.config.js.
+- Do not maintain duplicate color palettes in Tailwind and SCSS.
+- Keep only the colors actually needed from Create Team in _tokens.scss.
+- Merge similar colors into reusable semantic tokens.
+- Do not create unnecessary color shades.
+- Do not change existing UI behavior or styling unintentionally.
+- Show the proposed changes before editing.
