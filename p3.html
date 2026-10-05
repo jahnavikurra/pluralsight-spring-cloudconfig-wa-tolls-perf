@@ -1,31 +1,15 @@
-Refactor our existing React UI repository, prioritizing styling and shared components. Defer test improvements for now.
+Let's start Phase 1 of our UI refactoring.
 
-**1. Centralize colors**
-- Audit existing CSS, SCSS, TSX and JSX files.
-- Identify every color currently used across ADO and GitHub pages, including hover, disabled, focus, backgrounds, borders and text.
-- Move all actively used colors into the TOP of our existing centralized SCSS token file, grouped by purpose.
-- Use meaningful semantic variable names.
-- Replace hardcoded color values throughout the pages with references to these tokens.
-- Preserve the existing visual appearance and exact color values.
+Scope: Completed ADO pages only. Do not modify GitHub pages.
 
-**2. Clean global styles**
-- Identify duplicate and unused color declarations in global CSS/SCSS.
-- Remove only confirmed unused declarations after checking all references.
-- Avoid creating new token files if we already have them.
-- Keep global.scss for common application styling.
-- Maintain one source of truth for colors, typography and other design tokens.
+1. Audit all colors currently used across ADO-related CSS, SCSS and TSX files.
+2. Check our existing global styles and token files before creating anything new.
+3. Consolidate all actively used ADO colors at the top of the existing centralized token file, grouped by purpose (primary, background, surface, text, border, status, hover, focus, disabled).
+4. Replace hardcoded colors in ADO pages with references to centralized tokens.
+5. Identify duplicate and unused color declarations in global CSS/SCSS. Only remove declarations confirmed unused across the entire repository.
+6. Preserve existing colors, visual appearance and functionality exactly.
+7. Do not introduce new styling frameworks or unnecessary files.
+8. Do not modify shared styles in a way that changes GitHub or other pages.
+9. Run existing tests, lint and build checks after refactoring. Do not add more test coverage at this stage.
 
-**3. Shared components**
-- Identify repeated components across the completed ADO pages.
-- Move genuinely reusable components to our existing shared components directory.
-- Reuse existing layouts, buttons, inputs and form elements wherever applicable.
-- Do not introduce unnecessary abstractions.
-
-**4. Tests and safety**
-- Keep all existing tests organized and unchanged unless necessary for refactoring compatibility.
-- Defer additional coverage improvements and unrelated test fixes.
-- Run existing tests, lint and build checks after changes.
-- Do not alter APIs, routing, validation, authentication or production functionality.
-- Preserve current UI appearance and behavior.
-
-First show the audit, active/unused color inventory and proposed file changes. Then implement incrementally, starting with token consolidation.
+First show me the color inventory, proposed token changes and impacted files. Wait for my approval before implementing.
