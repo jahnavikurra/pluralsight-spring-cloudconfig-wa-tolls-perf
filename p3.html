@@ -1,15 +1,20 @@
-Before creating or modifying any design tokens, first search the entire repository.
+Proceed, but keep this refactor scoped to the ADO pages first.
 
-1. Check theme.css, _tokens.scss, global.scss, globals.css, _components.scss, Tailwind configuration and existing page-level styles.
-2. Identify whether the required color or styling token already exists.
-3. Compare both variable names and actual resolved hex/RGB values to detect duplicates, including aliases.
-4. Reuse existing global tokens wherever the color and purpose match.
-5. If similar colors exist, suggest consolidation using ADO Create Team as the design reference.
-6. Only introduce a new token when no suitable existing token is available.
-7. Avoid duplicate aliases, unnecessary IDP-specific variables and new color palettes.
-8. Identify unused global tokens, but do not delete them until all repository references are verified, including dynamic usage.
+1. Restore the 8 shared primitive/global tokens that are still valid reuse targets.
+2. Consolidate unnecessary IDP aliases into the existing global semantic tokens where the value and purpose are the same.
+3. Remove the 4 redundant option tokens and revert their related class swaps.
+4. Do not merge near-equal gray colors yet.
+5. Do not modify tailwind.config.js.
+6. Do not refactor GitHub pages in this phase. Revert the GitHub-only class swaps introduced by this refactor while preserving existing legacy GitHub behavior.
+7. Keep ADO Create Team as the visual/design reference for the completed ADO pages.
+8. Do not change business logic, APIs, validation, routing, or functionality.
+9. Build and run the existing tests after each cleanup step.
 
-First provide a mapping:
-Existing token → Where used → Duplicate found → Recommended action (Reuse / Merge / Keep / Remove).
+At the end, show:
+- final global color tokens
+- any remaining IDP-specific tokens and why they are required
+- files changed
+- build/test results
+- any unused color variables still remaining
 
-Do not modify any files until the audit is complete. Preserve existing UI functionality and Tailwind compatibility.
+Do not make additional styling changes beyond this scope.
