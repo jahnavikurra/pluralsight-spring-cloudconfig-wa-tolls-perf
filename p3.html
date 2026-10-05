@@ -1,9 +1,15 @@
-Reduce the refactor diff before I keep it.
-1. Revert whitespace-only/re-indentation changes that are not required for the shared layout.
-2. Keep only meaningful shared-layout, shared-component, styling-token and required test changes.
-3. Do not use bg-green-100 directly if an existing shared success/completed-state token or class can be reused. Use the shared style instead.
-4. Preserve .idp-scope, existing functionality, APIs, routing and validation.
-5. Do not make unrelated ESLint cleanup unless required by the refactor.
-6. Run the full tests, build and lint after reducing the diff.
-7. Report the final number of files and meaningful lines changed.
-Do not add additional refactoring in this step.
+Stop making functional or styling changes.
+Organize the current working tree for review.
+1. Confirm all shared-layout refactor functionality is complete.
+2. Run the full build, 209+ tests, lint and git diff --check.
+3. Do not add any more tests or refactor code.
+4. Give me an exact commit plan grouping the existing changes into:
+   - earlier test/coverage work
+   - global tokens/SCSS cleanup
+   - new shared ADO components/helpers
+   - ADO page migration to shared components
+5. List the exact files for each group.
+6. Flag any file that contains changes from more than one group so I can stage it carefully.
+7. Confirm no API, routing, validation or business behavior changed.
+8. Report any remaining TypeScript, lint or Sonar issues separately as existing baseline vs new.
+Do not edit files while doing this review
