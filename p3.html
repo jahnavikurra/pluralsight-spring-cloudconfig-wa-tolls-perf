@@ -1,10 +1,9 @@
-Do one final Sonar validation only. Do not refactor or clean unrelated code.
-Inspect all Sonar findings in team/page.tsx, especially the 20 findings below line 2044.
-Classify each as:
-- pre-existing/baseline
-- introduced by this shared-layout refactor
-Fix only findings introduced by this refactor. Do not fix existing Sonar debt.
-Confirm again that the 5 new shared components/helpers have zero Sonar findings.
-Then run build, tests, lint and git diff --check.
-Do not make any other styling, functionality, test coverage or cleanup changes.
-Give me a final PASS/FAIL recommendation for committing this refactor.
+The refactor validation passed. Do not modify any code further.
+Prepare a safe commit plan for the current working tree.
+Separate the existing changes into logical commits where possible:
+1. test/coverage improvements
+2. SCSS/global token cleanup
+3. shared ADO components and helpers
+4. migration of ADO pages to the shared layout
+Show the exact files for each commit and identify any files containing mixed changes that cannot be cleanly separated.
+Do not stage, commit, reformat, or edit anything ye
