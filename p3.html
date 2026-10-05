@@ -1,15 +1,12 @@
-Continue with the ADO styling refactor only.
-Use ADO Create Team as the single visual and color reference for all completed ADO pages.
-1. Audit all completed ADO pages for hardcoded colors and duplicate color variables.
-2. Identify the colors used by Create Team for page background, cards, text, labels, borders, inputs, buttons, hover, disabled, required/error states, etc.
-3. Replace colors in the other ADO pages with the same Create Team color/token for the same visual purpose.
-4. Do not keep slightly different AI-generated shades if Create Team already has an equivalent color.
-5. Reuse existing global tokens whenever possible.
-6. Do not create new tokens unless genuinely necessary.
-7. Consolidate duplicate tokens that represent the same color and purpose.
-8. Preserve Create Team appearance exactly.
-9. Do not change layout, functionality, APIs, routing, validation, or business logic.
-10. Do not modify Tailwind or GitHub pages in this phase.
-11. After migration, identify and remove only color variables that have zero usage across ADO, GitHub, shared components, theme, and Tailwind.
-12. Run build and existing tests after the refactor.
-Before editing, show me the Create Team color mapping, the colors found on each ADO page, and which Create Team token each will use. Do not modify files until I approve the mapping.
+Refactor all completed ADO pages to use the same shared layout and styling, using ADO Create Team as the reference.
+Requirements:
+- Create or reuse one shared ADO page/form layout component.
+- Reuse the same header, content/card structure, spacing, labels, buttons and navigation area across ADO pages.
+- Use the same centralized color and typography tokens from Create Team.
+- Include Team, Environment, Pipeline, Repo and ADO License.
+- Move only genuinely common UI into shared components.
+- Keep page-specific fields, validation, APIs and business logic inside their respective pages.
+- Do not change functionality or routing.
+- Do not modify GitHub or Tailwind in this phase.
+- Reuse existing tests and update only if selectors/components change.
+Before editing, show which components/styles are duplicated across the ADO pages and the proposed shared component structure.
