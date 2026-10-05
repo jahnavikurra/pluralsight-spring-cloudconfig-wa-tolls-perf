@@ -1,14 +1,15 @@
-Proceed with the proposed approach.
+Before creating or modifying any design tokens, first search the entire repository.
 
-First safely restore the removed :root and .dark definitions in theme.css, preserving any unrelated changes.
+1. Check theme.css, _tokens.scss, global.scss, globals.css, _components.scss, Tailwind configuration and existing page-level styles.
+2. Identify whether the required color or styling token already exists.
+3. Compare both variable names and actual resolved hex/RGB values to detect duplicates, including aliases.
+4. Reuse existing global tokens wherever the color and purpose match.
+5. If similar colors exist, suggest consolidation using ADO Create Team as the design reference.
+6. Only introduce a new token when no suitable existing token is available.
+7. Avoid duplicate aliases, unnecessary IDP-specific variables and new color palettes.
+8. Identify unused global tokens, but do not delete them until all repository references are verified, including dynamic usage.
 
-Then:
-1. Use ADO Create Team as the design reference.
-2. Add only the required scoped semantic tokens to the existing _tokens.scss.
-3. Preserve exact existing colors for now; don't generate new shades or duplicate palettes.
-4. Leave tailwind.config.js unchanged.
-5. Keep legacy pages working.
-6. Remove unused colors only after verifying all references.
-7. Make changes incrementally and validate the build and existing tests after each phase.
+First provide a mapping:
+Existing token → Where used → Duplicate found → Recommended action (Reuse / Merge / Keep / Remove).
 
-Do not refactor test files or change business functionality in this phase. Report the changes and any remaining issues.
+Do not modify any files until the audit is complete. Preserve existing UI functionality and Tailwind compatibility.
