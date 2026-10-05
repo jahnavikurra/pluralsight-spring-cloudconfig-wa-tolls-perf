@@ -1,15 +1,10 @@
-Stop making functional or styling changes.
-Organize the current working tree for review.
-1. Confirm all shared-layout refactor functionality is complete.
-2. Run the full build, 209+ tests, lint and git diff --check.
-3. Do not add any more tests or refactor code.
-4. Give me an exact commit plan grouping the existing changes into:
-   - earlier test/coverage work
-   - global tokens/SCSS cleanup
-   - new shared ADO components/helpers
-   - ADO page migration to shared components
-5. List the exact files for each group.
-6. Flag any file that contains changes from more than one group so I can stage it carefully.
-7. Confirm no API, routing, validation or business behavior changed.
-8. Report any remaining TypeScript, lint or Sonar issues separately as existing baseline vs new.
-Do not edit files while doing this review
+Do one final Sonar validation only. Do not refactor or clean unrelated code.
+Inspect all Sonar findings in team/page.tsx, especially the 20 findings below line 2044.
+Classify each as:
+- pre-existing/baseline
+- introduced by this shared-layout refactor
+Fix only findings introduced by this refactor. Do not fix existing Sonar debt.
+Confirm again that the 5 new shared components/helpers have zero Sonar findings.
+Then run build, tests, lint and git diff --check.
+Do not make any other styling, functionality, test coverage or cleanup changes.
+Give me a final PASS/FAIL recommendation for committing this refactor.
