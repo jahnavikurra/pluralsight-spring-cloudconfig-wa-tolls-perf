@@ -1,14 +1,14 @@
-Do we really need the new changes in tailwind.config.js?
+Proceed with the proposed approach.
 
-Our target is centralized SCSS styling, with the ADO Create Team page as the design reference.
+First safely restore the removed :root and .dark definitions in theme.css, preserving any unrelated changes.
 
-Review all current Tailwind usage and dependencies.
+Then:
+1. Use ADO Create Team as the design reference.
+2. Add only the required scoped semantic tokens to the existing _tokens.scss.
+3. Preserve exact existing colors for now; don't generate new shades or duplicate palettes.
+4. Leave tailwind.config.js unchanged.
+5. Keep legacy pages working.
+6. Remove unused colors only after verifying all references.
+7. Make changes incrementally and validate the build and existing tests after each phase.
 
-- Keep existing Tailwind functionality for legacy pages.
-- Revert unnecessary new additions to tailwind.config.js.
-- Do not maintain duplicate color palettes in Tailwind and SCSS.
-- Keep only the colors actually needed from Create Team in _tokens.scss.
-- Merge similar colors into reusable semantic tokens.
-- Do not create unnecessary color shades.
-- Do not change existing UI behavior or styling unintentionally.
-- Show the proposed changes before editing.
+Do not refactor test files or change business functionality in this phase. Report the changes and any remaining issues.
