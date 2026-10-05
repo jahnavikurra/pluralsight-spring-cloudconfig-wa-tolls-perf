@@ -1,14 +1,14 @@
-Finish the ADO color cleanup only.
-1. Move the active Team scrollbar thumb color #94a3b8 to one semantic shared token such as --color-scrollbar-thumb and reuse it for the Team scrollbar styling. Do not substitute a different existing color.
-2. If the scrollbar hover uses the exact same intended color family, centralize that as a semantic hover token only if needed. Do not generate a color scale.
-3. Remove the commented-out/dead Team code containing #2f6fed, its rgba shadow, and #12a150 if it is confirmed unused. Do not create tokens for dead code.
-4. If the two ADO card classes use the exact same shadow literal, move that shadow to one shared token and reuse it.
-5. Leave intentional Tailwind status colors and ROLE_COLORS unchanged.
-6. Leave non-ADO global guardrail styles unchanged.
-7. Do not change Tailwind config, GitHub pages, APIs, validation, routing, hover behavior, or business logic.
-8. Do not do any additional refactoring.
-Run build, all tests, lint and git diff --check.
-Then report only:
-- remaining active hardcoded colors in completed ADO pages
-- reason each remains
-- validation results
+Do one final pre-commit validation only. Do not modify code unless you find a new issue introduced by this refactor.
+Check:
+1. Build passes.
+2. All tests pass.
+3. Lint has 0 new errors.
+4. git diff --check is clean.
+5. No API, routing, validation, or business logic changed.
+6. No unnecessary hardcoded colors remain in the completed ADO pages.
+7. Shared colors come from the centralized theme/token files.
+8. Only definitely unused theme color variables were removed.
+9. tailwind.config.js was not changed unnecessarily.
+10. New shared components/helpers have no new Sonar issues.
+11. Show the final changed-file list and flag any unexpected file.
+At the end, give me a simple PASS/FAIL recommendation for committing.
