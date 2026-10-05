@@ -1,17 +1,11 @@
-Before preparing commits, clean up the ADO color definitions.
-global.scss currently contains colors for the ADO pages only.
-1. Search the entire repo for every color variable/token defined in global.scss and the ADO token/style files.
-2. Keep only variables that are actually referenced by the completed ADO pages, shared ADO components, or required theme behavior.
-3. Remove zero-reference/unused ADO color variables.
-4. If two variables have the exact same value and the same semantic purpose, consolidate them to one token.
-5. Do not merge similar-but-not-identical colors in this cleanup.
-6. Do not add new colors.
-7. Do not modify Tailwind, GitHub pages, APIs, routing, validation, or business logic.
-8. Do not change existing visual appearance.
-9. After cleanup, run build, all tests, lint, and git diff --check.
-Report:
-- colors/tokens kept
-- colors/tokens removed
-- duplicate tokens consolidated
-- any remaining hardcoded colors in the completed ADO pages
-Do not make any other refactoring changes.
+Continue with color cleanup only.
+Use ADO Create Team as the single color reference.
+- Map the remaining hardcoded colors in Team, Environment, Pipeline and Repo to the existing shared semantic tokens based on their purpose: text, secondary text, border, divider, surface/background, etc.
+- If Create Team already has a token for that purpose, use it even if another page currently uses a slightly different AI-generated hex.
+- Do not create separate tokens for #d3dae6, #dce2ed, #e4e8f0, etc. if they represent the same visual purpose.
+- Remove #888/inputStyle only if it is confirmed unused.
+- Reuse the same border/shadow token for .ado-create-card and .idp-form-card where appropriate.
+- Leave Tailwind status colors such as red/green alone for now.
+- Do not touch GitHub pages or tailwind.config.js.
+- Do not change functionality.
+After cleanup, show the final shared color tokens and confirm there are no remaining hardcoded ADO colors that duplicate those tokens. Run build, tests, lint and git diff --check.
