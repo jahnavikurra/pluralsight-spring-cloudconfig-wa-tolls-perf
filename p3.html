@@ -1,9 +1,17 @@
-The refactor validation passed. Do not modify any code further.
-Prepare a safe commit plan for the current working tree.
-Separate the existing changes into logical commits where possible:
-1. test/coverage improvements
-2. SCSS/global token cleanup
-3. shared ADO components and helpers
-4. migration of ADO pages to the shared layout
-Show the exact files for each commit and identify any files containing mixed changes that cannot be cleanly separated.
-Do not stage, commit, reformat, or edit anything ye
+Before preparing commits, clean up the ADO color definitions.
+global.scss currently contains colors for the ADO pages only.
+1. Search the entire repo for every color variable/token defined in global.scss and the ADO token/style files.
+2. Keep only variables that are actually referenced by the completed ADO pages, shared ADO components, or required theme behavior.
+3. Remove zero-reference/unused ADO color variables.
+4. If two variables have the exact same value and the same semantic purpose, consolidate them to one token.
+5. Do not merge similar-but-not-identical colors in this cleanup.
+6. Do not add new colors.
+7. Do not modify Tailwind, GitHub pages, APIs, routing, validation, or business logic.
+8. Do not change existing visual appearance.
+9. After cleanup, run build, all tests, lint, and git diff --check.
+Report:
+- colors/tokens kept
+- colors/tokens removed
+- duplicate tokens consolidated
+- any remaining hardcoded colors in the completed ADO pages
+Do not make any other refactoring changes.
