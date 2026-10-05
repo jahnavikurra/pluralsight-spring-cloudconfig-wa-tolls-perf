@@ -1,11 +1,9 @@
-Proceed with the ADO shared-layout refactor with these constraints:
-- Apply the Environment, Pipeline and Repo header spacing changes to match Create Team/Team.
-- Standardize InfoTip behavior across the ADO pages.
-- Refactor ADO License to use the same shared layout, typography, spacing and colors as ADO Create Team.
-- Keep .idp-scope if it is required by our repo standards; do not remove the scope just to reuse the shared layout.
-- Reuse existing shared success/completed-state styling instead of introducing a page-specific bg-green-100 if an equivalent token/component already exists.
-- Update tests only where assertions must change because of this approved refactor.
-- Defer the search-select hover behavior change for now.
-- Do not change APIs, routing, validation or business logic.
-- Run build and all existing tests after the refactor.
-Afterward, show which shared layout/components are now used by Create Team, Team, Environment, Pipeline, Repo and ADO License.
+Reduce the refactor diff before I keep it.
+1. Revert whitespace-only/re-indentation changes that are not required for the shared layout.
+2. Keep only meaningful shared-layout, shared-component, styling-token and required test changes.
+3. Do not use bg-green-100 directly if an existing shared success/completed-state token or class can be reused. Use the shared style instead.
+4. Preserve .idp-scope, existing functionality, APIs, routing and validation.
+5. Do not make unrelated ESLint cleanup unless required by the refactor.
+6. Run the full tests, build and lint after reducing the diff.
+7. Report the final number of files and meaningful lines changed.
+Do not add additional refactoring in this step.
