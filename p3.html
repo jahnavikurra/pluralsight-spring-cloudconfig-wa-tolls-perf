@@ -1,14 +1,9 @@
-Do one final pre-commit validation only. Do not modify code unless you find a new issue introduced by this refactor.
-Check:
-1. Build passes.
-2. All tests pass.
-3. Lint has 0 new errors.
-4. git diff --check is clean.
-5. No API, routing, validation, or business logic changed.
-6. No unnecessary hardcoded colors remain in the completed ADO pages.
-7. Shared colors come from the centralized theme/token files.
-8. Only definitely unused theme color variables were removed.
-9. tailwind.config.js was not changed unnecessarily.
-10. New shared components/helpers have no new Sonar issues.
-11. Show the final changed-file list and flag any unexpected file.
-At the end, give me a simple PASS/FAIL recommendation for committing.
+Review the SonarQube issues introduced on this branch only.
+- Focus only on New Code issues, not existing/baseline issues.
+- Group the 39 issues by Sonar rule and severity.
+- Fix Critical/High issues first, then Major/Medium.
+- Do not change business logic, API behavior, routing, validation, or UI behavior.
+- Prefer small refactors: remove unused imports/code, simplify duplicated logic, reduce cognitive complexity, replace nested ternaries, fix accessibility/type issues, and reuse existing shared helpers/components.
+- Do not add suppressions unless the issue is a confirmed false positive.
+- After each group of fixes, run build, tests, lint, and verify Sonar New Code issues are reduced.
+- Show me the issue/rule, affected file, proposed fix, and risk before editing.
