@@ -1,9 +1,1 @@
-Review the SonarQube issues introduced on this branch only.
-- Focus only on New Code issues, not existing/baseline issues.
-- Group the 39 issues by Sonar rule and severity.
-- Fix Critical/High issues first, then Major/Medium.
-- Do not change business logic, API behavior, routing, validation, or UI behavior.
-- Prefer small refactors: remove unused imports/code, simplify duplicated logic, reduce cognitive complexity, replace nested ternaries, fix accessibility/type issues, and reuse existing shared helpers/components.
-- Do not add suppressions unless the issue is a confirmed false positive.
-- After each group of fixes, run build, tests, lint, and verify Sonar New Code issues are reduced.
-- Show me the issue/rule, affected file, proposed fix, and risk before editing.
+Audit the remaining inline ADO form components. Extract only genuinely repeated components, starting with ProjectSearchSelect and identical dropdown patterns. Keep Team-only components local. Reuse existing tokens/styles, preserve behavior, and do not over-abstract. Run build, tests, lint, and Sonar after each extraction.
