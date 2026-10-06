@@ -1,1 +1,1 @@
-Audit the remaining inline ADO form components. Extract only genuinely repeated components, starting with ProjectSearchSelect and identical dropdown patterns. Keep Team-only components local. Reuse existing tokens/styles, preserve behavior, and do not over-abstract. Run build, tests, lint, and Sonar after each extraction.
+Keep the shared dropdown extraction, but preserve the exact old behavior. Fix the shared component so remount/reset and focus behavior match the previous inline selects. Do not change UX or styling. Re-run build, tests, lint and Sonar after the fix.
