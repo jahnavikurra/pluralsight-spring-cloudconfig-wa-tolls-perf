@@ -1,1 +1,4 @@
-Proceed with Phase 4 only. Migrate Home/Landing to the shared dashboard components one section at a time, starting with Team Contributions and Team Performance. Preserve exact DOM behavior and visual appearance. Do not change data logic, colors, navigation, right rail, journey timeline, or LeftNav yet. After each section run focused tests and visual regression; then run full build, tests, lint, Sonar and git diff --check.
+Organize the current changes into two safe commits without changing code behavior:
+1. Phase 2: shared dashboard components, tone.ts, and their tests.
+2. Phase 4: Landing migration for Team Contributions and Team Performance.
+Identify any mixed files that need partial staging. Do not edit functionality. Verify each commit builds/tests correctly and show the exact files/hunks for each before staging.
