@@ -1,4 +1,25 @@
-Organize the current changes into two safe commits without changing code behavior:
-1. Phase 2: shared dashboard components, tone.ts, and their tests.
-2. Phase 4: Landing migration for Team Contributions and Team Performance.
-Identify any mixed files that need partial staging. Do not edit functionality. Verify each commit builds/tests correctly and show the exact files/hunks for each before staging.
+Add a reusable shared PipelineSupportBanner for ADO pages only.
+Banner text:
+For help with pipeline configuration or support, please contact the DevSecOps CICD Team.
+Apply it to these ADO pages:
+Create Pipeline
+- Always show the banner.
+- Place it directly below the page title/subtitle and above the stepper.
+Create Repository
+- Show the banner only when Pipeline is selected.
+- Place it directly below the Repository / Pipeline / Environment selection row and above the pipeline-related fields.
+Create ADO Team
+- Show the banner only when Pipeline is selected under Full DevOps Setup.
+- Place it directly below the Repository / Pipeline / Environment selection row.
+Provision Environment
+- Do not show the banner unless that page includes pipeline configuration.
+Requirements:
+- Implement one shared component: PipelineSupportBanner.
+- Reuse existing shared UI, global SCSS, theme variables, and tokens.
+- No hardcoded colors or duplicate styling.
+- Do not modify tailwind.config.js.
+- Do not change APIs, routing, validation, permissions, or business logic.
+- Use subtle info styling with a small info icon and compact spacing.
+- Do not add a close button unless an existing shared dismissible banner already exists.
+- Render the banner only once per page.
+Add focused tests for the required conditional rendering, then run build, full tests, lint, Sonar New Code, and git diff --check.
