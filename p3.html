@@ -1,11 +1,15 @@
-Implement only the P1 safe cleanup from the Home Page refactoring audit.
+Review the completed P1 changes in Landing.tsx and verify no production functionality was removed.
 
-Remove unused imports, duplicate imports, dead components, and unused sample data. Fix the invalid SVG namespace.
+Then audit the feature/homepage branch for SonarQube issues, remaining TypeScript errors, lint warnings, and code duplication.
 
-Preserve existing functionality, styling, API calls, authentication, and navigation.
+Prioritize:
+1. Bugs and issues introduced by this branch.
+2. Existing shared components that can replace duplicate Home Page code.
+3. Accessibility and TypeScript fixes in the Home Page.
+4. Remaining repository-wide issues, reported separately.
 
-Do not start P2/P3 refactoring or make unrelated changes.
+Compare existing errors against develop where possible.
 
-Run lint, TypeScript checks, unit tests, and production build. Report the results and remaining issues.
+Do not change unrelated production code, authentication, API behavior, or existing styling.
 
-Show all changed files before committing. Do not commit automatically.
+Do not modify files yet. Give me the findings and a prioritized implementation plan with file names and risk levels.
