@@ -1,13 +1,13 @@
-Update .github/instructions/ui-reuse.instructions.md to apply to the entire repository using applyTo: "**".
+Update the existing Copilot instructions to apply UI coding standards across the repository.
 
-For all new or modified code:
-- Reuse existing SCSS tokens, colors, typography, spacing, and styles.
-- Do not introduce new colors, hardcoded styling, design tokens, or duplicate SCSS.
-- Reuse existing shared components, form layouts, headers, buttons, and dropdowns.
-- Do not create new layouts or duplicate components when existing ones can be reused.
-- Preserve existing production UI, styling, and functionality.
-- Require explicit approval before introducing a new design pattern or token.
-- Flag violations during Copilot PR reviews.
-- Do not refactor unrelated legacy code.
+Refactoring is still in progress, so enforce standards only on new or modified code, not untouched legacy code.
 
-Preserve all existing instructions. Do not commit or push.
+For all new UI changes:
+- Reuse existing shared components and layouts.
+- Use existing SCSS tokens, colors, spacing, and typography.
+- Do not introduce new colors, hardcoded styles, duplicate CSS/SCSS, or unnecessary layouts.
+- Reuse existing ADO and GitHub patterns.
+- Require approval for new design tokens or layout patterns.
+- Preserve existing production functionality.
+
+Update PR validation to flag new violations without failing on existing legacy issues. Preserve current instructions. Do not modify production code, commit, or push.
