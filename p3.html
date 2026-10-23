@@ -1,1 +1,8 @@
-Fix the ADO token cache security issue with minimal changes. Use trusted oid and tid from the validated NextAuth authentication context instead of decoding the Graph access token for cache identity. Never use "unknown" for a user-specific cache key. If trusted identity is unavailable, skip caching or fail securely. Review similar cache keys across ADO and Graph APIs, add cross-user isolation tests, and preserve existing production functionality. Do not refactor unrelated code.
+# Compute Engine - Background tasks
+sonar.ce.javaOpts=-Xms4G -Xmx4G -XX:+HeapDumpOnOutOfMemoryError
+
+# Elasticsearch - Indexing
+sonar.search.javaOpts=-Xms6G -Xmx6G -XX:MaxDirectMemorySize=3G -XX:+HeapDumpOnOutOfMemoryError
+
+# Web Server
+sonar.web.javaOpts=-Xms2G -Xmx2G -XX:+HeapDumpOnOutOfMemoryError
