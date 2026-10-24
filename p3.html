@@ -1,8 +1,16 @@
-# Compute Engine - Background tasks
-sonar.ce.javaOpts=-Xms4G -Xmx4G -XX:+HeapDumpOnOutOfMemoryError
+Audit and incrementally refactor the entire React UI repository following React, TypeScript, and enterprise coding best practices.
 
-# Elasticsearch - Indexing
-sonar.search.javaOpts=-Xms6G -Xmx6G -XX:MaxDirectMemorySize=3G -XX:+HeapDumpOnOutOfMemoryError
+Focus on:
+1. Improve folder structure and organize files by feature.
+2. Identify and remove duplicate code, components, styles, and logic.
+3. Reuse existing shared components, hooks, utilities, and layouts across ADO, GitHub, and Homepage.
+4. Fix ESLint issues, SonarQube code smells, unused imports, and unnecessary complexity.
+5. Replace hardcoded colors with existing SCSS design tokens. Do not introduce new colors, layouts, or Tailwind.
+6. Improve TypeScript typing, component separation, maintainability, and performance.
+7. Identify missing unit tests and add meaningful tests for critical functionality.
+8. Follow existing repository instructions and preserve current UI, routing, APIs, authentication, and behavior.
+9. Avoid unnecessary dependencies, breaking changes, and large rewrites.
 
-# Web Server
-sonar.web.javaOpts=-Xms2G -Xmx2G -XX:+HeapDumpOnOutOfMemoryError
+**First, audit the repository and provide a prioritized refactoring plan with affected files. Do not modify code until I approve the plan.**
+
+After approval, refactor one module at a time, validate changes, and keep existing production functionality intact.
