@@ -1,7 +1,11 @@
-Switch to feature/develop-sync-refactor-final and verify it matches the clean rebased develop-sync commit (747b519).
+I want to use my existing branch feature/develop-sync-jahnavi-commits for the PR into develop.
 
-Confirm the working tree is clean and there are no conflicts with the latest origin/develop.
+Update my existing branch to match the verified feature/develop-sync-refactor-final branch (commit 747b519).
 
-Do not rebase, force-push, or modify code. Keep the old feature branch unchanged.
+First verify the working tree is clean and create a backup of the existing branch.
 
-Report the correct source and target branches for the PR.
+Use a safe force-with-lease push only after confirming the remote branch has no additional commits or changes from other developers.
+
+Do not redo the refactoring or rebase. Preserve all three verified commits, Boards Only functionality, and master hotfix fixes.
+
+Verify no merge conflicts remain. Do not create or merge the PR yet. Report the final branch status.
