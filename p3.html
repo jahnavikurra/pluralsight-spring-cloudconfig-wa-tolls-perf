@@ -1,7 +1,11 @@
-Fetch the latest remote branches and perform a quick final check of develop-sync against origin/develop.
+Safely rebase develop-sync onto the latest origin/develop.
 
-Verify the three commits, check for potential merge conflicts, and confirm no master hotfix functionality was accidentally overwritten.
+First, preserve all uncommitted changes in a named stash, including untracked files. Create a backup branch before rewriting history.
 
-Do not repeat full tests or builds. Do not modify, push, or merge anything.
+Skip only the duplicate hotfix commit 6049cbb, after verifying its functionality already exists in develop.
 
-Give a brief GO/NO-GO recommendation for pushing and creating a PR into develop.
+Resolve conflicts while preserving our refactored Landing and Team pages, Boards Only functionality, shared DocsLink, and PipelineSupportBanner using text-primary.
+
+Do not overwrite unrelated develop changes. After rebasing, restore the stashed changes safely and run targeted validation.
+
+Do not push, merge, discard changes, or force-push. Report the results and any unresolved conflicts.
