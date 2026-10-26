@@ -1,7 +1,9 @@
-Quickly review only the remaining uncommitted changes using git diff.
+Run npm run build once to validate the remaining dependency and cleanup changes.
 
-Focus on broken imports, regressions, duplicate code, and dependency issues. Reuse previous test results and run only targeted checks for changed files.
+If successful, create two separate commits:
+1. Token-cache refactoring and related tests.
+2. Profile, unused file, and dependency cleanup.
 
-Do not repeat full repository scans, Playwright, or builds unless necessary.
+Stage only the relevant files for each commit. Preserve all existing functionality and the previous Landing/Team commit.
 
-Keep the review brief. Report only blockers and required fixes. Do not modify, commit, or push anything.
+Do not push or merge. Report commit hashes and any remaining changes.
