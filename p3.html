@@ -1,11 +1,10 @@
-Perform a final pre-commit review of the Landing and Team Review changes.
+Stage and commit only the five files identified in the final Landing and Team Review review.
 
-Confirm:
-1. Develop's refactored implementations and Boards Only functionality are preserved.
-2. All relevant master hotfix fixes remain intact.
-3. No legacy layouts, duplicate components, or hardcoded styles were introduced.
-4. No unrelated files or functionality were changed.
-5. The remaining TypeScript errors and ESLint warnings are pre-existing, not introduced by this work.
-6. Review the final diff for accidental changes.
+Use commit message:
+fix: preserve develop Landing and Boards Only after master hotfix
 
-Do not make additional changes or commit yet. List exactly which files should be staged for this focused commit, and report any remaining regression risks.
+Before committing, verify the staged diff contains only the intended changes.
+
+Do not stage, commit, discard, or modify any unrelated refactoring changes.
+
+Do not push or merge automatically. Report the commit hash and remaining uncommitted files.
