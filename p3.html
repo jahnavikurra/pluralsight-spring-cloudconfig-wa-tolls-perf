@@ -1,11 +1,7 @@
-Safely rebase develop-sync onto the latest origin/develop.
+Perform a quick post-rebase verification.
 
-First, preserve all uncommitted changes in a named stash, including untracked files. Create a backup branch before rewriting history.
+Confirm develop-sync is based on the latest origin/develop, has no merge conflicts, and preserves Boards Only, the refactored Landing and Team Review pages, and all master hotfix fixes.
 
-Skip only the duplicate hotfix commit 6049cbb, after verifying its functionality already exists in develop.
+Check git status, the final diff, and run only targeted tests for affected files. Do not repeat full scans.
 
-Resolve conflicts while preserving our refactored Landing and Team pages, Boards Only functionality, shared DocsLink, and PipelineSupportBanner using text-primary.
-
-Do not overwrite unrelated develop changes. After rebasing, restore the stashed changes safely and run targeted validation.
-
-Do not push, merge, discard changes, or force-push. Report the results and any unresolved conflicts.
+Report GO/NO-GO for pushing. Do not modify, commit, push, or merge anything.
