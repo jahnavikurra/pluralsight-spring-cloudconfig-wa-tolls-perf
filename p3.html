@@ -1,1 +1,7 @@
-Before Module 2, fix the /profile build error by using the existing shared useProfileImage hook after verifying equivalent behavior. Investigate the token cache key issue and add tests proving tokens cannot be shared across different users when oid is missing; disable caching when user identity cannot be reliably established. Preserve existing authentication behavior otherwise. Run tests, TypeScript, ESLint, and production build checks. Summarize changes and stop for review. Do not start Module 2.
+Compare our refactored code with the latest develop branch and verify that all functionality introduced by the master hotfix is preserved.
+
+Pay special attention to shared components, SCSS, API integrations, authentication, routing, ADO and GitHub forms.
+
+Identify behavior changes, lost functionality, duplicate implementations, and regression risks. Recommend minimal fixes following our existing React standards.
+
+Do not make code changes until the review is complete.
