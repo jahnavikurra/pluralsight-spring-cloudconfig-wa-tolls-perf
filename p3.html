@@ -1,12 +1,11 @@
-Review the master hotfix against our refactored Landing and Team Review pages.
+Before committing, fix the three TS2367 errors in team/page.tsx caused by redundant Boards Only conditions.
 
-Use the refactored develop implementations as the source of truth.
+Preserve all Boards Only functionality from develop, including default selection, form fields, review summary, and switching between Boards Only and Full Team Setup.
 
-1. Preserve the refactored layout, shared components, SCSS, and routing for both pages.
-2. Retain the new Boards Only functionality in develop, including selection, default behavior, and all Team Review conditions.
-3. Incorporate only necessary hotfix fixes without bringing back legacy code.
-4. Avoid duplicate components, hardcoded styles, and unnecessary changes.
-5. Verify Landing → Team Setup → Team Review navigation and form data.
-6. Run relevant tests, lint, TypeScript checks, and build.
+Simplify the conditions safely without changing functionality.
 
-Keep master unchanged. Apply changes only to our working refactoring branch. Show the diff and validation results before committing or merging.
+Also review the two existing ESLint warnings and fix them only if safe.
+
+Run TypeScript, ESLint, relevant unit tests, and build again. Confirm whether any errors remain.
+
+Do not change unrelated code or commit automatically.
