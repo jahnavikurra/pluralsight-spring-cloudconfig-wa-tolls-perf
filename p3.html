@@ -1,7 +1,7 @@
-Perform a quick post-rebase verification.
+Compare the 4 uncommitted files against HEAD. Keep the committed refactored Landing, Team Review, Boards Only, and hotfix functionality.
 
-Confirm develop-sync is based on the latest origin/develop, has no merge conflicts, and preserves Boards Only, the refactored Landing and Team Review pages, and all master hotfix fixes.
+Identify any unique valid changes in those files. If they contain only outdated changes, back them up and safely restore the committed versions.
 
-Check git status, the final diff, and run only targeted tests for affected files. Do not repeat full scans.
+Run only targeted checks. No full scans or builds.
 
-Report GO/NO-GO for pushing. Do not modify, commit, push, or merge anything.
+Do not commit, push, or merge. Give a brief GO/NO-GO result.
