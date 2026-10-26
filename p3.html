@@ -1,9 +1,7 @@
-Run npm run build once to validate the remaining dependency and cleanup changes.
+Fetch the latest remote branches and perform a quick final check of develop-sync against origin/develop.
 
-If successful, create two separate commits:
-1. Token-cache refactoring and related tests.
-2. Profile, unused file, and dependency cleanup.
+Verify the three commits, check for potential merge conflicts, and confirm no master hotfix functionality was accidentally overwritten.
 
-Stage only the relevant files for each commit. Preserve all existing functionality and the previous Landing/Team commit.
+Do not repeat full tests or builds. Do not modify, push, or merge anything.
 
-Do not push or merge. Report commit hashes and any remaining changes.
+Give a brief GO/NO-GO recommendation for pushing and creating a PR into develop.
