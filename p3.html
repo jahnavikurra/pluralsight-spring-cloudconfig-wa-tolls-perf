@@ -1,7 +1,7 @@
-Compare the 4 uncommitted files against HEAD. Keep the committed refactored Landing, Team Review, Boards Only, and hotfix functionality.
+Push the clean, rebased develop-sync HEAD to a new remote branch named feature/develop-sync-refactor-final.
 
-Identify any unique valid changes in those files. If they contain only outdated changes, back them up and safely restore the committed versions.
+Verify the remote branch doesn't already exist. Create a PR targeting develop with the refactoring and hotfix reconciliation commits.
 
-Run only targeted checks. No full scans or builds.
+Do not include the backup patch or stash. Do not force-push or merge.
 
-Do not commit, push, or merge. Give a brief GO/NO-GO result.
+Report the PR link and CI pipeline status.
