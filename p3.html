@@ -1,11 +1,11 @@
-Before committing, fix the three TS2367 errors in team/page.tsx caused by redundant Boards Only conditions.
+Perform a final pre-commit review of the Landing and Team Review changes.
 
-Preserve all Boards Only functionality from develop, including default selection, form fields, review summary, and switching between Boards Only and Full Team Setup.
+Confirm:
+1. Develop's refactored implementations and Boards Only functionality are preserved.
+2. All relevant master hotfix fixes remain intact.
+3. No legacy layouts, duplicate components, or hardcoded styles were introduced.
+4. No unrelated files or functionality were changed.
+5. The remaining TypeScript errors and ESLint warnings are pre-existing, not introduced by this work.
+6. Review the final diff for accidental changes.
 
-Simplify the conditions safely without changing functionality.
-
-Also review the two existing ESLint warnings and fix them only if safe.
-
-Run TypeScript, ESLint, relevant unit tests, and build again. Confirm whether any errors remain.
-
-Do not change unrelated code or commit automatically.
+Do not make additional changes or commit yet. List exactly which files should be staged for this focused commit, and report any remaining regression risks.
