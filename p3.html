@@ -1,11 +1,7 @@
-Now review the remaining uncommitted refactoring changes separately.
+Quickly review only the remaining uncommitted changes using git diff.
 
-Check token-cache, profile, dependency cleanup, deleted files, and related tests.
+Focus on broken imports, regressions, duplicate code, and dependency issues. Reuse previous test results and run only targeted checks for changed files.
 
-Verify there are no broken imports, duplicate implementations, functionality regressions, or unnecessary dependencies.
+Do not repeat full repository scans, Playwright, or builds unless necessary.
 
-Confirm shared components and existing SCSS standards are preserved.
-
-Run relevant tests, lint, TypeScript checks, and build.
-
-Do not modify the already committed Landing and Team Review changes. Do not commit, push, merge, or discard anything. Report findings and recommended fixes first.
+Keep the review brief. Report only blockers and required fixes. Do not modify, commit, or push anything.
