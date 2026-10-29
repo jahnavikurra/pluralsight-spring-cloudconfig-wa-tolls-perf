@@ -1,13 +1,1 @@
-Sync the latest origin/master into develop after the hotfix/combined merge.
-
-Requirements:
-1. Fetch the latest remote branches and verify local develop against origin/develop. Safely synchronize them first without losing commits.
-2. Merge origin/master into develop.
-3. Preserve all existing develop-side refactoring, including React components, shared components, SCSS, layouts, and tests.
-4. For conflicts, retain the refactored develop implementation and manually incorporate any necessary hotfix functionality from master.
-5. Do not replace refactored pages with legacy master code.
-6. Ensure all functional hotfix changes from master are included.
-7. Run lint, tests, and build to verify functionality.
-8. Show the resolved conflicts and final changes for review.
-
-Do not reset, rebase, discard changes, commit, or push without approval.
+Before Module 2, investigate all remaining `oid ?? "unknown"` cache keys. Add regression tests first, then use the existing tokenCacheKey helper to prevent cross-user token sharing wherever applicable. Preserve API behavior and response formats. Run all tests, lint, TypeScript, and build checks. Summarize changes and stop for review. Do not commit or start Module 2.
