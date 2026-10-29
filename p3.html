@@ -1,11 +1,9 @@
-I want to use my existing branch feature/develop-sync-jahnavi-commits for the PR into develop.
+Review our existing FrontEnd IDP deployment pipeline and PR-check pipeline.
 
-Update my existing branch to match the verified feature/develop-sync-refactor-final branch (commit 747b519).
+Move the existing PR quality validations (ESLint, Vitest, coverage reporting, SonarQube, and build validation where applicable) from the deployment pipeline into the dedicated PR-check pipeline.
 
-First verify the working tree is clean and create a backup of the existing branch.
+Keep build, packaging, and deployment functionality in the deployment pipeline. Avoid duplicate quality checks and reuse existing YAML templates/configuration.
 
-Use a safe force-with-lease push only after confirming the remote branch has no additional commits or changes from other developers.
+Preserve current blocking versus non-blocking behavior. Do not introduce new validation rules or change deployment behavior.
 
-Do not redo the refactoring or rebase. Preserve all three verified commits, Boards Only functionality, and master hotfix fixes.
-
-Verify no merge conflicts remain. Do not create or merge the PR yet. Report the final branch status.
+First show which jobs will move, which will remain, and the exact YAML changes required. Do not modify files until reviewed.
