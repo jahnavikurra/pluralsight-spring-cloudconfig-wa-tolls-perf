@@ -1,3 +1,11 @@
-Verify requested_by handling in the ADO License Request and GitHub Actions Workflow pages against the backend API contract. Make only necessary compatibility fixes and rerun affected checks.
+The backend team will handle requested_by compatibility. Do not make any additional backend-related changes.
 
-Then confirm the merge is fully staged, preserve all develop refactoring, and commit the merge on feature/mastertodev20261029. Do not push yet. Show me the final commit and Git status.
+Push feature/mastertodev20261029 to origin and create a PR targeting develop.
+
+Ensure:
+- All develop-side refactoring is preserved.
+- All master hotfix changes are included.
+- No additional code changes are made.
+- PR validation checks are triggered.
+
+Provide the PR link and final status.
