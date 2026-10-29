@@ -1,1 +1,10 @@
-Create a new sync branch from the latest origin/develop, preserving all committed refactoring. Merge origin/master into this branch and resolve conflicts by retaining refactored UI code while incorporating functional hotfix changes. Validate all affected pages and run build, lint, and tests. Do not modify master or develop directly. Do not commit or push without approval.
+Before committing the merge:
+
+1. Compare TypeScript errors and lint failures against clean origin/develop.
+2. Confirm the merge introduced no new errors.
+3. Run the full unit test suite again.
+4. Verify requested_by handling across ADO and GitHub forms, including the license page.
+5. Confirm all refactored UI components, styles, and functionality remain intact.
+6. Check Git status and ensure no unresolved conflicts or conflict markers remain.
+
+If all checks pass or remaining issues are confirmed pre-existing, provide the final summary. Do not commit or push yet.
