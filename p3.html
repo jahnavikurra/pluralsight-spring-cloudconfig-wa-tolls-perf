@@ -1,9 +1,12 @@
-Review our existing FrontEnd IDP deployment pipeline and PR-check pipeline.
+Audit all completed ADO pages in develop for production readiness.
 
-Move the existing PR quality validations (ESLint, Vitest, coverage reporting, SonarQube, and build validation where applicable) from the deployment pipeline into the dedicated PR-check pipeline.
+1. Identify duplicated JSX, React components, API/service logic, form patterns, and SCSS.
+2. Reuse existing shared components, hooks, services, and global SCSS tokens wherever appropriate. Do not create unnecessary abstractions or new design patterns.
+3. Fix responsive layout issues across laptop and desktop resolutions: 1280x720, 1366x768, 1440x900, 1920x1080, 2560x1440, and 3840x2160, including 125% and 150% browser zoom.
+4. Keep the left navigation fixed and the middle content area independently scrollable where intended.
+5. Ensure forms, cards, tables, dialogs, dropdowns, and buttons resize correctly without horizontal overflow or overlapping.
+6. Preserve all existing ADO functionality, authentication, routing, API contracts, and the latest master hotfixes.
+7. Follow existing React standards, shared components, SCSS tokens, and repo-level Copilot instructions.
+8. Add or update focused responsive and functional tests.
 
-Keep build, packaging, and deployment functionality in the deployment pipeline. Avoid duplicate quality checks and reuse existing YAML templates/configuration.
-
-Preserve current blocking versus non-blocking behavior. Do not introduce new validation rules or change deployment behavior.
-
-First show which jobs will move, which will remain, and the exact YAML changes required. Do not modify files until reviewed.
+Start with an audit report listing reusable components, duplication, responsive issues, and proposed changes by file. Do not modify code until the audit is complete. Do not commit or push.
