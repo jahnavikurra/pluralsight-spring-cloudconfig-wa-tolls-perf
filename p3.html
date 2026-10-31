@@ -1,12 +1,17 @@
-Audit all completed ADO pages in develop for production readiness.
+Proceed with the ADO audit recommendations in controlled phases.
 
-1. Identify duplicated JSX, React components, API/service logic, form patterns, and SCSS.
-2. Reuse existing shared components, hooks, services, and global SCSS tokens wherever appropriate. Do not create unnecessary abstractions or new design patterns.
-3. Fix responsive layout issues across laptop and desktop resolutions: 1280x720, 1366x768, 1440x900, 1920x1080, 2560x1440, and 3840x2160, including 125% and 150% browser zoom.
-4. Keep the left navigation fixed and the middle content area independently scrollable where intended.
-5. Ensure forms, cards, tables, dialogs, dropdowns, and buttons resize correctly without horizontal overflow or overlapping.
-6. Preserve all existing ADO functionality, authentication, routing, API contracts, and the latest master hotfixes.
-7. Follow existing React standards, shared components, SCSS tokens, and repo-level Copilot instructions.
-8. Add or update focused responsive and functional tests.
+Phase A: Fix shared sidebar scrolling, responsive layout, compact screen behavior, and excessive form width on large monitors. Apply sidebar fixes globally.
 
-Start with an audit report listing reusable components, duplication, responsive issues, and proposed changes by file. Do not modify code until the audit is complete. Do not commit or push.
+Phase B: Consolidate duplicate components, API helpers, form fields, review sections, and existing SCSS styles. Reuse global design tokens. Preserve all existing behavior and error messages.
+
+Phase C: Refactor Environment, Pipeline, Repository, License, and Team pages one at a time, smallest risk first.
+
+Do not remove permission-check code or alter API contracts, authentication, routing, backend integrations, or existing master hotfix functionality.
+
+Keep responsive layouts working across laptop, desktop, 2K and 4K resolutions at 100%, 125%, and 150% browser zoom.
+
+For each phase, run relevant Vitest tests, lint, build, and Playwright responsive checks. Verify all wizard steps, dropdowns, dialogs, navigation, and submission flows, not just Step 1.
+
+Use existing shared components and SCSS tokens. Avoid Tailwind, hardcoded colors, duplicated styles, and unnecessary new components.
+
+Implement Phase A first, show changes and test results, then stop for review before proceeding.
