@@ -1,12 +1,27 @@
-Extend responsive layout validation to the entire frontend repository, not just ADO pages.
+Continue fixing the issues identified in the existing repository-wide responsive audit. Do not repeat the audit.
 
-1. Discover and audit all user-facing routes, including ADO, GitHub, Home, Dashboard, Login, onboarding, and other pages.
-2. Verify responsiveness at 1280x720, 1366x768, 1440x900, 1920x1080, 2560x1440, and 3840x2160, including 100%, 125%, and 150% zoom.
-3. Check for horizontal overflow, overlapping elements, clipped fields, broken cards, dropdowns, dialogs, and unexpected scrolling.
-4. Keep the left navigation fixed and the main content independently scrollable where applicable.
-5. Reuse existing shared layouts, components, and global SCSS tokens across ADO and GitHub wherever functionality is similar.
-6. Preserve all existing functionality, API contracts, and hotfix changes.
-7. Add reusable Playwright responsive tests rather than duplicating tests for every page.
-8. Report issues grouped by route and severity, distinguishing actual failures from intentional scrolling.
+**1. Responsive UI fixes**
+- Fix missing mobile navigation across affected pages.
+- Fix clipped or unscrollable cards on /selfservice.
+- Investigate /Landing and fix only if actively used.
+- Ensure all ADO, GitHub, and shared layouts work across laptop and desktop resolutions, including 125% and 150% zoom.
+- Preserve intended independent sidebar and main-content scrolling.
 
-Audit the entire repository first, then fix issues in controlled phases. Do not commit or push without review.
+**2. SonarQube cleanup**
+- Review all SonarQube findings currently reported in VS Code Problems and the SonarQube Output/terminal.
+- Fix actionable bugs, code smells, security issues, cognitive complexity, React read-only props, and maintainability findings.
+- Include findings in Sidebar.tsx, responsive test files, and other affected files.
+- Use existing shared React components, hooks, services, and global SCSS tokens.
+- Do not suppress SonarQube rules, weaken quality gates, or introduce new duplication.
+- Distinguish actual code issues from analyzer errors, dependency findings, and pre-existing unrelated issues.
+
+**3. Cleanup and validation**
+- Review unexpected package-lock.json changes and generated Playwright files.
+- Preserve authentication, API contracts, permissions, hotfixes, and existing functionality.
+- Run affected Playwright tests, Vitest, ESLint, TypeScript checks, and production build.
+- Recheck SonarQube findings after fixes.
+- Report remaining issues with reasons.
+
+Work in controlled phases, prioritizing shared components and high-severity findings. Avoid unnecessary refactoring and repeated full-repository audits.
+
+Do not commit, push, or modify master. Show the final changes and validation results for review.
