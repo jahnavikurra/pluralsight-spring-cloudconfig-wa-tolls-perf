@@ -1,17 +1,12 @@
-Proceed with the ADO audit recommendations in controlled phases.
+Extend responsive layout validation to the entire frontend repository, not just ADO pages.
 
-Phase A: Fix shared sidebar scrolling, responsive layout, compact screen behavior, and excessive form width on large monitors. Apply sidebar fixes globally.
+1. Discover and audit all user-facing routes, including ADO, GitHub, Home, Dashboard, Login, onboarding, and other pages.
+2. Verify responsiveness at 1280x720, 1366x768, 1440x900, 1920x1080, 2560x1440, and 3840x2160, including 100%, 125%, and 150% zoom.
+3. Check for horizontal overflow, overlapping elements, clipped fields, broken cards, dropdowns, dialogs, and unexpected scrolling.
+4. Keep the left navigation fixed and the main content independently scrollable where applicable.
+5. Reuse existing shared layouts, components, and global SCSS tokens across ADO and GitHub wherever functionality is similar.
+6. Preserve all existing functionality, API contracts, and hotfix changes.
+7. Add reusable Playwright responsive tests rather than duplicating tests for every page.
+8. Report issues grouped by route and severity, distinguishing actual failures from intentional scrolling.
 
-Phase B: Consolidate duplicate components, API helpers, form fields, review sections, and existing SCSS styles. Reuse global design tokens. Preserve all existing behavior and error messages.
-
-Phase C: Refactor Environment, Pipeline, Repository, License, and Team pages one at a time, smallest risk first.
-
-Do not remove permission-check code or alter API contracts, authentication, routing, backend integrations, or existing master hotfix functionality.
-
-Keep responsive layouts working across laptop, desktop, 2K and 4K resolutions at 100%, 125%, and 150% browser zoom.
-
-For each phase, run relevant Vitest tests, lint, build, and Playwright responsive checks. Verify all wizard steps, dropdowns, dialogs, navigation, and submission flows, not just Step 1.
-
-Use existing shared components and SCSS tokens. Avoid Tailwind, hardcoded colors, duplicated styles, and unnecessary new components.
-
-Implement Phase A first, show changes and test results, then stop for review before proceeding.
+Audit the entire repository first, then fix issues in controlled phases. Do not commit or push without review.
