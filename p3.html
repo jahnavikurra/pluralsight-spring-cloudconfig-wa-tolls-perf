@@ -1,12 +1,9 @@
-The final frontend PR quality validation review is complete.
+Check Azure DevOps frontend PR validation run 2342676.
 
-1. Review the seven changed files and stage only the intended PR quality pipeline, scripts, and configuration changes.
-2. Exclude generated coverage files, temporary tests, artifacts, secrets, and unrelated changes.
-3. Commit with message:
-   ci(frontend): enforce baseline-aware React and SCSS PR quality checks
-4. Push feature/finalpages to update the existing PR targeting develop.
-5. Verify the actual Azure DevOps PR quality and SonarQube jobs execute successfully on the CYBERTRON agent.
-6. Confirm the SonarQube Quality Gate receives coverage and that legacy violations remain non-blocking under the new checks.
-7. Report any failed pipeline tasks with their exact errors. Do not bypass or weaken existing Quality Gates.
+Inspect the final status of both PR_QUALITY_GATE and SonarQube jobs.
 
-Do not modify master, deploy, or merge the PR automatically.
+Report each task's PASS/FAIL status, any errors, Vitest coverage generation, SonarQube coverage import, Quality Gate result, and confirmation that existing legacy issues remain non-blocking under the new checks.
+
+If anything failed, identify the minimal correction without changing deployment behavior or weakening existing Quality Gates.
+
+Do not repeat local audits, commit, or push.
