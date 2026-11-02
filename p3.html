@@ -1,10 +1,11 @@
-Perform the final production-readiness verification without repeating the full repository audit.
+Refactor ADO License Request Justification to use the existing shared TextAreaField, FieldLabel, and FieldError components.
 
-1. Refresh SonarQube findings and fix any remaining actionable issues introduced in changed files.
-2. Verify GitHub wizard workflows end-to-end, including navigation, validation, dropdowns, review, and submission using safe mocked APIs.
-3. Verify the latest master hotfix functionality is preserved.
-4. Confirm no new TypeScript errors, ESLint findings, duplicated SCSS, or responsive regressions were introduced.
-5. Review all changed files for unrelated changes, generated artifacts, and unintended dependency updates.
-6. Report the final results and remaining risks.
+- Reuse the existing shared components and SCSS tokens.
+- Extend TextAreaField with an optional character counter only if the existing component doesn't support it.
+- Preserve the current 500-character limit (or the existing configured limit), required validation, helper text, error messages, and aria-describedby behavior.
+- Keep the same layout, spacing, styling, and responsive behavior as other ADO and GitHub forms.
+- Do not change field values, API payloads, submission logic, or authentication.
+- Avoid duplicated markup and unnecessary component abstractions.
+- Update focused unit tests and run affected Playwright, lint, build, and SonarQube checks.
 
-Do not modify master, commit, or push until reviewed.
+Show the changes and test results. Do not commit or push.
