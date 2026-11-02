@@ -1,16 +1,1 @@
-Proceed with the SonarQube improvements, focusing on branch dashboards for develop and master, PR code coverage, code smells, duplication, and Quality Gates.
-
-Ensure:
-- develop and master branch analysis runs without triggering deployments.
-- Existing PR analysis continues working.
-- Vitest LCOV coverage is imported correctly.
-- Quality Gates enforce new-code standards without blocking legacy issues.
-- Existing code smells, duplication, and coverage are still visible for refactoring tracking.
-- No duplicate SonarQube scans occur.
-- No production application behavior or deployment configuration is changed.
-
-Investigate the current 300-second Quality Gate timeout and verify analysis completion before changing timeout settings.
-
-Do not introduce new dependencies or change CSS/SCSS analysis exclusions yet. Preserve existing lint and test checks.
-
-Review the final YAML changes and explain how to verify everything before committing. Do not commit, push, or queue pipelines automatically.
+Review PR 324181 after the latest push to feature/finalpages. Identify every failed or pending required branch policy, including PR Check, comments, reviewers, and build validation. Fix only code-related failures, preserve existing functionality and refactoring changes, and verify tests, linting, coverage, and SonarQube. Do not bypass policies, disable validations, or merge until all required checks pass. Report any blockers that require manual action.
