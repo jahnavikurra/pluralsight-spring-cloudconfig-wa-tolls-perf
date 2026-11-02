@@ -1,14 +1,10 @@
-Final validation is complete and the branch is ready for a PR into develop.
+Finalize the validated frontend refactoring.
 
-Review the final Git diff and stage only the intended 47 refactoring, shared-component, responsive layout, and test files.
-
-Exclude generated artifacts, local IDE settings, secrets, and unrelated changes.
-
-Commit with message:
-refactor(ui): standardize ADO and GitHub forms and responsive layouts
-
-Push feature/finalpages.
-
-Include validation results, preserved hotfix functionality, pre-existing issues, and the outstanding security vulnerabilities in the PR description.
+1. Stage only the intended shared-component, responsive layout, ADO, GitHub, Landing/Home, and test changes.
+2. Exclude generated files, secrets, and unrelated modifications.
+3. Commit to feature/finalpages.
+4. Push the branch and create a PR targeting develop.
+5. Include the passing validation results, preserved master hotfixes, and existing issues in the PR description.
+6. Explicitly document the outstanding Next.js and DOMPurify critical security vulnerabilities as production release blockers.
 
 Do not modify master or deploy to production.
