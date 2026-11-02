@@ -1,17 +1,12 @@
-Perform a focused final review of the new frontend PR quality validation before committing.
+The final frontend PR quality validation review is complete.
 
-1. Preserve existing deployment pipeline behavior. Isolate new Stylelint rules in a PR-specific configuration if necessary.
-2. Improve baseline-aware validation so new violations cannot be hidden by identical existing violations in the same file. Use changed-line checks where reliable.
-3. Ensure existing legacy issues remain visible but do not block unrelated PRs.
-4. Confirm React Hooks, TypeScript, ESLint, SCSS, hardcoded colors, and shared-component standards are enforced as intended.
-5. Verify the SonarQube PR scan receives Vitest coverage and preserves the existing Quality Gate.
-6. Confirm PR quality checks run on the Windows CYBERTRON agent without relying on developer-specific paths.
-7. Reuse the existing backend-style separation between quality and SonarQube jobs.
-8. Run npm run quality:pr against origin/develop and test both valid and invalid examples.
-9. Review the final YAML and configuration diff. Avoid unrelated changes.
+1. Review the seven changed files and stage only the intended PR quality pipeline, scripts, and configuration changes.
+2. Exclude generated coverage files, temporary tests, artifacts, secrets, and unrelated changes.
+3. Commit with message:
+   ci(frontend): enforce baseline-aware React and SCSS PR quality checks
+4. Push feature/finalpages to update the existing PR targeting develop.
+5. Verify the actual Azure DevOps PR quality and SonarQube jobs execute successfully on the CYBERTRON agent.
+6. Confirm the SonarQube Quality Gate receives coverage and that legacy violations remain non-blocking under the new checks.
+7. Report any failed pipeline tasks with their exact errors. Do not bypass or weaken existing Quality Gates.
 
-Do not repeat the full repository audit or frontend refactoring tests.
-
-Report PASS/FAIL, blocking versus advisory checks, and remaining limitations.
-
-Do not commit or push until reviewed.
+Do not modify master, deploy, or merge the PR automatically.
