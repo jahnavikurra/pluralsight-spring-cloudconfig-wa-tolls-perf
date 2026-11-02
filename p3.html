@@ -1,10 +1,7 @@
-Fix the SonarQube PR pipeline Java version issue.
+Check Azure DevOps PR validation run 2342803.
 
-1. Remove the newly added JavaToolInstaller@0 step that forces Java 17 from pr_sonar_containerapp.
-2. Verify the Windows CYBERTRON agent selects Java 21 for SonarQube analysis by checking java -version and JAVA_HOME.
-3. Preserve the existing SonarQube scanner settings, coverage configuration, project key, and Quality Gate.
-4. Do not change the deployment pipeline or unrelated jobs.
-5. Validate the YAML, then commit and push this minimal fix to feature/finalpages.
-6. Rerun the PR checks and report the SonarQube analysis, coverage import, and Quality Gate results.
+Verify both quality and SonarQube job results, actual Java version and JAVA_HOME, SonarQube analysis, Vitest coverage import, and Quality Gate status.
 
-Do not modify master or weaken any quality checks.
+If anything fails, identify the exact error and minimal fix. Do not repeat completed audits or modify unrelated files.
+
+Report whether PR 324181 is ready to merge into develop.
