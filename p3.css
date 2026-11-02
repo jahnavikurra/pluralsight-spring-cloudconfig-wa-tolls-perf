@@ -1,11 +1,10 @@
-Perform the final cleanup and production-readiness review of the current responsive and SonarQube fixes.
+Proceed with the following decisions:
 
-1. Fix the remaining actionable SonarQube findings, including SidebarParts.tsx, without introducing suppressions or changing functionality.
-2. Review overly wide text fields and constrain them where appropriate using existing shared SCSS tokens.
-3. Leave /Landing unchanged if confirmed unused legacy code.
-4. Review all 28 changed files for unnecessary changes, duplicated SCSS, generated files, and unintended package-lock.json modifications.
-5. Confirm ADO and GitHub shared layouts, authentication, API behavior, hotfix functionality, and responsive behavior remain intact.
-6. Run focused tests and build for any additional changes.
-7. Show the final diff summary, remaining pre-existing issues, and production-readiness status.
+1. Keep the reusable Playwright responsive audit tests, configuration, and report script for future regression testing.
+2. Preserve hotfix c67480e and fetch origin/master to check for any newer hotfix commits without merging or overwriting current changes.
+3. Keep existing unrelated TypeScript and lint issues unchanged.
+4. Review dependency vulnerability findings and report severity, affected versions, and safe remediation options separately. Do not automatically upgrade dependencies.
+5. Exclude generated artifacts and machine-specific IDE files from the PR; retain existing tracked configuration.
+6. Review the final diff and summarize only release-blocking issues.
 
-Do not repeat the full 59-route audit. Do not commit or push until reviewed.
+Do not repeat completed audits or tests unnecessarily. Do not commit or push yet.
