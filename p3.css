@@ -1,10 +1,13 @@
-Proceed with the following decisions:
+Complete the shared-component refactoring across all ADO and GitHub forms.
 
-1. Keep the reusable Playwright responsive audit tests, configuration, and report script for future regression testing.
-2. Preserve hotfix c67480e and fetch origin/master to check for any newer hotfix commits without merging or overwriting current changes.
-3. Keep existing unrelated TypeScript and lint issues unchanged.
-4. Review dependency vulnerability findings and report severity, affected versions, and safe remediation options separately. Do not automatically upgrade dependencies.
-5. Exclude generated artifacts and machine-specific IDE files from the PR; retain existing tracked configuration.
-6. Review the final diff and summarize only release-blocking issues.
+1. Reuse shared Description, Justification, labels, textareas, validation messages, dropdowns, cards, headers, steppers, and buttons wherever functionality is similar.
+2. Check existing shared components first. Create new components only when necessary.
+3. Preserve each form's field requirements, max lengths, validation rules, state, and API payloads.
+4. Use the same responsive layouts and existing global SCSS tokens across ADO and GitHub.
+5. Eliminate duplicate JSX, SCSS, and reusable form logic without introducing unnecessary abstractions.
+6. Fix any new SonarQube findings.
+7. Run affected Vitest, Playwright, lint, TypeScript, and build checks.
 
-Do not repeat completed audits or tests unnecessarily. Do not commit or push yet.
+Preserve authentication, permissions, hotfix functionality, and existing UI behavior. Report shared components created or reused and code duplication removed.
+
+Do not commit or push until reviewed.
