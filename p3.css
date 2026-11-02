@@ -1,11 +1,11 @@
-The backend team will handle requested_by compatibility. Do not make any additional backend-related changes.
+Perform the final cleanup and production-readiness review of the current responsive and SonarQube fixes.
 
-Push feature/mastertodev20261029 to origin and create a PR targeting develop.
+1. Fix the remaining actionable SonarQube findings, including SidebarParts.tsx, without introducing suppressions or changing functionality.
+2. Review overly wide text fields and constrain them where appropriate using existing shared SCSS tokens.
+3. Leave /Landing unchanged if confirmed unused legacy code.
+4. Review all 28 changed files for unnecessary changes, duplicated SCSS, generated files, and unintended package-lock.json modifications.
+5. Confirm ADO and GitHub shared layouts, authentication, API behavior, hotfix functionality, and responsive behavior remain intact.
+6. Run focused tests and build for any additional changes.
+7. Show the final diff summary, remaining pre-existing issues, and production-readiness status.
 
-Ensure:
-- All develop-side refactoring is preserved.
-- All master hotfix changes are included.
-- No additional code changes are made.
-- PR validation checks are triggered.
-
-Provide the PR link and final status.
+Do not repeat the full 59-route audit. Do not commit or push until reviewed.
