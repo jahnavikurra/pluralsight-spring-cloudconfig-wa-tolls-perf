@@ -1,17 +1,16 @@
-Review our React frontend Azure DevOps PR Check pipeline and SonarQube configuration.
+Proceed with the SonarQube improvements, focusing on branch dashboards for develop and master, PR code coverage, code smells, duplication, and Quality Gates.
 
-We want SonarQube dashboards to display code coverage, code smells, bugs, vulnerabilities, duplicated code, maintainability, and Quality Gate results.
+Ensure:
+- develop and master branch analysis runs without triggering deployments.
+- Existing PR analysis continues working.
+- Vitest LCOV coverage is imported correctly.
+- Quality Gates enforce new-code standards without blocking legacy issues.
+- Existing code smells, duplication, and coverage are still visible for refactoring tracking.
+- No duplicate SonarQube scans occur.
+- No production application behavior or deployment configuration is changed.
 
-Requirements:
-1. Verify Vitest generates coverage/lcov.info.
-2. Ensure coverage is generated before SonarQubeAnalyze and imported using sonar.javascript.lcov.reportPaths.
-3. Verify SonarQube analyzes all applicable React JS/TS/JSX/TSX source files.
-4. Review source, test, and coverage exclusions so we are not unintentionally excluding application code.
-5. Preserve PR analysis for new-code quality checks.
-6. Configure separate branch analysis for develop and master to track overall code quality.
-7. Verify whether feature/finalpages is published correctly as branch analysis.
-8. Ensure the same SonarQube project key is used consistently.
-9. Preserve existing tests, linting, quality checks, and PR functionality.
-10. Do not trigger deployments or change production application behavior.
+Investigate the current 300-second Quality Gate timeout and verify analysis completion before changing timeout settings.
 
-First audit the existing configuration, then make only the necessary changes. Avoid duplicate scans and unnecessary pipeline execution. Report which metrics are currently available and which are missing.
+Do not introduce new dependencies or change CSS/SCSS analysis exclusions yet. Preserve existing lint and test checks.
+
+Review the final YAML changes and explain how to verify everything before committing. Do not commit, push, or queue pipelines automatically.
