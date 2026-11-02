@@ -1,11 +1,10 @@
-Investigate the existing standalone sonar_scan_containerapp job.
+Add .pipelines/frontend-idp-pr-policy-pipeline.yml from feature/layout to feature/finalpages without modifying its existing configuration.
 
-1. Find its YAML definition and pipeline configuration.
-2. Check whether it runs for feature/finalpages and PRs targeting develop.
-3. Verify branch filters, PR build-validation policy, scanner parameters, and SonarQube project key.
-4. Check why feature/finalpages has not appeared in SonarQube.
-5. Ensure the existing scan supports feature branch and PR analysis.
-6. Preserve the deployment pipeline's sonarqubeEnabled: false setting to avoid duplicate scans.
-7. Do not weaken existing Quality Gates or change master/develop behavior.
+Before committing:
+1. Verify the YAML is identical to the existing working version.
+2. Confirm SonarQube PR analysis runs for PRs targeting develop.
+3. Check that the Quality Gate does not incorrectly fail because coverage data is missing.
+4. Preserve existing branch policies and deployment pipeline behavior.
+5. Do not enable duplicate SonarQube scans.
 
-Identify the minimal fix and report the findings before making changes. Do not commit or push.
+Show the diff and validation results before committing or pushing.
