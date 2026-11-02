@@ -1,10 +1,11 @@
-Finalize the validated frontend refactoring.
+Investigate the existing standalone sonar_scan_containerapp job.
 
-1. Stage only the intended shared-component, responsive layout, ADO, GitHub, Landing/Home, and test changes.
-2. Exclude generated files, secrets, and unrelated modifications.
-3. Commit to feature/finalpages.
-4. Push the branch and create a PR targeting develop.
-5. Include the passing validation results, preserved master hotfixes, and existing issues in the PR description.
-6. Explicitly document the outstanding Next.js and DOMPurify critical security vulnerabilities as production release blockers.
+1. Find its YAML definition and pipeline configuration.
+2. Check whether it runs for feature/finalpages and PRs targeting develop.
+3. Verify branch filters, PR build-validation policy, scanner parameters, and SonarQube project key.
+4. Check why feature/finalpages has not appeared in SonarQube.
+5. Ensure the existing scan supports feature branch and PR analysis.
+6. Preserve the deployment pipeline's sonarqubeEnabled: false setting to avoid duplicate scans.
+7. Do not weaken existing Quality Gates or change master/develop behavior.
 
-Do not modify master or deploy to production.
+Identify the minimal fix and report the findings before making changes. Do not commit or push.
