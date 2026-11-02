@@ -1,11 +1,72 @@
-Refactor ADO License Request Justification to use the existing shared TextAreaField, FieldLabel, and FieldError components.
+Perform ONE final production-readiness validation of the current frontend branch before preparing the PR to develop.
 
-- Reuse the existing shared components and SCSS tokens.
-- Extend TextAreaField with an optional character counter only if the existing component doesn't support it.
-- Preserve the current 500-character limit (or the existing configured limit), required validation, helper text, error messages, and aria-describedby behavior.
-- Keep the same layout, spacing, styling, and responsive behavior as other ADO and GitHub forms.
-- Do not change field values, API payloads, submission logic, or authentication.
-- Avoid duplicated markup and unnecessary component abstractions.
-- Update focused unit tests and run affected Playwright, lint, build, and SonarQube checks.
+Do not repeat completed audits or unnecessary tests.
 
-Show the changes and test results. Do not commit or push.
+**1. Shared components and code quality**
+- Verify ADO and GitHub forms reuse existing shared components wherever functionality is similar.
+- Include Description, Justification, TextAreaField, FieldLabel, FieldError, dropdowns, cards, headers, steppers, buttons, and validation patterns.
+- Confirm ADO License Justification uses the shared component while preserving its character counter and validation.
+- Identify remaining unnecessary duplication, unused code, duplicate JSX/SCSS, hardcoded styles, and unnecessary abstractions.
+- Preserve platform-specific business logic and API contracts.
+
+**2. Landing, Home, and navigation**
+- Explicitly validate the active Landing/Home page, Dashboard, and main navigation.
+- Check headers, sidebar, cards, buttons, redirects, login/logout, and navigation to ADO and GitHub workflows.
+- Verify existing refactored layouts, shared components, and SCSS tokens are consistently applied.
+- Investigate the legacy /Landing route and leave it unchanged if unused.
+
+**3. Repository-wide responsiveness**
+- Cover all user-facing pages, including ADO, GitHub, Landing, Home, Dashboard, and shared layouts.
+- Validate 1280x720, 1366x768, 1440x900, 1920x1080, 2560x1440, and 3840x2160 at 100%, 125%, and 150% zoom.
+- Reuse existing Playwright audit results and run focused checks for recent changes and previously unverified routes.
+- Confirm no horizontal overflow, clipped fields, overlapping elements, broken cards, inaccessible dialogs, or unexpected scrolling.
+- Preserve fixed sidebar/navigation and independent main-content scrolling where applicable.
+
+**4. Functionality and hotfix verification**
+- Preserve existing authentication, authorization, permissions, routing, API payloads, submissions, validation, and error handling.
+- Verify the latest origin/master hotfix changes are included without overwriting develop-side refactoring.
+- Check ADO and GitHub wizard navigation, field validation, review, submission, and success/error states using safe mocked APIs.
+- Do not make unrelated functionality changes.
+
+**5. SonarQube and static analysis**
+- Review SonarQube findings in changed files.
+- Confirm no new bugs, code smells, security issues, or excessive complexity were introduced.
+- Compare TypeScript and ESLint results with the existing develop baseline.
+- Do not suppress rules, weaken quality gates, or modify unrelated legacy code.
+
+**6. Final tests and cleanup**
+- Reuse existing passing Vitest, Playwright, and production build results where still valid.
+- Rerun only tests impacted by the latest changes.
+- Review all changed files for unintended modifications, dependency changes, generated artifacts, and unnecessary files.
+- Confirm no merge conflicts remain.
+- Verify the final Git diff and branch status.
+
+**7. Security and release readiness**
+- Report outstanding dependency vulnerabilities, especially critical Next.js security advisories.
+- Identify release blockers separately from existing non-blocking issues.
+- Do not automatically upgrade dependencies.
+
+**8. Final report**
+
+Provide a concise PASS/FAIL summary covering:
+- Shared components
+- ADO forms
+- GitHub forms
+- Landing/Home/Dashboard
+- Navigation and responsive layouts
+- SonarQube
+- TypeScript and ESLint
+- Vitest and Playwright
+- Production build
+- Master hotfix preservation
+- Security vulnerabilities
+- Changed files and remaining risks
+
+Clearly state:
+- New issues versus pre-existing issues
+- PR readiness for develop: YES/NO
+- Production readiness for master: YES/NO
+
+Do not start another audit or refactoring phase unless a critical regression is discovered.
+
+Do not commit, push, or modify master until reviewed.
