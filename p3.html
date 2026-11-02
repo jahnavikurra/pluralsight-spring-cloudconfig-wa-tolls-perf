@@ -1,27 +1,10 @@
-Continue fixing the issues identified in the existing repository-wide responsive audit. Do not repeat the audit.
+Perform the final production-readiness verification without repeating the full repository audit.
 
-**1. Responsive UI fixes**
-- Fix missing mobile navigation across affected pages.
-- Fix clipped or unscrollable cards on /selfservice.
-- Investigate /Landing and fix only if actively used.
-- Ensure all ADO, GitHub, and shared layouts work across laptop and desktop resolutions, including 125% and 150% zoom.
-- Preserve intended independent sidebar and main-content scrolling.
+1. Refresh SonarQube findings and fix any remaining actionable issues introduced in changed files.
+2. Verify GitHub wizard workflows end-to-end, including navigation, validation, dropdowns, review, and submission using safe mocked APIs.
+3. Verify the latest master hotfix functionality is preserved.
+4. Confirm no new TypeScript errors, ESLint findings, duplicated SCSS, or responsive regressions were introduced.
+5. Review all changed files for unrelated changes, generated artifacts, and unintended dependency updates.
+6. Report the final results and remaining risks.
 
-**2. SonarQube cleanup**
-- Review all SonarQube findings currently reported in VS Code Problems and the SonarQube Output/terminal.
-- Fix actionable bugs, code smells, security issues, cognitive complexity, React read-only props, and maintainability findings.
-- Include findings in Sidebar.tsx, responsive test files, and other affected files.
-- Use existing shared React components, hooks, services, and global SCSS tokens.
-- Do not suppress SonarQube rules, weaken quality gates, or introduce new duplication.
-- Distinguish actual code issues from analyzer errors, dependency findings, and pre-existing unrelated issues.
-
-**3. Cleanup and validation**
-- Review unexpected package-lock.json changes and generated Playwright files.
-- Preserve authentication, API contracts, permissions, hotfixes, and existing functionality.
-- Run affected Playwright tests, Vitest, ESLint, TypeScript checks, and production build.
-- Recheck SonarQube findings after fixes.
-- Report remaining issues with reasons.
-
-Work in controlled phases, prioritizing shared components and high-severity findings. Avoid unnecessary refactoring and repeated full-repository audits.
-
-Do not commit, push, or modify master. Show the final changes and validation results for review.
+Do not modify master, commit, or push until reviewed.
