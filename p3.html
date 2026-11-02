@@ -1,10 +1,102 @@
-Add .pipelines/frontend-idp-pr-policy-pipeline.yml from feature/layout to feature/finalpages without modifying its existing configuration.
+Enhance our existing frontend Azure DevOps PR validation pipeline based on modern React, TypeScript, Next.js, SCSS, and enterprise development best practices.
 
-Before committing:
-1. Verify the YAML is identical to the existing working version.
-2. Confirm SonarQube PR analysis runs for PRs targeting develop.
-3. Check that the Quality Gate does not incorrectly fail because coverage data is missing.
-4. Preserve existing branch policies and deployment pipeline behavior.
-5. Do not enable duplicate SonarQube scans.
+**Main goal:** Enforce high-quality, reusable, maintainable, secure, and responsive frontend code without blocking existing legacy code until it is refactored.
 
-Show the diff and validation results before committing or pushing.
+### 1. PR pipeline architecture
+- Use the existing frontend PR policy YAML.
+- Follow the backend PR pipeline's separation of quality checks and SonarQube analysis.
+- Keep deployment pipelines unchanged.
+- Reuse existing templates and tools wherever possible.
+- Ensure PR checks run for develop and master through branch policies.
+- Avoid duplicate checks and SonarQube scans.
+
+### 2. React and Next.js best practices
+Enforce applicable recommended ESLint, React Hooks, TypeScript, and Next.js rules:
+
+- Correct component structure and separation of concerns.
+- Proper React Hooks usage and dependency management.
+- No unnecessary useEffect, derived state, or avoidable re-renders.
+- Correct keys, props, state management, and event handling.
+- Type-safe props, APIs, and component interfaces.
+- Avoid new any types, unused imports, unreachable code, and unnecessary complexity.
+- Proper Next.js Server/Client Component boundaries where applicable.
+- Correct routing, accessibility, error handling, and loading states.
+- Prefer readable, maintainable code over unnecessary abstractions.
+- Avoid premature memoization and overengineering.
+
+### 3. Shared components and architecture
+- Reuse existing components for similar ADO and GitHub functionality.
+- Prefer existing FieldLabel, FieldError, TextAreaField, form controls, cards, headers, steppers, layouts, and buttons.
+- Extract genuinely reusable logic into shared hooks or services.
+- Keep platform-specific business logic and API contracts separate.
+- Avoid duplicated JSX, unnecessary components, and excessive prop drilling.
+- Follow the existing repository structure and shared-component conventions.
+- Do not automatically create abstractions for small, unrelated similarities.
+
+Automate only objectively detectable violations. Use PR-review guidance for architectural decisions that require human judgment.
+
+### 4. SCSS and design-system standards
+- Use existing global SCSS variables and design tokens.
+- Block new hardcoded colors in component styles and inline React styles.
+- Prevent prohibited Tailwind usage and arbitrary styling values.
+- Detect invalid SCSS and duplicate declarations.
+- Prevent unnecessary duplicate styles and new design tokens.
+- Preserve approved theme definitions and legitimate exceptions.
+- Enforce responsive layout standards using existing shared layouts.
+- Prefer CSS Grid/Flexbox, fluid sizing, and reusable responsive patterns over hardcoded dimensions.
+
+### 5. SonarQube
+- Preserve existing SonarQube PR analysis and Quality Gates.
+- Analyze new code for bugs, vulnerabilities, code smells, duplication, complexity, and maintainability.
+- Verify coverage requirements and ensure appropriate coverage reports are supplied where needed.
+- Do not weaken quality profiles or introduce suppressions to hide violations.
+
+### 6. Testing standards
+- Use Vitest and React Testing Library for component behavior and validations.
+- Use Playwright for critical workflows and responsive regression testing.
+- Prefer accessible queries over brittle CSS selectors.
+- Test observable user behavior rather than implementation details.
+- Avoid excessive snapshots, duplicate tests, and unnecessary mocks.
+- Add focused tests for new or modified functionality.
+- Run ESLint, Stylelint, TypeScript, relevant tests, and build checks without unnecessarily duplicating pipeline work.
+
+### 7. Critical: Protect legacy code
+All newly introduced validation must be baseline-aware.
+
+- Block new violations, not existing legacy issues.
+- Apply changed-line rules where reliable.
+- Compare against the target branch baseline for full-project checks.
+- Do not fail unchanged legacy code simply because the same file was modified.
+- Handle renamed files and mixed legacy/new code.
+- Keep existing issues visible for gradual remediation.
+- Do not weaken existing mandatory security policies or SonarQube Quality Gates.
+- Clearly report any checks that cannot reliably distinguish existing issues from new ones.
+
+### 8. Validate enforcement
+Test the PR checks using controlled compliant and noncompliant examples.
+
+Confirm that:
+- New hardcoded colors fail.
+- Existing unchanged hardcoded colors do not fail new checks.
+- React Hooks violations fail.
+- New TypeScript and ESLint violations fail.
+- Invalid SCSS fails.
+- Compliant shared-component usage passes.
+- Existing legacy findings do not become newly blocking.
+- Security and SonarQube Quality Gates retain their current enforcement.
+
+### 9. Final deliverables
+Provide:
+- Updated PR policy YAML and supporting configuration.
+- A concise explanation of each quality check.
+- Which checks are blocking versus advisory.
+- Evidence that baseline-aware enforcement works.
+- A summary of React best practices enforced.
+- Any remaining gaps requiring manual PR review.
+- Validation results and instructions for running checks locally.
+
+Make minimal, maintainable changes using existing repository tooling.
+
+Do not modify master, develop, deployment pipelines, or branch policies.
+
+Do not commit or push until I review the changes.
