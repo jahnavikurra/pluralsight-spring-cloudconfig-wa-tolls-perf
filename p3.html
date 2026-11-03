@@ -1,1 +1,18 @@
-Review PR 324181 after the latest push to feature/finalpages. Identify every failed or pending required branch policy, including PR Check, comments, reviewers, and build validation. Fix only code-related failures, preserve existing functionality and refactoring changes, and verify tests, linting, coverage, and SonarQube. Do not bypass policies, disable validations, or merge until all required checks pass. Report any blockers that require manual action.
+Review the recurring GitHub Copilot PR review findings in our React repository.
+
+Our goal is to catch and prevent these issues during development rather than repeatedly fixing them after each PR review.
+
+1. Review existing Copilot instructions, ESLint, TypeScript, Vitest, Playwright, SonarQube and quality gate configurations.
+2. Identify recurring issues such as unused imports, missing cleanup, React hook mistakes, event listener leaks, missing test coverage, accessibility problems, unsafe code and responsive regressions.
+3. Update `.github/copilot-instructions.md` and relevant path-specific instructions to guide both code generation and Copilot PR reviews.
+4. Convert recurring findings into automated ESLint, TypeScript or test checks wherever feasible.
+5. Ensure all added or modified code follows existing React best practices.
+6. Automatically detect these issues locally before PR creation.
+7. Reuse existing `quality:pr` and frontend PR-check pipeline configurations.
+8. Do not introduce duplicate tools or unnecessary dependencies.
+9. Preserve all existing functionality and tests.
+10. Do not block unchanged legacy code while refactoring is still ongoing.
+11. Do not suppress genuine issues or weaken existing quality gates merely to pass validation.
+12. Report which Copilot review findings can now be prevented automatically and which still require manual review.
+
+First analyze the current configuration and propose minimal changes, then implement and validate them.
