@@ -1,11 +1,6 @@
-Perform the final pre-PR validation on the current working tree.
+Prepare two separate commits from the current 13 changed files:
 
-- Rerun the PR quality gate, all Vitest tests and production build after the latest changes.
-- Confirm no new ESLint, TypeScript or style violations compared with develop.
-- Verify the updated quality gate is actually referenced by our frontend PR pipeline.
-- Check whether the stale ESLint suppressions can be removed safely; do not weaken existing lint rules.
-- Review all 13 changed files for unintended changes.
-- Keep existing legacy issues unchanged and report any skipped checks.
-- Do not commit or push.
+1. Repository Copilot instructions and automated quality-gate improvements.
+2. Sidebar and Playwright fixes addressing previous PR review comments.
 
-Give a final PASS/FAIL summary and identify anything that must be fixed before merging.
+Stage only the relevant files for each commit. Preserve all other changes. Show the staged file list and commit messages before committing. Do not push or create a PR yet.
