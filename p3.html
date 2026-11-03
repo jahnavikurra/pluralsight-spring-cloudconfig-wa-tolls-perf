@@ -1,14 +1,13 @@
-Proceed with consolidating the Copilot instruction files into four files as recommended.
+Perform a final verification of the consolidated Copilot instruction files.
 
-Requirements:
-- Keep all unique React, testing, security, accessibility, cleanup and UI reuse standards.
-- Remove only genuinely duplicated or obsolete rules.
-- Preserve existing `ui-reuse.instructions.md` requirements for shared components and SCSS.
-- Keep each instruction file under 4,000 characters for Azure DevOps review compatibility.
-- Verify each path-specific file has the correct `applyTo` pattern.
-- Do not change application functionality or refactor unrelated code.
-- Do not discard any existing uncommitted changes.
-- Validate the instruction files and run existing quality checks.
-- Report final file sizes and any rules removed or consolidated.
+1. Confirm all four instruction files exist with no missing or duplicated rules.
+2. Preserve explicit responsive viewport checks at 1024px, 768px and 375px.
+3. Verify each file stays under 4,000 characters and path-specific applyTo patterns cover the intended files.
+4. Confirm all important React, accessibility, testing, security, cleanup, shared components and SCSS standards remain.
+5. Check that the existing quality:pr pipeline still validates newly changed code without blocking unchanged legacy code.
+6. Review all 12 changed files and identify unrelated changes.
+7. Run relevant tests, linting, type checks and build validation.
+8. Confirm the instructions are compatible with Azure DevOps Copilot PR review.
+9. Report any checks that cannot be verified locally.
 
-Do not commit or push automatically. Show me the final changes for review.
+Do not modify unrelated files, weaken checks, commit or push automatically.
