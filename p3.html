@@ -1,13 +1,11 @@
-Prepare the current changes for a clean PR targeting develop.
+Perform the final pre-PR validation on the current working tree.
 
-1. Preserve all four verified Copilot instruction files.
-2. Review the 13 changed files and group instruction/quality-gate changes separately from Sidebar and Playwright fixes.
-3. Investigate the ESLint exit code 2 and remove only genuinely obsolete suppressions without weakening lint rules.
-4. Preserve the existing TypeScript error baseline and ensure there are no new errors.
-5. Verify that quality:pr fails on new violations and passes when only existing legacy findings remain.
-6. Confirm the PR pipeline invokes the updated quality gate, including any new scripts and dependencies.
-7. Run all locally available checks and report skipped validations.
-8. Do not change existing application behavior or unrelated functionality.
-9. Do not commit, push or create a PR automatically.
+- Rerun the PR quality gate, all Vitest tests and production build after the latest changes.
+- Confirm no new ESLint, TypeScript or style violations compared with develop.
+- Verify the updated quality gate is actually referenced by our frontend PR pipeline.
+- Check whether the stale ESLint suppressions can be removed safely; do not weaken existing lint rules.
+- Review all 13 changed files for unintended changes.
+- Keep existing legacy issues unchanged and report any skipped checks.
+- Do not commit or push.
 
-Provide the recommended commit groups, final validation results and any remaining risks.
+Give a final PASS/FAIL summary and identify anything that must be fixed before merging.
