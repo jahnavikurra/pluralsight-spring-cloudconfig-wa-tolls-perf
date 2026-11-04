@@ -1,6 +1,14 @@
-Prepare two separate commits from the current 13 changed files:
+I have already committed the changes to my feature branch, but nothing has been merged into develop yet.
 
-1. Repository Copilot instructions and automated quality-gate improvements.
-2. Sidebar and Playwright fixes addressing previous PR review comments.
+I want a separate PR for the Copilot repository instructions, automated code-quality checks and PR quality-gate configuration.
 
-Stage only the relevant files for each commit. Preserve all other changes. Show the staged file list and commit messages before committing. Do not push or create a PR yet.
+1. Inspect the current branch and committed changes against origin/develop.
+2. Create a new branch feature/pr-quality-gates from origin/develop.
+3. Bring over only the Copilot instructions, ESLint configurations, PR quality scripts, pipeline changes and necessary package changes.
+4. Do not include Sidebar, Playwright responsive fixes or unrelated feature changes.
+5. Do not modify, reset, rebase or delete my existing feature branch.
+6. Preserve the existing functionality and legacy-code baseline.
+7. Run the relevant quality checks on the new branch.
+8. Show the final diff against develop to confirm only quality-gate changes are included.
+
+Do not push, create a PR or merge automatically. Leave my original branch intact.
