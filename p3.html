@@ -1,14 +1,13 @@
-Optimize our existing Azure DevOps frontend CI pipeline without changing deployment behavior.
+Review the final CI and PR pipeline optimization before committing.
 
-1. Inspect the current deployment pipeline and separate frontend PR-check pipeline.
-2. Make SonarQube analysis and code coverage optional in the main CI pipeline, defaulting to disabled.
-3. Add boolean runtime parameters so we can manually enable either check when needed.
-4. Keep production build, Docker packaging, deployment and essential smoke checks mandatory.
-5. Ensure SonarQube analysis, code coverage and quality-gate validation run automatically in the required PR-check pipeline.
-6. Reuse existing SonarQube service connections, project keys and coverage configuration.
-7. Do not run duplicate analysis unnecessarily.
-8. Preserve SonarQube branch analysis for develop/master through a suitable post-merge or scheduled pipeline if required.
-9. Keep existing application behavior and legacy-code baselines unchanged.
-10. Validate pipeline YAML, dependencies, conditions and branch policies.
+1. Confirm SonarQube and code coverage are disabled by default in the main CI pipeline but can be enabled manually.
+2. Confirm the PR-check pipeline runs SonarQube analysis, coverage and quality-gate checks automatically.
+3. Verify SonarQube failures are not ignored by continueOnError or task conditions.
+4. Compare our main CI YAML changes with ADO PR #324667 and identify potential conflicts without overwriting its Node, Java or pipeline changes.
+5. Preserve existing Docker build, deployment and other mandatory steps.
+6. Verify develop and master post-merge SonarQube scans work as intended, without unnecessary duplicate scans.
+7. Confirm the PR-check build validation policy is configured as Required; if repository permissions prevent changing it, provide the exact manual steps.
+8. Check for temporary files and unrelated modifications.
+9. Provide the recommended branch and commit structure.
 
-Show which steps move, which become optional, and the expected effect on pipeline duration. Do not commit or push automatically.
+Do not commit, push or merge anything automatically.
