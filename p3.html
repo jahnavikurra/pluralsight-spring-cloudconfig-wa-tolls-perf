@@ -1,13 +1,22 @@
-Review the final CI and PR pipeline optimization before committing.
+Proceed with preparing two separate PR branches based on the verified plan.
 
-1. Confirm SonarQube and code coverage are disabled by default in the main CI pipeline but can be enabled manually.
-2. Confirm the PR-check pipeline runs SonarQube analysis, coverage and quality-gate checks automatically.
-3. Verify SonarQube failures are not ignored by continueOnError or task conditions.
-4. Compare our main CI YAML changes with ADO PR #324667 and identify potential conflicts without overwriting its Node, Java or pipeline changes.
-5. Preserve existing Docker build, deployment and other mandatory steps.
-6. Verify develop and master post-merge SonarQube scans work as intended, without unnecessary duplicate scans.
-7. Confirm the PR-check build validation policy is configured as Required; if repository permissions prevent changing it, provide the exact manual steps.
-8. Check for temporary files and unrelated modifications.
-9. Provide the recommended branch and commit structure.
+PR A: feature/pr-quality-gates
+- Keep the five existing commits.
+- Include only the PR pipeline SonarQube quality-gate enforcement change.
+- Do not include main CI deployment pipeline changes.
 
-Do not commit, push or merge anything automatically.
+PR B: feature/ci-optional-sonar-coverage
+- Create from the latest origin/develop.
+- Include only the main CI pipeline optimization.
+- Make SonarQube, coverage and frontend quality checks optional and disabled by default.
+- Preserve all mandatory build and deployment steps.
+
+For both branches:
+- Preserve existing commits and unrelated work.
+- Confirm each branch's diff against origin/develop.
+- Verify Azure DevOps YAML template expansion.
+- Check for conflicts with PR #324667.
+- Do not change existing ADO branch policies yet.
+- Do not commit, push or create PRs until I approve the final diffs.
+
+Show the final branch names, changed files and validation results.
