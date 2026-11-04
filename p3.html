@@ -1,14 +1,14 @@
-I have already committed the changes to my feature branch, but nothing has been merged into develop yet.
+Optimize our existing Azure DevOps frontend CI pipeline without changing deployment behavior.
 
-I want a separate PR for the Copilot repository instructions, automated code-quality checks and PR quality-gate configuration.
+1. Inspect the current deployment pipeline and separate frontend PR-check pipeline.
+2. Make SonarQube analysis and code coverage optional in the main CI pipeline, defaulting to disabled.
+3. Add boolean runtime parameters so we can manually enable either check when needed.
+4. Keep production build, Docker packaging, deployment and essential smoke checks mandatory.
+5. Ensure SonarQube analysis, code coverage and quality-gate validation run automatically in the required PR-check pipeline.
+6. Reuse existing SonarQube service connections, project keys and coverage configuration.
+7. Do not run duplicate analysis unnecessarily.
+8. Preserve SonarQube branch analysis for develop/master through a suitable post-merge or scheduled pipeline if required.
+9. Keep existing application behavior and legacy-code baselines unchanged.
+10. Validate pipeline YAML, dependencies, conditions and branch policies.
 
-1. Inspect the current branch and committed changes against origin/develop.
-2. Create a new branch feature/pr-quality-gates from origin/develop.
-3. Bring over only the Copilot instructions, ESLint configurations, PR quality scripts, pipeline changes and necessary package changes.
-4. Do not include Sidebar, Playwright responsive fixes or unrelated feature changes.
-5. Do not modify, reset, rebase or delete my existing feature branch.
-6. Preserve the existing functionality and legacy-code baseline.
-7. Run the relevant quality checks on the new branch.
-8. Show the final diff against develop to confirm only quality-gate changes are included.
-
-Do not push, create a PR or merge automatically. Leave my original branch intact.
+Show which steps move, which become optional, and the expected effect on pipeline duration. Do not commit or push automatically.
