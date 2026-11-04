@@ -1,22 +1,28 @@
-Proceed with preparing two separate PR branches based on the verified plan.
+Enhance our existing GitHub Copilot repository instructions so Copilot consistently generates production-quality React + TypeScript code following modern React best practices.
 
-PR A: feature/pr-quality-gates
-- Keep the five existing commits.
-- Include only the PR pipeline SonarQube quality-gate enforcement change.
-- Do not include main CI deployment pipeline changes.
+First inspect our existing four instruction files, shared components, project architecture, ESLint rules and reusable UI standards.
 
-PR B: feature/ci-optional-sonar-coverage
-- Create from the latest origin/develop.
-- Include only the main CI pipeline optimization.
-- Make SonarQube, coverage and frontend quality checks optional and disabled by default.
-- Preserve all mandatory build and deployment steps.
+Requirements:
 
-For both branches:
-- Preserve existing commits and unrelated work.
-- Confirm each branch's diff against origin/develop.
-- Verify Azure DevOps YAML template expansion.
-- Check for conflicts with PR #324667.
-- Do not change existing ADO branch policies yet.
-- Do not commit, push or create PRs until I approve the final diffs.
+1. Follow modern React functional-component architecture, hooks rules, TypeScript best practices and separation of concerns.
+2. Avoid unnecessary useEffect, redundant state, direct DOM manipulation, prop drilling and duplicated business logic.
+3. Use proper effect cleanup, safe asynchronous handling, stable list keys and correct hook dependencies.
+4. Avoid unnecessary useMemo, useCallback and React.memo. Apply performance optimization only when justified.
+5. Reuse existing shared components, custom hooks, form controls, API utilities and common helpers before introducing new implementations.
+6. Reuse existing global SCSS tokens, typography, spacing, layouts and responsive patterns. Do not introduce hardcoded colors or unnecessary styles.
+7. Follow semantic HTML, accessibility, keyboard navigation, labels, focus management and accessible error messages.
+8. Use strong TypeScript types, safe null handling, consistent props interfaces and clear naming conventions.
+9. Use existing application patterns for authentication, authorization, API calls, loading states and error handling. Never rely on UI-only authorization.
+10. Write maintainable, testable code with appropriate Vitest and React Testing Library tests.
+11. Avoid unnecessary dependencies, excessive abstraction, oversized components, dead code and duplicated functionality.
+12. Preserve existing behavior, including ADO Boards Only, Full Team Setup, GitHub onboarding and existing RBAC functionality.
 
-Show the final branch names, changed files and validation results.
+Update the existing copilot-instructions.md and ui-reuse.instructions.md only where needed. Preserve testing and CI instructions.
+
+Make these standards applicable when Copilot generates new code, edits existing code and refactors components—not only during PR reviews.
+
+Keep instructions concise, avoid duplication and preserve the existing compatibility limits.
+
+Verify that VS Code Copilot actually loads the repository-wide and path-specific instructions. Test with a representative React component generation request.
+
+Do not change application code, commit or push. Show the instruction diff and verification results.
