@@ -1,19 +1,7 @@
-Combine the two prepared branches into one PR branch.
+Before merging feature/pr-quality-gates, verify that our repository instructions and automated PR checks enforce SCSS-only styling for new code.
 
-Use feature/pr-quality-gates as the final branch.
+New JSX/TSX styling must use existing SCSS tokens and classes, without introducing new Tailwind utilities. Preserve unchanged legacy Tailwind code and existing shared components.
 
-1. Preserve all existing quality-gate commits and the pending PR pipeline change.
-2. Bring the main CI optimization from feature/ci-optional-sonar-coverage into feature/pr-quality-gates.
-3. Include only the intended pipeline changes, Copilot instructions, React standards, shared-component reuse rules, SCSS validations, ESLint, TypeScript, Vitest, code coverage and SonarQube configuration.
-4. Make SonarQube, coverage and frontend quality checks optional in main CI, disabled by default.
-5. Keep SonarQube analysis, coverage and quality-gate enforcement mandatory in PR checks.
-6. Preserve Docker build, deployments and existing application behavior.
-7. Verify all required checks run for PRs targeting develop and appropriate branch scans run after merging.
-8. Validate YAML template expansion, quality scripts and the complete diff against origin/develop.
-9. Check potential conflicts with PR #324667 and preserve its intended Node/Java updates when reconciling.
-10. Do not include Sidebar, responsive fixes or unrelated feature changes.
-11. Do not rewrite published history, delete branches or lose uncommitted changes.
+Check copilot-instructions.md, ui-reuse.instructions.md, pr-quality.mjs and the PR pipeline. Add any missing instructions and reliable new-code-only blocking rules. Test deliberate violations and valid exceptions.
 
-Use separate commits for quality-gate changes and main CI optimization, but keep both in the same branch and PR.
-
-Do not push or merge automatically. Show final validation results.
+Do not change unrelated application code. Report results before committing or pushing.
