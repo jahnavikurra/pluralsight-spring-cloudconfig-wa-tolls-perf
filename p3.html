@@ -1,11 +1,13 @@
-Review the 6 changed files for the new Tailwind/SCSS enforcement.
+Resolve the current merge conflicts after merging develop into feature/finalpages.
 
-Simplify the implementation using our existing PR quality-gate architecture. Remove unnecessary duplication, scripts and complexity while preserving reliable detection of newly introduced Tailwind utilities.
+- Preserve all existing final pages functionality, UI layouts, and business logic from the feature branch.
+- Retain the latest PR quality gates, pipeline templates, Copilot instructions, SCSS standards, shared-component rules, linting, and test configurations from develop.
+- For overlapping changes, carefully integrate both versions instead of blindly choosing ours or theirs.
+- Do not remove or weaken any PR quality validations.
+- Do not introduce new hardcoded styles, duplicate components, or unnecessary files.
+- Preserve existing tests and add or update tests only where required by the merge.
+- Verify the merged package.json, pipeline YAML, and quality-check scripts remain consistent.
+- Run the relevant lint, tests, and build checks.
+- Show a summary of every resolved conflict and report any unresolved issues.
 
-Keep focused tests for new violations, unchanged legacy code, semantic SCSS classes and valid shared-component reuse.
-
-Ensure new React styling uses SCSS and existing global tokens, and that the PR gate blocks enforceable violations without blocking legacy code.
-
-Confirm the necessary Copilot instructions are included.
-
-Show the minimum required files, total lines changed and test results. Do not commit or push.
+Do not commit or push automatically. Wait for my review.
