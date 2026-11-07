@@ -1,11 +1,8 @@
-Production ADO Team Onboarding and Create Repository work, but Development fails with OBO_REJECTED, HTTP 401, and entra_error=invalid_client.
-
-Compare Development with the working Production (master) branch.
-
-1. Review all recent changes to React authentication, API clients, bearer token handling, and backend OBO implementation.
-2. Check whether our recent UI refactoring or PR quality-check changes modified authentication behavior.
-3. Compare environment variable names, Entra client IDs, tenant IDs, scopes, and client credential references without exposing secrets.
-4. Identify any configuration differences requiring verification in Azure.
-5. Determine whether this is a code regression or environment configuration issue.
-
-Do not modify existing code yet. Provide the exact changed files, relevant commits, findings, and recommended minimal fix. Preserve all refactoring and existing functionality.
+ContainerAppConsoleLogs_CL
+| where TimeGenerated > ago(24h)
+| where ContainerAppName_s == "idp-backend-api-dev"
+| where Log_s contains "AADSTS"
+    or Log_s contains "invalid_client"
+    or Log_s contains "OBO"
+| project TimeGenerated, RevisionName_s, Log_s
+| order by TimeGenerated desc
