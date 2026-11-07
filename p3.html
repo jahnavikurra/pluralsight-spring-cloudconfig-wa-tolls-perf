@@ -1,1 +1,11 @@
-Show me the exact files and line numbers where our PR quality gates enforce new-code-only validation for hardcoded colors, Tailwind, and SCSS. Confirm whether untouched legacy code is excluded and whether modified legacy lines are handled correctly. Do not change anything.
+Production ADO Team Onboarding and Create Repository work, but Development fails with OBO_REJECTED, HTTP 401, and entra_error=invalid_client.
+
+Compare Development with the working Production (master) branch.
+
+1. Review all recent changes to React authentication, API clients, bearer token handling, and backend OBO implementation.
+2. Check whether our recent UI refactoring or PR quality-check changes modified authentication behavior.
+3. Compare environment variable names, Entra client IDs, tenant IDs, scopes, and client credential references without exposing secrets.
+4. Identify any configuration differences requiring verification in Azure.
+5. Determine whether this is a code regression or environment configuration issue.
+
+Do not modify existing code yet. Provide the exact changed files, relevant commits, findings, and recommended minimal fix. Preserve all refactoring and existing functionality.
