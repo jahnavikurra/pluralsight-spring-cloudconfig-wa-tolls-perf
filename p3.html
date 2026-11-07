@@ -1,8 +1,5 @@
-ContainerAppConsoleLogs_CL
-| where TimeGenerated > ago(24h)
-| where ContainerAppName_s == "idp-backend-api-dev"
-| where Log_s contains "AADSTS"
-    or Log_s contains "invalid_client"
-    or Log_s contains "OBO"
-| project TimeGenerated, RevisionName_s, Log_s
-| order by TimeGenerated desc
+I investigated the issue in Azure and confirmed that the Dev backend logs show AADSTS7000215 (Invalid client secret) during the OBO token exchange. Both Dev and UAT are failing, while Prod works.
+
+I also reviewed our frontend changes, and no relevant authentication changes were identified. This strongly points to the non-prod backend credential/configuration rather than our UI refactoring or PR quality-check changes.
+
+Can the backend team verify AUTH_CLIENT_SECRET and its Key Vault configuration against the Entra app registration?
