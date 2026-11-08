@@ -1,5 +1,46 @@
-I investigated the issue in Azure and confirmed that the Dev backend logs show AADSTS7000215 (Invalid client secret) during the OBO token exchange. Both Dev and UAT are failing, while Prod works.
+Review and refactor the existing ADO New Team Onboarding implementation in develop, focusing on the Boards Only setup.
 
-I also reviewed our frontend changes, and no relevant authentication changes were identified. This strongly points to the non-prod backend credential/configuration rather than our UI refactoring or PR quality-check changes.
+**Reference implementation**
 
-Can the backend team verify AUTH_CLIENT_SECRET and its Key Vault configuration against the Entra app registration?
+Use the existing Full Team Setup functionality as the baseline. Preserve its current production behavior, validation, shared components, responsive layout, and user experience across all four steps: Create a Team, Role Assignments, Review, and Submit.
+
+**Boards Only requirements**
+
+1. Reuse the existing Boards Only implementation in develop. Do not recreate it or duplicate Full Team Setup components.
+2. Both setup types must use the same project, team name, team prefix, domain prefix, board type, description, field validation, navigation, error handling, and applicable role assignment behavior.
+3. Full Team Setup must continue to create its existing 11 groups without changing functionality.
+4. Boards Only must generate exactly five board-related AAD groups using the team prefix entered by the user.
+5. The required group suffixes from the work item are:
+   - BoardUsers
+   - TeamAdmin
+   - ProductManagers
+   - BoardUsers
+   - Testers
+6. The work item lists BoardUsers twice. Investigate whether the duplicate is a documentation error or represents a missing distinct group. Do not silently create duplicate groups or invent a replacement name. Report the discrepancy for confirmation.
+7. Group naming must follow `ADO-${teamPrefix}-${groupSuffix}` using the same naming, normalization, duplicate checking, and validation conventions as Full Team Setup.
+8. For Boards Only, hide or disable repository, pipeline, environment, and any unrelated resource-specific fields and role assignments.
+9. Ensure Boards Only is not blocked by validation for resources that do not apply.
+10. In Step 2, show only applicable board-related groups and reuse the existing user/group assignment controls.
+11. In Step 3, display all relevant team details and the five expected group names, following the existing Full Team Setup review layout.
+12. In Step 4, reuse the existing submission workflow and backend integration, with the setup type and group list appropriate for Boards Only. Validate backend support before changing the payload.
+13. Ensure navigating backward and forward preserves form data and selections.
+14. Preserve Full Team Setup functionality exactly as it works today.
+
+**React and SCSS standards**
+
+- Reuse existing React shared components, hooks, utilities, and form validation.
+- Extract common behavior where appropriate instead of duplicating the Full Team Setup flow.
+- Use existing global SCSS and design tokens.
+- Do not add Tailwind utilities, hardcoded colors, duplicate CSS, or unnecessary dependencies.
+- Follow the existing Copilot instructions and PR quality gates.
+- Do not change unrelated pages or existing production functionality.
+
+**Verification**
+
+Compare Boards Only and Full Team Setup step by step, including conditional fields, group generation, assignment behavior, validation, review summaries, and final API payloads.
+
+Add or update focused tests for both setup types, including group counts, group names, required-field validation, navigation, and submission.
+
+Run the relevant PR quality checks, tests, and build.
+
+First provide a gap analysis showing what already works, what is missing, and the exact files requiring changes. Do not modify code, commit, or push until the gap analysis is reviewed.
