@@ -1,23 +1,17 @@
-Update Step 2 (Role Assignments) of ADO New Team Onboarding in the existing feature/finalpages branch.
+Perform a final functional review of the Boards Only implementation in feature/finalpages.
 
-Use the current Full Team Setup Step 2 UI shown in production as the reference.
+Verify all four steps against the existing Full Team Setup behavior.
 
-For Boards Only:
-- Display exactly 4 roles: Board Users, Product Managers, Team Admins, and Testers.
-- Reuse the existing role assignment accordion components, user search, selected-user chips, Read More descriptions, info icons, Expand All/Collapse All, and validation.
-- Use the existing role metadata and descriptions for each role. Do not create new descriptions.
-- Display the same short role description and Read More detailed description as Full Team Setup.
-- Show the Roles Configured counter out of 4 instead of 12.
-- Ensure assigned-user counts include only the 4 active roles.
-- Preserve the same role assignment functionality, required-field validation, user lookup, duplicate prevention, and error handling as Full Team Setup.
-- Ensure Step 3 Review shows only the 4 Boards Only groups using the user-entered team prefix.
-- Ensure Step 4 Submit sends only the four applicable role assignments and excludes inactive Full Team Setup roles.
-- When switching between setup types, preserve entered user selections but submit only those applicable to the selected setup type.
+Specifically:
+- Confirm Boards Only displays exactly four unique groups and uses the correct existing role descriptions.
+- Verify required-role validation against the current backend contract.
+- Confirm whether the backend supports boards_only=true with only four populated role arrays and empty arrays for inactive roles.
+- Verify TeamAdmin versus TeamAdmins naming against the existing API contract and group naming logic.
+- Confirm Step 3 displays the correct dynamically generated group names based on the team prefix.
+- Verify the submission payload, duplicate-group detection, error handling, and successful submission behavior.
+- Verify switching between Boards Only and Full Setup preserves user selections without submitting inactive roles.
+- Preserve Full Team Setup functionality and all existing styling.
 
-Keep Full Team Setup unchanged, including its existing 12 roles and 11 review groups.
+Do not make assumptions or modify the backend contract. Report any unverified items.
 
-Reuse existing React components and SCSS without introducing Tailwind, hardcoded styling, duplicate UI logic, or new dependencies.
-
-Update relevant tests and run PR quality checks and build.
-
-Make these changes only in feature/finalpages. Do not commit or push automatically.
+Do not commit or push. Provide a final readiness summary.
