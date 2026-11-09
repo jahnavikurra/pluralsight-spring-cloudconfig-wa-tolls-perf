@@ -1,11 +1,17 @@
-Review my current feature branch against the latest origin/develop.
+Safely integrate the latest origin/develop into my current feature/finalpages branch.
 
-1. Fetch the latest develop branch.
-2. Identify any overlapping changes and potential merge conflicts.
-3. Pay special attention to shared components, SCSS, routing, Full Team Setup, and Boards Only functionality.
-4. Check whether recent hotfixes or changes in develop could be overwritten or cause regressions.
-5. Report all conflicts and recommend safe resolutions while preserving both intended develop changes and my refactoring.
-6. Do not discard changes from either branch.
-7. Do not merge, rebase, reset, commit, or push anything automatically.
+1. First verify and protect all uncommitted changes. Do not discard or overwrite any work.
+2. Merge origin/develop into my feature branch using git merge, not rebase.
+3. Resolve the four identified conflicts:
+   - Sidebar.tsx: preserve our refactored sidebar and integrate develop's GitHub Migration navigation link in SidebarData.tsx.
+   - pipeline/page.tsx: preserve develop's removal of Build Type and Deploy Type dropdowns.
+   - _components.scss: preserve both our shared SCSS refactoring and develop's migration-page styling without duplication.
+   - wizard-form-layout-team.test.tsx: preserve our Boards Only and Full Team Setup tests and retain any additional valid coverage from develop.
+4. Preserve the repository environments dropdown fix and other develop hotfixes.
+5. Check that the GitHub Migration page reuses shared components and global SCSS tokens without changing existing behavior.
+6. Verify all affected pages, including Boards Only, Full Team Setup, repositories, pipelines, environments, GitHub Migration, and sidebar navigation.
+7. Run TypeScript, ESLint, production build, relevant Vitest tests, and targeted Playwright tests.
+8. Investigate actual failures without repeatedly running redundant tests.
+9. Provide a final summary of merged files, conflict resolutions, test results, and remaining risks.
 
-I want to understand conflicts before integrating my branch.
+Do not push, deploy, or create a PR. Stop and report any uncertain conflict resolution rather than guessing.
