@@ -1,17 +1,12 @@
-Perform a final functional review of the Boards Only implementation in feature/finalpages.
+Address the remaining Boards Only readiness issues in feature/finalpages without changing existing Full Team Setup functionality.
 
-Verify all four steps against the existing Full Team Setup behavior.
+1. Keep Team Owners visible and required in Step 2 for new team prefixes, while Boards Only creates exactly four unique Entra groups.
+2. Ensure the role-assignment counter reflects five assignment roles (Team Owners plus four group roles), while the Review group count remains four.
+3. Compare frontend group naming against the current backend implementation. Ensure the generated group names in Review match those that the backend will create. Preserve existing Full Team Setup naming unless a shared bug requires a carefully tested correction.
+4. Align the frontend description validation with the backend's 255-character limit.
+5. Verify switching between setup types preserves entered selections but submits only applicable role assignments, including required Team Owners.
+6. Preserve the existing UI, Read More descriptions, validation, shared React components, and SCSS styling.
+7. Update focused tests and run all PR quality checks, Vitest, and build.
+8. Report any backend contract or deployment uncertainty separately. Do not claim live integration verification without testing it.
 
-Specifically:
-- Confirm Boards Only displays exactly four unique groups and uses the correct existing role descriptions.
-- Verify required-role validation against the current backend contract.
-- Confirm whether the backend supports boards_only=true with only four populated role arrays and empty arrays for inactive roles.
-- Verify TeamAdmin versus TeamAdmins naming against the existing API contract and group naming logic.
-- Confirm Step 3 displays the correct dynamically generated group names based on the team prefix.
-- Verify the submission payload, duplicate-group detection, error handling, and successful submission behavior.
-- Verify switching between Boards Only and Full Setup preserves user selections without submitting inactive roles.
-- Preserve Full Team Setup functionality and all existing styling.
-
-Do not make assumptions or modify the backend contract. Report any unverified items.
-
-Do not commit or push. Provide a final readiness summary.
+Do not disable quality gates, add suppression markers, commit, or push automatically.
