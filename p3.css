@@ -1,11 +1,17 @@
-Perform a final comparison of frontend and backend group-name generation for both Boards Only and Full Team Setup.
+Review and preserve our existing naming conventions in feature/finalpages.
 
-Verify exact naming and normalization, including hyphens, underscores, domain prefixes, duplicate prefixes, case sensitivity, and existing-group detection.
+1. Team, Repository, Pipeline, and Environment names must follow the existing duplicate domain-prefix removal logic.
+2. Example: ai-ai_team-repo should normalize to ai-team-repo, following the existing separator and naming rules.
+3. Entra group names must NOT use this duplicate-prefix removal logic.
+4. Preserve the existing Full Team Setup Entra group naming and existing-group detection behavior.
+5. Make Boards Only reuse exactly the same Entra group naming and detection logic as Full Team Setup.
+6. Boards Only must have 4 Entra groups, while Full Team Setup retains 11.
+7. Keep resource-name normalization separate from Entra group-name generation.
+8. Ensure Step 3 Review, duplicate detection, and submission payloads consistently reflect the appropriate naming conventions.
+9. Do not change existing working naming rules or unrelated functionality.
 
-Ensure Step 3 Review displays the exact group names that the backend will create.
+First inspect the current implementation and compare it with the previous working Full Team Setup code. Fix only confirmed inconsistencies.
 
-Preserve all existing Full Team Setup functionality and use shared naming logic for both setup types.
+Run focused tests covering Team, Repository, Pipeline, Environment, and Entra group naming.
 
-Update focused tests for naming edge cases.
-
-Do not change unrelated functionality, commit, or push automatically.
+Do not commit or push automatically.
