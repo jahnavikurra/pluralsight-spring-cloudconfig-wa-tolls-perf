@@ -1,12 +1,11 @@
-Perform a complete responsive UI regression review of my current feature/finalpages branch after merging develop.
+Speed up final verification of feature/finalpages.
 
-1. Identify all pages and routes across Azure DevOps, GitHub, dashboard, and shared layouts.
-2. Verify that our existing responsive implementation is preserved across all pages, including the newly merged GitHub Migration page.
-3. Test common viewport widths: 375px, 768px, 1024px, 1366px, 1920px, and 2560px, including 24", 27", and 32" monitor layouts.
-4. Check sidebar behavior, fixed navigation, headers, forms, cards, grids, tables, dropdowns, modals, scrolling, and overflow.
-5. Ensure the main content scrolls correctly without unintended nested scrollbars or horizontal overflow.
-6. Confirm that mobile navigation, tablet layouts, and desktop layouts work correctly.
-7. Verify all pages reuse existing shared components, SCSS tokens, typography, breakpoints, and responsive layout patterns.
-8. Pay special attention to GitHub Migration because it now inherits the shared wizard shell styling.
-9. Run relevant Playwright responsive and visual regression tests. Investigate skipped tests and distinguish missing coverage from intentionally skipped scenarios.
-10. Fix confirmed responsive regressions using existing shared components and SCSS
+1. Stop redundant test runs and polling loops started during this verification without affecting unrelated processes.
+2. Reuse previous passing results if the relevant code has not changed.
+3. Run only tests affected by the latest changes, including GitHub Migration responsive tests.
+4. Use a maximum of 2 Playwright workers to avoid overloading my laptop.
+5. Run TypeScript, ESLint, and build only if changes since their last successful runs require them.
+6. Do not repeat full responsive audits, full Vitest suites, or all-route Playwright tests.
+7. Report only failures, new regressions, and final PR readiness.
+
+Do not change functionality, commit, push, or deploy.
