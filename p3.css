@@ -1,11 +1,12 @@
-Speed up final verification of feature/finalpages.
+Finalize feature/finalpages for Dev testing.
 
-1. Stop redundant test runs and polling loops started during this verification without affecting unrelated processes.
-2. Reuse previous passing results if the relevant code has not changed.
-3. Run only tests affected by the latest changes, including GitHub Migration responsive tests.
-4. Use a maximum of 2 Playwright workers to avoid overloading my laptop.
-5. Run TypeScript, ESLint, and build only if changes since their last successful runs require them.
-6. Do not repeat full responsive audits, full Vitest suites, or all-route Playwright tests.
-7. Report only failures, new regressions, and final PR readiness.
+All major responsive, build, and regression checks have already been completed. Do not rerun full test suites.
 
-Do not change functionality, commit, push, or deploy.
+1. Review the remaining uncommitted changes and confirm they are intentional.
+2. Verify the current branch contains all Boards Only, Full Team Setup, SCSS, sidebar, and GitHub Migration changes.
+3. Confirm there are no unresolved merge conflicts or unintended files.
+4. Reuse previous valid passing test results.
+5. Report any outstanding issues that could block Dev testing.
+6. Confirm whether our existing Azure DevOps pipeline supports deployment directly from feature/finalpages.
+
+Do not run additional full suites, modify code, commit, push, or deploy. Give a concise final readiness report.
