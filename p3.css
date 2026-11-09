@@ -1,9 +1,15 @@
-Perform final verification of feature/finalpages without changing naming logic.
+Review and resolve the remaining 189 Tailwind PR quality-gate violations in feature/finalpages.
 
-1. Confirm all existing naming rules remain unchanged for repositories, pipelines, environments, and Entra groups.
-2. Verify Boards Only reuses Full Team Setup's existing naming and duplicate-detection behavior.
-3. Run the complete test suite, TypeScript, ESLint, Stylelint, production build, and PR quality checks.
-4. Identify any remaining failures and unrelated changes.
-5. Do not refactor or modify working functionality unnecessarily.
+Requirements:
+1. Identify all 189 violations introduced by this branch compared with develop.
+2. Refactor the affected new Tailwind styling to existing SCSS classes and design tokens.
+3. Reuse shared components and existing style definitions wherever possible.
+4. Preserve sidebar behavior, layouts, responsiveness, and existing page functionality.
+5. Do not modify the completed Boards Only and Full Team Setup business logic or naming conventions.
+6. Do not refactor unrelated untouched legacy code.
+7. Do not disable quality gates, introduce suppression markers, or add hardcoded colors.
+8. Review and fix stale lint suppressions introduced by this branch, without weakening the rules.
+9. Run the PR quality checks, full Vitest suite, production build, and relevant responsive Playwright tests.
+10. Report remaining baseline TypeScript, ESLint, and Stylelint errors separately from new violations.
 
-Do not commit or push automatically.
+Do not commit or push automatically. Provide a final summary of the changed files and validation results.
