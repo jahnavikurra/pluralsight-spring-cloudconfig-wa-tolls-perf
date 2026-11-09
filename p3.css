@@ -1,11 +1,15 @@
-Perform a final regression and PR readiness review of feature/finalpages.
+Stop the redundant background test runs and polling loops started during this verification. First inspect which processes are still active, and do not terminate unrelated processes.
 
-Verify responsive sidebar and drawer behavior, visual appearance, SCSS scope, accessibility, and existing page functionality after removing the 189 Tailwind violations.
+Keep all current code changes.
 
-Investigate intermittent Vitest timeouts and fix their root cause if introduced by this branch.
+Run validation sequentially with limited workers:
+1. PR quality checks
+2. Relevant Vitest tests
+3. Production build
+4. Focused Playwright routing and mobile sidebar tests
 
-Run the full test suite, PR quality checks, production build, and relevant Playwright tests.
+Avoid running the full test suite repeatedly. Use existing passing results where valid, and rerun only checks affected by subsequent changes.
 
-Compare results against develop and separate new issues from existing baseline issues.
+Report failures and distinguish test timeouts caused by resource contention from actual code failures.
 
-Do not weaken quality checks, change business logic, commit, or push automatically. Report final readiness and any remaining blockers.
+Do not commit or push.
