@@ -1,13 +1,17 @@
-Complete the shared-component refactoring across all ADO and GitHub forms.
+Perform a final functional review of the Boards Only implementation in feature/finalpages.
 
-1. Reuse shared Description, Justification, labels, textareas, validation messages, dropdowns, cards, headers, steppers, and buttons wherever functionality is similar.
-2. Check existing shared components first. Create new components only when necessary.
-3. Preserve each form's field requirements, max lengths, validation rules, state, and API payloads.
-4. Use the same responsive layouts and existing global SCSS tokens across ADO and GitHub.
-5. Eliminate duplicate JSX, SCSS, and reusable form logic without introducing unnecessary abstractions.
-6. Fix any new SonarQube findings.
-7. Run affected Vitest, Playwright, lint, TypeScript, and build checks.
+Verify all four steps against the existing Full Team Setup behavior.
 
-Preserve authentication, permissions, hotfix functionality, and existing UI behavior. Report shared components created or reused and code duplication removed.
+Specifically:
+- Confirm Boards Only displays exactly four unique groups and uses the correct existing role descriptions.
+- Verify required-role validation against the current backend contract.
+- Confirm whether the backend supports boards_only=true with only four populated role arrays and empty arrays for inactive roles.
+- Verify TeamAdmin versus TeamAdmins naming against the existing API contract and group naming logic.
+- Confirm Step 3 displays the correct dynamically generated group names based on the team prefix.
+- Verify the submission payload, duplicate-group detection, error handling, and successful submission behavior.
+- Verify switching between Boards Only and Full Setup preserves user selections without submitting inactive roles.
+- Preserve Full Team Setup functionality and all existing styling.
 
-Do not commit or push until reviewed.
+Do not make assumptions or modify the backend contract. Report any unverified items.
+
+Do not commit or push. Provide a final readiness summary.
