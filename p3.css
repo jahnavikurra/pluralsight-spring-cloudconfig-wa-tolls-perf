@@ -1,15 +1,11 @@
-Review and resolve the remaining 189 Tailwind PR quality-gate violations in feature/finalpages.
+Perform a final regression and PR readiness review of feature/finalpages.
 
-Requirements:
-1. Identify all 189 violations introduced by this branch compared with develop.
-2. Refactor the affected new Tailwind styling to existing SCSS classes and design tokens.
-3. Reuse shared components and existing style definitions wherever possible.
-4. Preserve sidebar behavior, layouts, responsiveness, and existing page functionality.
-5. Do not modify the completed Boards Only and Full Team Setup business logic or naming conventions.
-6. Do not refactor unrelated untouched legacy code.
-7. Do not disable quality gates, introduce suppression markers, or add hardcoded colors.
-8. Review and fix stale lint suppressions introduced by this branch, without weakening the rules.
-9. Run the PR quality checks, full Vitest suite, production build, and relevant responsive Playwright tests.
-10. Report remaining baseline TypeScript, ESLint, and Stylelint errors separately from new violations.
+Verify responsive sidebar and drawer behavior, visual appearance, SCSS scope, accessibility, and existing page functionality after removing the 189 Tailwind violations.
 
-Do not commit or push automatically. Provide a final summary of the changed files and validation results.
+Investigate intermittent Vitest timeouts and fix their root cause if introduced by this branch.
+
+Run the full test suite, PR quality checks, production build, and relevant Playwright tests.
+
+Compare results against develop and separate new issues from existing baseline issues.
+
+Do not weaken quality checks, change business logic, commit, or push automatically. Report final readiness and any remaining blockers.
