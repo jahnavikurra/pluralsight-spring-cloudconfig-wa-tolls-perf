@@ -1,12 +1,9 @@
-Finalize feature/finalpages for Dev testing.
+Prepare feature/finalpages for Dev testing.
 
-All major responsive, build, and regression checks have already been completed. Do not rerun full test suites.
+1. Verify the current Git branch and review the two uncommitted test-file changes.
+2. Stage and commit only the approved responsive test updates.
+3. Verify that all intended Boards Only, Full Team Setup, shared SCSS, sidebar, and GitHub Migration changes are included.
+4. Check whether the Dev deployment pipeline supports feature branches.
+5. Report the exact push and Dev deployment steps.
 
-1. Review the remaining uncommitted changes and confirm they are intentional.
-2. Verify the current branch contains all Boards Only, Full Team Setup, SCSS, sidebar, and GitHub Migration changes.
-3. Confirm there are no unresolved merge conflicts or unintended files.
-4. Reuse previous valid passing test results.
-5. Report any outstanding issues that could block Dev testing.
-6. Confirm whether our existing Azure DevOps pipeline supports deployment directly from feature/finalpages.
-
-Do not run additional full suites, modify code, commit, push, or deploy. Give a concise final readiness report.
+Do not rerun tests, modify unrelated code, merge into develop, or deploy automatically. Do not push until I approve.
