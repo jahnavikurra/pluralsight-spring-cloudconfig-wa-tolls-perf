@@ -1,15 +1,11 @@
-Stop the redundant background test runs and polling loops started during this verification. First inspect which processes are still active, and do not terminate unrelated processes.
+Review my current feature branch against the latest origin/develop.
 
-Keep all current code changes.
+1. Fetch the latest develop branch.
+2. Identify any overlapping changes and potential merge conflicts.
+3. Pay special attention to shared components, SCSS, routing, Full Team Setup, and Boards Only functionality.
+4. Check whether recent hotfixes or changes in develop could be overwritten or cause regressions.
+5. Report all conflicts and recommend safe resolutions while preserving both intended develop changes and my refactoring.
+6. Do not discard changes from either branch.
+7. Do not merge, rebase, reset, commit, or push anything automatically.
 
-Run validation sequentially with limited workers:
-1. PR quality checks
-2. Relevant Vitest tests
-3. Production build
-4. Focused Playwright routing and mobile sidebar tests
-
-Avoid running the full test suite repeatedly. Use existing passing results where valid, and rerun only checks affected by subsequent changes.
-
-Report failures and distinguish test timeouts caused by resource contention from actual code failures.
-
-Do not commit or push.
+I want to understand conflicts before integrating my branch.
