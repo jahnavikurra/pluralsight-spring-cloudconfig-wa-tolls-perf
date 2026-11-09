@@ -1,12 +1,11 @@
-Address the remaining Boards Only readiness issues in feature/finalpages without changing existing Full Team Setup functionality.
+Perform a final comparison of frontend and backend group-name generation for both Boards Only and Full Team Setup.
 
-1. Keep Team Owners visible and required in Step 2 for new team prefixes, while Boards Only creates exactly four unique Entra groups.
-2. Ensure the role-assignment counter reflects five assignment roles (Team Owners plus four group roles), while the Review group count remains four.
-3. Compare frontend group naming against the current backend implementation. Ensure the generated group names in Review match those that the backend will create. Preserve existing Full Team Setup naming unless a shared bug requires a carefully tested correction.
-4. Align the frontend description validation with the backend's 255-character limit.
-5. Verify switching between setup types preserves entered selections but submits only applicable role assignments, including required Team Owners.
-6. Preserve the existing UI, Read More descriptions, validation, shared React components, and SCSS styling.
-7. Update focused tests and run all PR quality checks, Vitest, and build.
-8. Report any backend contract or deployment uncertainty separately. Do not claim live integration verification without testing it.
+Verify exact naming and normalization, including hyphens, underscores, domain prefixes, duplicate prefixes, case sensitivity, and existing-group detection.
 
-Do not disable quality gates, add suppression markers, commit, or push automatically.
+Ensure Step 3 Review displays the exact group names that the backend will create.
+
+Preserve all existing Full Team Setup functionality and use shared naming logic for both setup types.
+
+Update focused tests for naming edge cases.
+
+Do not change unrelated functionality, commit, or push automatically.
