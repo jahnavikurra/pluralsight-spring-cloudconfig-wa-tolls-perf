@@ -1,17 +1,12 @@
-Safely integrate the latest origin/develop into my current feature/finalpages branch.
+Perform a complete responsive UI regression review of my current feature/finalpages branch after merging develop.
 
-1. First verify and protect all uncommitted changes. Do not discard or overwrite any work.
-2. Merge origin/develop into my feature branch using git merge, not rebase.
-3. Resolve the four identified conflicts:
-   - Sidebar.tsx: preserve our refactored sidebar and integrate develop's GitHub Migration navigation link in SidebarData.tsx.
-   - pipeline/page.tsx: preserve develop's removal of Build Type and Deploy Type dropdowns.
-   - _components.scss: preserve both our shared SCSS refactoring and develop's migration-page styling without duplication.
-   - wizard-form-layout-team.test.tsx: preserve our Boards Only and Full Team Setup tests and retain any additional valid coverage from develop.
-4. Preserve the repository environments dropdown fix and other develop hotfixes.
-5. Check that the GitHub Migration page reuses shared components and global SCSS tokens without changing existing behavior.
-6. Verify all affected pages, including Boards Only, Full Team Setup, repositories, pipelines, environments, GitHub Migration, and sidebar navigation.
-7. Run TypeScript, ESLint, production build, relevant Vitest tests, and targeted Playwright tests.
-8. Investigate actual failures without repeatedly running redundant tests.
-9. Provide a final summary of merged files, conflict resolutions, test results, and remaining risks.
-
-Do not push, deploy, or create a PR. Stop and report any uncertain conflict resolution rather than guessing.
+1. Identify all pages and routes across Azure DevOps, GitHub, dashboard, and shared layouts.
+2. Verify that our existing responsive implementation is preserved across all pages, including the newly merged GitHub Migration page.
+3. Test common viewport widths: 375px, 768px, 1024px, 1366px, 1920px, and 2560px, including 24", 27", and 32" monitor layouts.
+4. Check sidebar behavior, fixed navigation, headers, forms, cards, grids, tables, dropdowns, modals, scrolling, and overflow.
+5. Ensure the main content scrolls correctly without unintended nested scrollbars or horizontal overflow.
+6. Confirm that mobile navigation, tablet layouts, and desktop layouts work correctly.
+7. Verify all pages reuse existing shared components, SCSS tokens, typography, breakpoints, and responsive layout patterns.
+8. Pay special attention to GitHub Migration because it now inherits the shared wizard shell styling.
+9. Run relevant Playwright responsive and visual regression tests. Investigate skipped tests and distinguish missing coverage from intentionally skipped scenarios.
+10. Fix confirmed responsive regressions using existing shared components and SCSS
