@@ -1,9 +1,9 @@
-Prepare feature/finalpages for Dev testing.
+Check whether feature/finalpages can deploy to Dev using our existing Azure DevOps pipeline.
 
-1. Verify the current Git branch and review the two uncommitted test-file changes.
-2. Stage and commit only the approved responsive test updates.
-3. Verify that all intended Boards Only, Full Team Setup, shared SCSS, sidebar, and GitHub Migration changes are included.
-4. Check whether the Dev deployment pipeline supports feature branches.
-5. Report the exact push and Dev deployment steps.
+Inspect the branch filters and shared deployment template if accessible.
 
-Do not rerun tests, modify unrelated code, merge into develop, or deploy automatically. Do not push until I approve.
+Confirm whether refs/heads/feature matches refs/heads/feature/finalpages and whether UAT could also run.
+
+Recommend the smallest safe way to deploy only this feature branch to Dev without changing existing develop, UAT, or Production deployment behavior.
+
+Do not change YAML, push, merge, or deploy.
