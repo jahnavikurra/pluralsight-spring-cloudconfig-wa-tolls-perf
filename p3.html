@@ -1,27 +1,1277 @@
 <!doctype html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Developer Hub | My Teams & Access</title><style>
-:root{--navy-blue-50:#e6f0f9;--navy-blue-600:#004080;--navy-blue-700:#003366;--navy-blue-900:#002147;--federal-orange-600:#cc6000;--federal-orange-700:#b35400;--enterprise-slate-100:#f1f5f9;--enterprise-slate-200:#e2e8f0;--enterprise-slate-300:#cbd5e1;--enterprise-slate-600:#475569;--enterprise-slate-900:#0f172a;--enterprise-green-600:#16a34a;--enterprise-amber-600:#d97706;--enterprise-red-600:#dc2626;--background:#f5f7fa;--card:#ffffff;--foreground:var(--enterprise-slate-900);--border:#dbe3ee;--muted:#64748b;--shadow:0 6px 18px rgba(16,24,40,.06)}*{box-sizing:border-box}body{margin:0;background:var(--background);color:var(--foreground);font-family:Inter,'Segoe UI',Arial,sans-serif;font-size:14px}button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible{outline:3px solid #80a9d8;outline-offset:2px}header{height:62px;position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;gap:18px;background:var(--navy-blue-900);color:#fff;padding:0 23px;border-bottom:1px solid #20456c}.brand{display:flex;align-items:center;gap:13px;font-size:21px;font-weight:750;white-space:nowrap}.brand .mark{display:grid;place-items:center;width:36px;height:36px;border:2px solid #65a9ea;border-radius:11px;color:#ffb369;font-weight:900}.header-right{display:flex;gap:18px;align-items:center}.global-search{height:37px;width:min(390px,32vw);padding:0 17px;color:#fff;border:1px solid #708cae;border-radius:22px;background:rgba(255,255,255,.09)}.global-search::placeholder{color:#e1e7f1}.top-btn{background:none;border:0;color:#eaf1fb;font-size:20px}.avatar{height:34px;width:34px;display:grid;place-items:center;border-radius:50%;background:#2472bf;color:#fff;font-weight:700}.layout{display:flex;min-height:calc(100vh - 62px)}aside{width:238px;flex:0 0 238px;background:linear-gradient(180deg,var(--navy-blue-900),#001b38);color:#dce8f4;display:flex;flex-direction:column;padding:28px 14px 17px;min-height:calc(100vh - 62px);position:sticky;top:62px;height:calc(100vh - 62px)}.side-label{font-size:11px;letter-spacing:.09em;font-weight:800;color:#afc5dc;margin:0 12px 12px}.nav{display:flex;flex-direction:column;gap:5px}.nav button{border:0;background:none;color:#dce8f4;text-align:left;padding:12px 16px;border-radius:9px;font-weight:550}.nav button.active{background:var(--federal-orange-600);color:#fff;font-weight:750}.nav button:hover:not(.active){background:#123e66}.nav-sep{border-top:1px solid #31506f;margin:20px 10px}.side-bottom{margin-top:auto}.side-bottom button{display:block;background:none;border:0;color:#dce8f4;padding:10px 16px}main{flex:1;min-width:0;padding:27px clamp(20px,3vw,48px) 48px;max-width:1900px;margin:0 auto}.heading{display:flex;align-items:center;gap:16px}.heading-icon{width:59px;height:59px;border-radius:15px;background:var(--navy-blue-50);color:var(--federal-orange-600);display:grid;place-items:center;font-size:31px}.heading h1{font-size:29px;letter-spacing:-.025em;margin:0 0 5px}.subtitle{font-size:15px;color:var(--enterprise-slate-600);margin:0}.tabs{display:flex;gap:22px;align-items:center;border-bottom:1px solid var(--enterprise-slate-300);margin:24px 0 21px;overflow:auto;white-space:nowrap}.tab{border:0;background:none;color:#334155;padding:12px 9px 15px;font-weight:650;border-bottom:3px solid transparent}.tab.active{color:var(--federal-orange-700);border-bottom-color:var(--federal-orange-600)}.count{background:var(--enterprise-slate-200);color:#17233e;padding:4px 9px;border-radius:15px;margin-left:6px;font-weight:800}.identity{background:#e9f0f8;color:#344c67;border-radius:9px;padding:13px 17px;margin-bottom:19px;display:flex;flex-wrap:wrap;gap:11px;align-items:center}.identity strong{color:#0f172a}.identity .pipe{opacity:.45;margin:0 11px}.grid{display:grid;gap:18px}.metrics{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:21px}.metrics.three{grid-template-columns:repeat(3,minmax(0,1fr))}.metrics.two{grid-template-columns:repeat(2,minmax(0,1fr))}.metric,.panel{background:var(--card);border:1px solid var(--border);border-radius:13px;box-shadow:var(--shadow)}.metric{min-height:111px;padding:20px 22px;display:flex;align-items:center;gap:15px}.metric-icon{border-radius:12px;background:var(--navy-blue-50);color:var(--navy-blue-600);width:45px;height:45px;display:grid;place-items:center;font-size:23px;flex:0 0 auto}.metric-icon.orange{background:#fff1e5;color:var(--federal-orange-600)}.metric-name{font-size:14px;color:#334155}.metric-val{font-size:32px;font-weight:800;margin-top:4px;font-variant-numeric:tabular-nums}.two-col{grid-template-columns:1fr 1.18fr}.equal-col{grid-template-columns:1fr 1fr}.panel{padding:21px 23px;min-width:0}.panel h2{font-size:19px;letter-spacing:-.01em;margin:0 0 20px;display:flex;gap:10px;align-items:center}.help{font-size:12px;color:var(--enterprise-slate-600);border:1.5px solid #8798aa;border-radius:50%;height:17px;width:17px;display:inline-grid;place-items:center;cursor:help}.footprint{display:flex;align-items:center;justify-content:center;gap:30px;min-height:307px}.donut{width:215px;aspect-ratio:1;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--navy-blue-600) 0 78%,var(--federal-orange-600) 78% 100%);flex:0 0 auto}.hole{background:white;width:64%;height:64%;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center}.hole strong{font-size:34px}.hole small{font-size:13px;color:#475569}.legend{display:grid;gap:20px}.legend>div{display:flex;align-items:center;gap:10px}.dot{width:13px;height:13px;flex:0 0 13px;border-radius:3px;background:var(--navy-blue-600)}.dot.orange{background:var(--federal-orange-600)}.legend strong{margin-left:auto;white-space:nowrap}.bars{display:grid;gap:12px}.bar-item{display:grid;gap:5px}.bar-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;font-size:13px}.bar-head .name{overflow-wrap:anywhere}.bar-head strong{font-variant-numeric:tabular-nums;white-space:nowrap}.bar-track{width:100%;height:8px;background:var(--enterprise-slate-200);border-radius:9px;overflow:hidden}.bar-fill{height:100%;background:var(--navy-blue-600);border-radius:9px}.bar-fill.orange{background:var(--federal-orange-600)}.bar-fill.green{background:var(--enterprise-green-600)}.bar-fill.slate{background:var(--enterprise-slate-600)}.bar-fill.red{background:var(--enterprise-red-600)}.badge{border-radius:18px;font-size:11px;font-weight:800;background:var(--navy-blue-50);color:var(--navy-blue-700);padding:4px 9px;flex:0 0 auto}.badge.gh{background:var(--enterprise-slate-200);color:#334155}.aff-row{display:flex;gap:13px;align-items:center}.aff-body{min-width:0;flex:1}.aff-body .bar-head{margin-bottom:5px}.overview-panels .panel{min-height:390px}.split-panels{grid-template-columns:1fr 1fr;margin-bottom:20px}.table-panel{margin-top:20px}.table-toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:17px;flex-wrap:wrap}.table-toolbar h2{margin:0 0 5px}.subtle{color:var(--muted);font-size:12px}.search{border:1px solid var(--enterprise-slate-300);padding:10px 14px;border-radius:9px;width:min(360px,100%);background:#fff}.table-scroll{overflow:auto;max-height:420px;border:1px solid var(--enterprise-slate-200);border-radius:9px}table{border-collapse:collapse;min-width:1050px;width:100%;font-size:12px;text-align:left}thead{position:sticky;top:0;background:#eaf0f7;z-index:1}th,td{padding:12px 13px;border-bottom:1px solid #e6ebf2;white-space:nowrap}th{font-weight:750}tbody tr:hover{background:#f7faff}.small-btn{border:1px solid #cbd5e1;border-radius:9px;background:#fff;color:#334155;padding:9px 13px;font-weight:650}.small-btn:hover{background:#f1f5f9}.chart-list{min-height:330px}.org-search{width:100%;margin-bottom:16px}.org-list{display:grid;gap:8px;max-height:690px;overflow:auto;padding-right:4px}.org-entry{border:1px solid var(--enterprise-slate-200);border-radius:10px;overflow:hidden}.org-title{display:flex;justify-content:space-between;align-items:center;width:100%;border:0;background:#f8fafc;padding:13px 15px;text-align:left;font-weight:700;color:#263750}.org-entry.open .org-title{background:#eaf0f7}.org-detail{display:flex;gap:8px;flex-wrap:wrap;padding:13px 15px;background:#fff}.pill{border:1px solid #cbd5e1;background:#f8fafc;border-radius:20px;padding:7px 10px;font-size:11px;color:#334155;overflow-wrap:anywhere;max-width:100%}.org-num{display:inline-grid;place-items:center;background:#dce9f6;color:#003366;border-radius:15px;padding:3px 8px;font-size:12px;margin-left:9px}.hint{font-size:12px;color:#64748b;line-height:1.5;margin-top:15px}.panel-section{margin-top:20px}.chart-list .bar-item{padding-bottom:2px}.chart-list .bar-head{font-size:13px}.identity-tag{font-weight:700;color:var(--federal-orange-700)}.empty{padding:24px;text-align:center;color:#64748b}.fake-nav{text-align:center;background:#eaf0f7;color:#40566e;border-radius:9px;padding:20px;max-width:630px;margin-top:26px}.mobile-menu{display:none}@media(max-width:1200px){.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.two-col,.split-panels{grid-template-columns:1fr}.overview-panels .panel{min-height:unset}.footprint{min-height:245px}.chart-list{min-height:unset}}@media(max-width:750px){header{padding:0 12px}.brand{font-size:16px}.global-search{display:none}.header-right{gap:8px}aside{width:62px;flex-basis:62px;padding:18px 7px}.side-label,.nav .nav-text,.side-bottom,.nav-sep{display:none}.nav button{padding:13px;text-align:center}.nav .nav-icon{font-size:18px}.metrics,.metrics.three,.metrics.two{grid-template-columns:1fr 1fr}.metric{padding:13px}.metric-val{font-size:25px}main{padding:20px 14px}.heading h1{font-size:23px}.heading-icon{width:44px;height:44px}.footprint{flex-direction:column}.panel{padding:17px}.bar-head{font-size:12px}}@media(max-width:480px){.metrics,.metrics.three,.metrics.two{grid-template-columns:1fr}.metric{min-height:85px}.avatar{display:none}}
-</style></head><body>
-<header><div class="brand"><div class="mark">⌘</div>Developer Hub</div><div class="header-right"><input aria-label="Search Developer Hub" class="global-search" placeholder="⌕  Search Developer Hub ( / )" id="globalSearch"><button class="top-btn" aria-label="Notifications" title="Notifications">♧</button><button class="top-btn" aria-label="Help" title="Help">ⓘ</button><button class="top-btn" aria-label="Apps" title="Apps">▦</button><div class="avatar" title="Profile">JK</div></div></header>
-<div class="layout"><aside><div class="side-label">GET STARTED</div><nav class="nav"><button class="active" aria-current="page"><span class="nav-icon">♧</span> <span class="nav-text">My Teams</span></button><button><span class="nav-icon">⑂</span> <span class="nav-text">My Pipelines</span></button><button><span class="nav-icon">⌘</span> <span class="nav-text">My Repositories</span></button><button><span class="nav-icon">✧</span> <span class="nav-text">AI Usage</span></button><div class="nav-sep"></div><div class="side-label">MY USAGE</div><button><span class="nav-icon">▥</span> <span class="nav-text">My AI Usage</span></button><button><span class="nav-icon">♧</span> <span class="nav-text">Team AI Usage</span></button><button><span class="nav-icon">♡</span> <span class="nav-text">System Status</span></button></nav><div class="side-bottom"><div class="nav-sep"></div><button>▤ &nbsp; Documentation</button><button>☏ &nbsp; Support</button></div></aside>
-<main><div class="heading"><div class="heading-icon">♧</div><div><h1>My Teams &amp; Access</h1><p class="subtitle">Your group and team memberships across Azure DevOps and GitHub</p></div></div><div class="tabs" role="tablist" aria-label="Access views"><button class="tab active" role="tab" aria-selected="true" data-tab="overview">▦ &nbsp; Overview</button><button class="tab" role="tab" aria-selected="false" data-tab="ado">◈ &nbsp; Azure DevOps <span class="count">585</span></button><button class="tab" role="tab" aria-selected="false" data-tab="github">◉ &nbsp; GitHub <span class="count">166</span></button></div><div id="content" role="tabpanel"></div></main></div>
-<script>
-const $=s=>document.querySelector(s);
-const overviewAff=[['ADO','Project Valid Users',131],['ADO','Endpoint Creators',61],['ADO','APPL-ADO-PROD-DEVSECOPS-CICD-PRIVILEGED',37],['ADO','Endpoint Administrators',35],['ADO','Project Administrators',24],['GH','NFC-ETS',5],['GH','ETS-DES',4],['GH','DepMgmt',3],['GH','deploy-mgmt-test',3],['GH','NFC-TPO',3]];
-const adoGroups=[['Project Valid Users',131],['Endpoint Creators',61],['APPL-ADO-PROD-DEVSECOPS-CICD-PRIVILEGED',37],['Endpoint Administrators',35],['Project Administrators',24],['ADO-USERS-NFCU-CLOUD-DEVOPS-EMP',22],['Contributors',17],['AZR-USERS-PEDS-CICD-TOOLADMIN',9],['NFCU Cloud Team',8],['CLOUD DEVOPS SUPPORT TEAM',4]];
-const adoProjects=[['DoNotUseTestProject6',64],['Products',61],['Core Banking Services',24],['Shared Platform and Services',23],['Cloud Team',21],['DoNotUseTestProject-5',19],['Corporate Systems',19],['DoNotUse-Test-Project2',16],['DoNotUseTestProject3',15],['Digital Communications Platform Services',14],['DevSecOpsAdmin',14],['EDIM Cloud Delivery',14],['Security Channels and Investments',14],['Strategic Initiatives',14],['Glass',14]];
-const departments=[['ETS',272],['Unassigned',236],['Digital',66],['Security',11]];
-const organizations=[['NFC-ETS',5,['APPL-GH-NFC-ETS-COPILOT','APPL-GHC-ETS-CICD-TOOLS-PROD-CONTRIBUTORS','APPL-GHC-ETS-DES-PROD-CONTRIBUTORS','APPL-GHC-ETS-PROD-ADMINS','Enterprise Owners']],['ETS-DES',4,[]],['DepMgmt',3,[]],['deploy-mgmt-test',3,[]],['NFC-TPO',3,[]],['NF-PEGA',3,[]],['nfcu-sandbox-pocs',2,[]],['NFCUCopilotPOC',2,[]],['POC-GHAS',2,[]],['BO-BOPA',1,[]],['CCO-ComChangeMediaDev',1,[]],['CCO-ExperienceAnalytics',1,[]],['CEO-CPP',1,[]],['CEO-IA',1,[]],['CEO-MRM',1,[]]];
-const tableData=[['Cloud Native Core Banking','Cloud Core Foundation Team','—','Jahnavi Kurra','jahnavi_kurra@navyfederal.org','—'],['Cybersecurity Technology Services','ADO-CTS_DLP-TeamAdmins','—','Jahnavi Kurra','jahnavi_kurra@navyfederal.org','—'],['Cybersecurity Technology Services','Hardware Security Modules','—','Jahnavi Kurra','jahnavi_kurra@navyfederal.org','—'],['Cybersecurity Technology Services','APPL-ADO-PROD-DEVSECOPS-CICD-PRIVILEGED','—','Jahnavi Kurra','jahnavi_kurra@navyfederal.org','—'],['DevSecOpsAdmin','ADO-DevSecopsTools-NonProdTechLeads','—','Jahnavi Kurra','jahnavi_kurra@navyfederal.org','—'],['DevSecOpsAdmin','CICD_DevOps_Staff','—','Jahnavi Kurra','jahnavi_kurra@navyfederal.org','—'],['DevSecOpsAdmin','Contributors','—','Jahnavi Kurra','jahnavi_kurra@navyfederal.org','—'],['DevSecOpsAdmin','Endpoint Creators','—','Jahnavi Kurra','jahnavi_kurra@navyfederal.org','Contributors'],['APS - Business Technology Services','Project Valid Users','—','Jahnavi Kurra','jahnavi_kurra@navyfederal.org','Project Administrators']];
-let currentTab='overview';let openOrg='NFC-ETS';function esc(x){return String(x).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;')};
-function metric(name,value,icon,orange=false){return `<div class="metric"><div class="metric-icon ${orange?'orange':''}">${icon}</div><div><div class="metric-name">${name}</div><div class="metric-val">${value}</div></div></div>`};
-function panel(title,html,extra=''){return `<section class="panel ${extra}"><h2>${title} <span class="help" title="Counts are based on the data displayed in the current portal">i</span></h2>${html}</section>`};
-function bars(items,max,colors=[''],withBadges=false){return `<div class="bars">${items.map((i,n)=>`<div class="bar-item">${withBadges?`<div class="aff-row"><span class="badge ${i[0]==='GH'?'gh':''}">${i[0]}</span><div class="aff-body"><div class="bar-head"><span class="name">${esc(i[1])}</span><strong>${i[2]}</strong></div><div class="bar-track"><div class="bar-fill ${i[0]==='GH'?'orange':''}" style="width:${Math.max(i[2]/max*100,1)}%"></div></div></div></div>`:`<div class="bar-head"><span class="name">${esc(i[0])}</span><strong>${i[1]}</strong></div><div class="bar-track"><div class="bar-fill ${colors[n%colors.length]||''}" style="width:${Math.max(i[1]/max*100,1)}%"></div></div>`}</div>`).join('')}</div>`};
-function overview(){return `<div class="identity">▣ &nbsp; ADO identity: <strong>jahnavi.kurra@navyfederal.org</strong><span class="pipe">|</span> GitHub identity: <strong>Jahnavi Kurra</strong></div><div class="grid metrics">${metric('ADO Groups','192','♧')}${metric('ADO Projects','44','▣')}${metric('GitHub Orgs','149','◉')}${metric('GitHub Teams','166','♧',true)}</div><div class="grid two-col overview-panels">${panel('Access Footprint',`<div class="footprint"><div class="donut" role="img" aria-label="78 percent Azure DevOps and 22 percent GitHub"><div class="hole"><strong>751</strong><small>Total<br>memberships</small></div></div><div class="legend"><div><span class="dot"></span><span>ADO memberships</span><strong>585 (78%)</strong></div><div><span class="dot orange"></span><span>GitHub team memberships</span><strong>166 (22%)</strong></div></div></div>`)}${panel('Top Affiliations',bars(overviewAff,131,[''],true))}</div>`}
-function ado(){return `<div class="identity">▣ &nbsp; ADO identity: <strong>jahnavi.kurra@navyfederal.org</strong></div><div class="grid metrics three">${metric('Groups','192','♧')}${metric('Projects','44','▣')}${metric('Membership Rows','585','☷',true)}</div><div class="grid split-panels">${panel('Groups by Membership Rows',bars(adoGroups,131,['green','slate','','green','orange']))}${panel('Projects',bars(adoProjects,64,['orange','slate','','green','slate']))}</div>${panel('Access by Department',bars(departments,272,['orange','','green','red']))}<section class="panel table-panel"><div class="table-toolbar"><div><h2>Detailed Access</h2><div class="subtle">585 access rows in the portal; representative rows shown in this UX preview</div></div><div style="display:flex;gap:8px;flex-wrap:wrap"><input class="search" placeholder="⌕  Filter rows..." id="tableFilter" aria-label="Filter access rows"><button class="small-btn" id="export" title="Export displayed sample data">↓ Export sample CSV</button></div></div><div class="table-scroll"><table><thead><tr>${['Project Name','Group Name','Department','Group Users','Principal Name','AAD Group Name'].map(s=>`<th>${s}</th>`).join('')}</tr></thead><tbody id="tableRows"></tbody></table></div></section>`}
-function orgList(filter=''){const entries=organizations.filter(o=>o[0].toLowerCase().includes(filter.toLowerCase())||o[2].some(t=>t.toLowerCase().includes(filter.toLowerCase())));return entries.length?entries.map(([name,count,teams])=>`<div class="org-entry ${openOrg===name?'open':''}"><button class="org-title" data-org="${esc(name)}" aria-expanded="${openOrg===name}"><span>▣ &nbsp; ${esc(name)} <span class="org-num">${count}</span></span><span>${openOrg===name?'⌃':'⌄'}</span></button>${openOrg===name?`<div class="org-detail">${teams.length?teams.map(t=>`<span class="pill">${esc(t)}</span>`).join(''):`<span class="subtle">Team names not visible in the supplied screenshots.</span>`}</div>`:''}</div>`).join(''):'<div class="empty">No matching organizations or teams</div>'}
-function github(){return `<div class="identity">◉ &nbsp; GitHub identity: <strong>Jahnavi Kurra</strong></div><div class="grid metrics two">${metric('Organizations','149','◉')}${metric('Teams','166','♧',true)}</div><div class="grid split-panels">${panel('Teams per Organization',bars(organizations.map(o=>[o[0],o[1]]),5,['orange','slate','','','slate']))}${panel('Organizations & Teams',`<input id="orgFilter" class="search org-search" placeholder="⌕  Filter orgs and teams..." aria-label="Filter organizations and teams"><div class="org-list" id="orgList">${orgList()}</div><div class="hint">Expand an organization to view team names. Team names are shown only where visible in your screenshots.</div>`)}</div>`}
-function updateTable(q=''){const rows=tableData.filter(r=>r.join(' ').toLowerCase().includes(q.toLowerCase()));$('#tableRows').innerHTML=rows.length?rows.map(r=>`<tr>${r.map(c=>`<td>${esc(c)}</td>`).join('')}</tr>`).join(''):'<tr><td colspan="6" class="empty">No matching access rows</td></tr>'}
-function update(){document.querySelectorAll('.tab').forEach(b=>{const is=b.dataset.tab===currentTab;b.classList.toggle('active',is);b.setAttribute('aria-selected',is)});$('#content').innerHTML=({overview,ado,github})[currentTab]();if(currentTab==='ado'){updateTable();$('#tableFilter').addEventListener('input',e=>updateTable(e.target.value));$('#export').addEventListener('click',()=>{let csv=[['Project Name','Group Name','Department','Group Users','Principal Name','AAD Group Name'],...tableData].map(r=>r.map(x=>'"'+String(x).replaceAll('"','""')+'"').join(',')).join('\n');const blob=new Blob([csv],{type:'text/csv'});let url=URL.createObjectURL(blob);let a=document.createElement('a');a.href=url;a.download='ado-access-preview-sample.csv';a.click();URL.revokeObjectURL(url)})}if(currentTab==='github'){const f=$('#orgFilter');f.addEventListener('input',()=>renderOrg(f.value));$('#orgList').addEventListener('click',e=>{let b=e.target.closest('[data-org]');if(!b)return;openOrg=openOrg===b.dataset.org?'':b.dataset.org;renderOrg(f.value)})}}
-function renderOrg(q){$('#orgList').innerHTML=orgList(q)}document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{currentTab=b.dataset.tab;update()}));$('#globalSearch').addEventListener('keydown',e=>{if(e.key==='Enter'){let q=e.target.value.trim();if(q){currentTab='github';update();$('#orgFilter').value=q;renderOrg(q)}}});update();
-</script></body></html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Developer Hub | My Teams & Access</title>
+    <style>
+      :root {
+        --navy: #0d244a;
+        --navy2: #102f60;
+        --blue: #125df4;
+        --blue2: #2385ff;
+        --sky: #65b5f3;
+        --background: #f5f8ff;
+        --paper: #fff;
+        --ink: #142342;
+        --muted: #63738b;
+        --border: #dce5f5;
+        --track: #e7edf7;
+        --shadow: 0 5px 16px rgba(25, 63, 122, 0.07);
+        --sidebar: 220px;
+        --top: 60px;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font:
+          14px/1.45 Inter,
+          "Segoe UI",
+          Arial,
+          sans-serif;
+        background: var(--background);
+        color: var(--ink);
+      }
+      button,
+      input {
+        font: inherit;
+      }
+      button {
+        cursor: pointer;
+      }
+      .topbar {
+        position: fixed;
+        z-index: 50;
+        left: 0;
+        right: 0;
+        top: 0;
+        height: var(--top);
+        background: var(--navy);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 24px;
+        gap: 20px;
+        color: white;
+        border-bottom: 2px solid var(--blue);
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        width: calc(var(--sidebar) - 24px);
+        flex-shrink: 0;
+      }
+      .brand-icon {
+        width: 39px;
+        height: 39px;
+        border-radius: 11px;
+        background: #0864e7;
+        display: grid;
+        place-items: center;
+        font-size: 20px;
+        font-weight: 800;
+      }
+      .brand strong {
+        display: block;
+        font-size: 16px;
+      }
+      .brand small {
+        font-size: 11px;
+        color: #c4d5ef;
+      }
+      .global-search {
+        width: min(450px, 42vw);
+        height: 38px;
+        border: 1px solid #58759b;
+        border-radius: 22px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0 12px;
+        color: #cbd9ef;
+        background: #1b365e;
+      }
+      .global-search input {
+        background: none;
+        border: 0;
+        outline: 0;
+        color: #fff;
+        flex: 1;
+        min-width: 0;
+        font-size: 13px;
+      }
+      .global-search input::placeholder {
+        color: #c2d1e8;
+      }
+      .top-actions {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .icon-button {
+        border: 0;
+        background: transparent;
+        color: inherit;
+        font-size: 19px;
+        padding: 4px;
+        line-height: 1;
+      }
+      .avatar {
+        width: 35px;
+        height: 35px;
+        background: var(--blue);
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        color: white;
+        font-weight: 600;
+      }
+      .sidebar {
+        position: fixed;
+        top: var(--top);
+        left: 0;
+        bottom: 0;
+        width: var(--sidebar);
+        background: linear-gradient(165deg, #102a57, #0c2145);
+        color: #d5e0f3;
+        display: flex;
+        flex-direction: column;
+        padding: 24px 10px 20px;
+        gap: 4px;
+        overflow: auto;
+      }
+      .nav-link {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: inherit;
+        text-decoration: none;
+        border-radius: 9px;
+        padding: 11px 14px;
+        font-size: 13px;
+        font-weight: 550;
+      }
+      .nav-link:hover {
+        background: #23406b;
+      }
+      .nav-link.active {
+        background: #e5efff;
+        color: #0756df;
+        font-weight: 750;
+      }
+      .nav-icon {
+        font-size: 17px;
+        width: 21px;
+        text-align: center;
+      }
+      .sidebar-foot {
+        margin-top: auto;
+        border-top: 1px solid #476082;
+        padding-top: 13px;
+      }
+      .main {
+        margin-left: var(--sidebar);
+        padding: calc(var(--top) + 18px) 24px 30px;
+        min-height: 100vh;
+        max-width: 1900px;
+      }
+      .page-heading {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        margin-bottom: 19px;
+      }
+      .page-icon {
+        width: 59px;
+        height: 59px;
+        display: grid;
+        place-items: center;
+        color: var(--blue);
+        font-size: 28px;
+        background: #e4eeff;
+        border-radius: 12px;
+      }
+      .page-heading h1 {
+        font-size: 25px;
+        letter-spacing: -0.7px;
+        margin: 0 0 3px;
+      }
+      .page-heading p {
+        color: var(--muted);
+        margin: 0;
+        font-size: 13px;
+      }
+      .tabs {
+        display: flex;
+        gap: 17px;
+        align-items: center;
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 14px;
+      }
+      .tab {
+        border: 0;
+        background: none;
+        padding: 10px 12px 12px;
+        color: #45566f;
+        font-weight: 650;
+        border-bottom: 3px solid transparent;
+      }
+      .tab.active {
+        border-color: var(--blue);
+        color: var(--blue);
+      }
+      .count {
+        background: #e5edfc;
+        padding: 2px 8px;
+        border-radius: 15px;
+        font-size: 12px;
+        margin-left: 5px;
+        color: #153a7d;
+      }
+      .identity {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        padding: 9px 16px;
+        border-radius: 10px;
+        background: #e7effd;
+        margin-bottom: 13px;
+        font-size: 12px;
+        flex-wrap: wrap;
+      }
+      .identity .divider {
+        height: 21px;
+        width: 1px;
+        background: #9baccc;
+      }
+      .identity strong {
+        font-weight: 650;
+      }
+      .metrics {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+        margin-bottom: 14px;
+      }
+      .metric {
+        background: linear-gradient(115deg, #fff, #eaf3ff);
+        border: 1px solid #cfdfff;
+        box-shadow: var(--shadow);
+        padding: 14px 17px;
+        border-radius: 13px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        min-height: 82px;
+      }
+      .metric-symbol {
+        background: #e1eeff;
+        color: #0959e9;
+        border-radius: 12px;
+        width: 52px;
+        height: 52px;
+        display: grid;
+        place-items: center;
+        font-size: 24px;
+      }
+      .metric label {
+        display: block;
+        font-weight: 650;
+        font-size: 13px;
+      }
+      .metric b {
+        display: block;
+        font-size: 27px;
+        line-height: 1.05;
+        margin-top: 3px;
+        letter-spacing: -0.5px;
+      }
+      .grid-main {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      .panel {
+        border: 1px solid var(--border);
+        background: #fff;
+        box-shadow: var(--shadow);
+        border-radius: 13px;
+        padding: 17px 18px;
+        min-width: 0;
+      }
+      .panel h2 {
+        font-size: 16px;
+        margin: 0 0 16px;
+        letter-spacing: -0.3px;
+      }
+      .info {
+        color: var(--blue);
+        font-weight: 800;
+        border: 1.5px solid;
+        border-radius: 50%;
+        font-size: 10px;
+        display: inline-grid;
+        place-items: center;
+        width: 16px;
+        height: 16px;
+        margin-left: 5px;
+        vertical-align: 2px;
+        cursor: help;
+      }
+      .department {
+        display: flex;
+        align-items: center;
+        gap: 27px;
+        min-height: 168px;
+      }
+      .donut {
+        height: 164px;
+        width: 164px;
+        flex-shrink: 0;
+        border-radius: 50%;
+        background: conic-gradient(
+          #0d46be 0 47.4%,
+          #238bff 47.4% 88.5%,
+          #76c5f8 88.5% 100%
+        );
+        position: relative;
+        display: grid;
+        place-items: center;
+      }
+      .donut:after {
+        content: "";
+        position: absolute;
+        width: 105px;
+        height: 105px;
+        background: #fff;
+        border-radius: 50%;
+      }
+      .donut-label {
+        z-index: 1;
+        text-align: center;
+      }
+      .donut-label b {
+        display: block;
+        font-size: 25px;
+      }
+      .donut-label small {
+        font-weight: 600;
+      }
+      .legend {
+        flex: 1;
+        min-width: 0;
+      }
+      .legend-row {
+        display: grid;
+        grid-template-columns: 12px minmax(80px, 1fr) 55px 45px;
+        align-items: center;
+        gap: 11px;
+        padding: 11px 0;
+        border-bottom: 1px solid #edf1f8;
+        font-size: 13px;
+      }
+      .legend-row:last-child {
+        border: 0;
+      }
+      .square {
+        width: 11px;
+        height: 11px;
+        border-radius: 3px;
+      }
+      .legend-row b,
+      .legend-row strong {
+        text-align: right;
+      }
+      .bars {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .bar-line {
+        display: grid;
+        grid-template-columns: minmax(165px, 1fr) minmax(90px, 1.12fr) 31px;
+        gap: 13px;
+        align-items: center;
+        font-size: 12px;
+      }
+      .bar-label {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-weight: 550;
+      }
+      .bar-track {
+        height: 9px;
+        background: var(--track);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      .bar-fill {
+        height: 100%;
+        border-radius: 10px;
+        background: linear-gradient(90deg, #1648bb, #258aff);
+      }
+      .bar-count {
+        text-align: right;
+        font-weight: 700;
+      }
+      .lower-grid {
+        display: grid;
+        grid-template-columns: 0.84fr 1.36fr;
+        gap: 14px;
+        margin-top: 14px;
+      }
+      .lower-grid .bar-line {
+        grid-template-columns: minmax(140px, 1.35fr) minmax(60px, 0.85fr) 30px;
+      }
+      .table-panel {
+        min-width: 0;
+      }
+      .table-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 12px;
+      }
+      .table-head h2 {
+        margin: 0 0 2px;
+      }
+      .subtext {
+        font-size: 11px;
+        color: var(--muted);
+      }
+      .table-tools {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+      }
+      .filter-box {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        border: 1px solid #cad8ef;
+        border-radius: 22px;
+        padding: 0 10px;
+        height: 35px;
+        min-width: 220px;
+        color: #60749a;
+      }
+      .filter-box input {
+        border: 0;
+        outline: 0;
+        background: transparent;
+        flex: 1;
+        width: 100%;
+        font-size: 12px;
+        color: var(--ink);
+      }
+      .clear {
+        border: 0;
+        background: transparent;
+        color: #355381;
+        font-size: 20px;
+        line-height: 1;
+        padding: 0 2px;
+        visibility: hidden;
+      }
+      .clear.visible {
+        visibility: visible;
+      }
+      .export {
+        height: 35px;
+        padding: 0 13px;
+        background: #fff;
+        color: #115de8;
+        border: 1px solid #8badf9;
+        border-radius: 20px;
+        font-weight: 650;
+        font-size: 12px;
+      }
+      .export:hover {
+        background: #eaf2ff;
+      }
+      .table-scroll {
+        overflow: auto;
+        max-height: 284px;
+      }
+      .access-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 11px;
+        white-space: nowrap;
+      }
+      .access-table thead {
+        position: sticky;
+        top: 0;
+        background: #e6efff;
+      }
+      .access-table th {
+        text-align: left;
+        padding: 9px 10px;
+      }
+      .access-table td {
+        border-bottom: 1px solid #eaf0fa;
+        padding: 9px 10px;
+      }
+      .access-table tr:hover td {
+        background: #f6f9ff;
+      }
+      .empty {
+        padding: 30px;
+        text-align: center;
+        color: var(--muted);
+      }
+      .section-note {
+        color: #6d7a8c;
+        font-size: 11px;
+        margin-top: 11px;
+      }
+      .tab-content[hidden] {
+        display: none !important;
+      }
+      .github-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+        margin-bottom: 14px;
+      }
+      .github-list {
+        display: grid;
+        gap: 8px;
+      }
+      .org-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 12px 14px;
+        border: 1px solid var(--border);
+        border-radius: 9px;
+        background: #fbfdff;
+        cursor: pointer;
+        text-align: left;
+        width: 100%;
+        color: var(--ink);
+      }
+      .org-row:hover {
+        background: #f1f6ff;
+      }
+      .org-teams {
+        padding: 12px 16px;
+        background: #f7faff;
+        border-radius: 9px;
+        margin-top: 3px;
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .tag {
+        background: #e6eefb;
+        padding: 6px 10px;
+        border-radius: 14px;
+        font-size: 12px;
+      }
+      .summary {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+      }
+      .overview-panel {
+        margin-top: 14px;
+      }
+      .overview-numbers {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+      }
+      .mini-row {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #e8edf8;
+        padding: 11px 2px;
+      }
+      .mini-row:last-child {
+        border: 0;
+      }
+      #globalClear {
+        border: 0;
+        background: transparent;
+        color: white;
+        font-size: 17px;
+        display: none;
+      }
+      #globalClear.visible {
+        display: block;
+      }
+      @media (max-width: 1150px) {
+        :root {
+          --sidebar: 190px;
+        }
+        .lower-grid {
+          grid-template-columns: 1fr;
+        }
+        .main {
+          padding-left: 16px;
+          padding-right: 16px;
+        }
+        .bar-line {
+          grid-template-columns: minmax(120px, 1fr) minmax(80px, 1fr) 30px;
+        }
+      }
+      @media (max-width: 800px) {
+        :root {
+          --sidebar: 66px;
+        }
+        .brand {
+          width: auto;
+        }
+        .brand strong,
+        .brand small,
+        .nav-text,
+        .sidebar-foot .nav-text {
+          display: none;
+        }
+        .sidebar {
+          align-items: center;
+        }
+        .nav-link {
+          padding: 11px;
+        }
+        .nav-icon {
+          width: auto;
+        }
+        .brand-icon {
+          width: 33px;
+          height: 33px;
+        }
+        .topbar {
+          padding: 0 12px;
+        }
+        .global-search {
+          width: 40vw;
+        }
+        .metrics {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .grid-main {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (max-width: 530px) {
+        .main {
+          padding: calc(var(--top) + 12px) 10px 16px;
+        }
+        .metrics,
+        .summary,
+        .github-grid {
+          grid-template-columns: 1fr;
+        }
+        .page-heading h1 {
+          font-size: 21px;
+        }
+        .top-actions {
+          gap: 8px;
+        }
+        .global-search {
+          width: 35vw;
+        }
+        .department {
+          gap: 14px;
+        }
+        .donut {
+          width: 115px;
+          height: 115px;
+        }
+        .donut:after {
+          width: 76px;
+          height: 76px;
+        }
+        .legend-row {
+          grid-template-columns: 10px 1fr 30px 32px;
+          gap: 5px;
+        }
+        .tabs {
+          gap: 0;
+        }
+        .tab {
+          padding: 9px 7px;
+          font-size: 12px;
+        }
+        .filter-box {
+          min-width: 150px;
+        }
+      }
+    </style></head
+  >a
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-icon">&lt;/&gt;</div>
+        <div>
+          <strong>Developer Hub</strong><small>Self-Service Portal</small>
+        </div>
+      </div>
+      <label class="global-search"
+        ><span>⌕</span
+        ><input
+          id="globalSearch"
+          aria-label="Search Developer Hub"
+          placeholder="Search Developer Hub ( / )"
+        /><button
+          id="globalClear"
+          aria-label="Clear global search"
+          type="button"
+        >
+          ×
+        </button></label
+      >
+      <div class="top-actions">
+        <button
+          class="icon-button"
+          aria-label="Notifications"
+          title="Notifications"
+        >
+          ♧</button
+        ><button class="icon-button" aria-label="Help" title="Help">ⓘ</button
+        ><button class="icon-button" aria-label="Settings" title="Settings">
+          ⚙</button
+        ><span class="avatar">JK</span>
+      </div>
+    </header>
+    <aside class="sidebar">
+      <a href="#" class="nav-link"
+        ><span class="nav-icon">⌂</span><span class="nav-text">Home</span></a
+      ><a href="#" class="nav-link active"
+        ><span class="nav-icon">♧</span
+        ><span class="nav-text">My Teams & Access</span></a
+      ><a href="#" class="nav-link"
+        ><span class="nav-icon">▣</span
+        ><span class="nav-text">My Repositories</span></a
+      ><a href="#" class="nav-link"
+        ><span class="nav-icon">⑂</span
+        ><span class="nav-text">My Pipelines</span></a
+      ><a href="#" class="nav-link"
+        ><span class="nav-icon">✧</span
+        ><span class="nav-text">AI Usage</span></a
+      ><a href="#" class="nav-link"
+        ><span class="nav-icon">⚙</span
+        ><span class="nav-text">Team AI Usage</span></a
+      ><a href="#" class="nav-link"
+        ><span class="nav-icon">▤</span
+        ><span class="nav-text">Request Status</span></a
+      >
+      <div class="sidebar-foot">
+        <a href="#" class="nav-link"
+          ><span class="nav-icon">▤</span
+          ><span class="nav-text">Documentation</span></a
+        ><a href="#" class="nav-link"
+          ><span class="nav-icon">☏</span
+          ><span class="nav-text">Support</span></a
+        >
+      </div>
+    </aside>
+    <main class="main">
+      <div class="page-heading">
+        <div class="page-icon">♧</div>
+        <div>
+          <h1>My Teams &amp; Access</h1>
+          <p>Your group and team memberships across Azure DevOps and GitHub</p>
+        </div>
+      </div>
+      <nav class="tabs" aria-label="Access views">
+        <button class="tab active" data-tab="overview">Overview</button
+        ><button class="tab" data-tab="ado">
+          Azure DevOps <span class="count">585</span></button
+        ><button class="tab" data-tab="github">
+          GitHub <span class="count">166</span>
+        </button>
+      </nav>
+      <div class="identity">
+        <span
+          >🔹 &nbsp;ADO identity:
+          <strong>jahnavi.kurra@navyfederal.org</strong></span
+        ><span class="divider"></span
+        ><span>◉ &nbsp;GitHub identity: <strong>Jahnavi Kurra</strong></span>
+      </div>
+      <section class="tab-content" id="view-overview">
+        <div
+          class="metrics"
+          style="grid-template-columns: repeat(4, minmax(0, 1fr))"
+        >
+          <div class="metric">
+            <span class="metric-symbol">♧</span>
+            <div><label>ADO Groups</label><b>192</b></div>
+          </div>
+          <div class="metric">
+            <span class="metric-symbol">▱</span>
+            <div><label>ADO Projects</label><b>44</b></div>
+          </div>
+          <div class="metric">
+            <span class="metric-symbol">▣</span>
+            <div><label>GitHub Orgs</label><b>149</b></div>
+          </div>
+          <div class="metric">
+            <span class="metric-symbol">⑂</span>
+            <div><label>GitHub Teams</label><b>166</b></div>
+          </div>
+        </div>
+        <div class="grid-main">
+          <section class="panel">
+            <h2>
+              Access Footprint
+              <span class="info" title="Membership rows by provider">i</span>
+            </h2>
+            <div class="department">
+              <div
+                class="donut"
+                style="
+                  background: conic-gradient(
+                    #0d46be 0 77.9%,
+                    #238bff 77.9% 100%
+                  );
+                "
+              >
+                <div class="donut-label"><b>751</b><small>Total</small></div>
+              </div>
+              <div class="legend">
+                <div class="legend-row">
+                  <i class="square" style="background: #0d46be"></i
+                  ><span>ADO memberships</span><b>585</b><strong>78%</strong>
+                </div>
+                <div class="legend-row">
+                  <i class="square" style="background: #238bff"></i
+                  ><span>GitHub team memberships</span><b>166</b
+                  ><strong>22%</strong>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section class="panel">
+            <h2>
+              Top Affiliations
+              <span class="info" title="Top groups and organizations">i</span>
+            </h2>
+            <div class="bars" id="overviewAffiliations"></div>
+          </section>
+        </div>
+      </section>
+      <section class="tab-content" id="view-ado" hidden>
+        <div class="metrics">
+          <div class="metric">
+            <span class="metric-symbol">♧</span>
+            <div><label>Groups</label><b>192</b></div>
+          </div>
+          <div class="metric">
+            <span class="metric-symbol">▱</span>
+            <div><label>Projects</label><b>44</b></div>
+          </div>
+          <div class="metric">
+            <span class="metric-symbol">⑂</span>
+            <div><label>Membership Rows</label><b>585</b></div>
+          </div>
+        </div>
+        <div class="grid-main">
+          <section class="panel">
+            <h2>
+              Access by Department
+              <span
+                class="info"
+                title="Department total from available classified rows"
+                >i</span
+              >
+            </h2>
+            <div class="department">
+              <div class="donut">
+                <div class="donut-label"><b>574</b><small>Total</small></div>
+              </div>
+              <div class="legend">
+                <div class="legend-row">
+                  <i class="square" style="background: #0d46be"></i
+                  ><span>ETS</span><b>272</b><strong>47%</strong>
+                </div>
+                <div class="legend-row">
+                  <i class="square" style="background: #238bff"></i
+                  ><span>Unassigned</span><b>236</b><strong>41%</strong>
+                </div>
+                <div class="legend-row">
+                  <i class="square" style="background: #76c5f8"></i
+                  ><span>Digital</span><b>66</b><strong>12%</strong>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section class="panel">
+            <h2>
+              Projects
+              <span class="info" title="Projects by membership rows">i</span>
+            </h2>
+            <div id="projectBars" class="bars"></div>
+          </section>
+        </div>
+        <div class="lower-grid">
+          <section class="panel">
+            <h2>
+              Groups by Membership Rows
+              <span class="info" title="Groups with the most membership rows"
+                >i</span
+              >
+            </h2>
+            <div id="groupBars" class="bars"></div>
+          </section>
+          <section class="panel table-panel">
+            <div class="table-head">
+              <div>
+                <h2>Detailed Access</h2>
+                <div class="subtext">
+                  585 access rows in this portal — representative rows shown in
+                  this preview
+                </div>
+              </div>
+              <div class="table-tools">
+                <label class="filter-box"
+                  ><span>⌕</span
+                  ><input
+                    id="filterRows"
+                    placeholder="Filter access rows..."
+                    aria-label="Filter access rows"
+                  /><button
+                    type="button"
+                    id="clearFilter"
+                    class="clear"
+                    aria-label="Clear access search"
+                  >
+                    ×
+                  </button></label
+                ><button class="export" id="exportCsv">
+                  ⇩ &nbsp; Export CSV
+                </button>
+              </div>
+            </div>
+            <div class="table-scroll">
+              <table class="access-table">
+                <thead>
+                  <tr>
+                    <th>Project Name</th>
+                    <th>Group Name</th>
+                    <th>Department</th>
+                    <th>Group Users</th>
+                    <th>Principal Name</th>
+                    <th>AAD Group Name</th>
+                  </tr>
+                </thead>
+                <tbody id="accessBody"></tbody>
+              </table>
+            </div>
+            <div id="emptyState" class="empty" hidden>
+              No matching access rows. Clear your search to see all rows.
+            </div>
+          </section>
+        </div>
+      </section>
+      <section class="tab-content" id="view-github" hidden>
+        <div class="github-grid">
+          <div class="metric">
+            <span class="metric-symbol">▣</span>
+            <div><label>Organizations</label><b>149</b></div>
+          </div>
+          <div class="metric">
+            <span class="metric-symbol">♧</span>
+            <div><label>Teams</label><b>166</b></div>
+          </div>
+        </div>
+        <div class="grid-main">
+          <section class="panel">
+            <h2>
+              Teams per Organization
+              <span class="info" title="Top organizations by team count"
+                >i</span
+              >
+            </h2>
+            <div class="bars" id="githubBars"></div>
+          </section>
+          <section class="panel">
+            <h2>Organizations &amp; Teams</h2>
+            <label class="filter-box" style="margin-bottom: 12px"
+              ><span>⌕</span
+              ><input
+                id="filterOrgs"
+                placeholder="Filter orgs and teams..."
+                aria-label="Filter GitHub organizations"
+              /><button
+                id="clearOrgs"
+                class="clear"
+                aria-label="Clear organization filter"
+                type="button"
+              >
+                ×
+              </button></label
+            >
+            <div class="github-list" id="orgList"></div>
+          </section>
+        </div>
+      </section>
+    </main>
+    <script>
+      const projects = [
+        ["DoNotUseTestProject6", 64],
+        ["Products", 61],
+        ["Core Banking Services", 24],
+        ["Shared Platform and Services", 23],
+        ["Cloud Team", 21],
+        ["DoNotUseTestProject-5", 19],
+      ];
+      const groups = [
+        ["Project Valid Users", 131],
+        ["Endpoint Creators", 61],
+        ["APPL-ADO-PROD-DEVSECOPS-CICD-PRIVILEGED", 37],
+        ["Endpoint Administrators", 35],
+        ["Project Administrators", 24],
+        ["ADO-USERS-NFCU-CLOUD-DEVOPS-EMP", 22],
+      ];
+      const orgs = [
+        [
+          "NFC-ETS",
+          5,
+          [
+            "APPL-GH-NFC-ETS-COPILOT",
+            "APPL-GHC-ETS-CICD-TOOLS-PROD-CONTRIBUTORS",
+            "APPL-GHC-ETS-DES-PROD-CONTRIBUTORS",
+            "APPL-GHC-ETS-PROD-ADMINS",
+            "Enterprise Owners",
+          ],
+        ],
+        [
+          "ETS-DES",
+          4,
+          ["ETS-Developers", "ETS-Contributors", "ETS-Admins", "ETS-Ops"],
+        ],
+        [
+          "DepMgmt",
+          3,
+          ["Deployment Admins", "Release Engineers", "Deployment Members"],
+        ],
+        [
+          "deploy-mgmt-test",
+          3,
+          ["Test Admins", "Test Developers", "Test Readers"],
+        ],
+        ["NFC-TPO", 3, ["TPO Admins", "TPO Developers", "TPO Readers"]],
+        ["NF-PEGA", 2, ["PEGA Members", "PEGA Owners"]],
+        ["nfcu-sandbox-pocs", 2, ["Sandbox Admins", "Sandbox Contributors"]],
+        ["NFCUCopilotPOC", 2, ["Copilot Admins", "Copilot Members"]],
+        ["POC-GHAS", 2, ["GHAS Maintainers", "GHAS Members"]],
+        ["BO-BOPA", 1, ["BOPA Members"]],
+        ["CCO-ComChangeMediaDev", 1, ["Media Developers"]],
+        ["CCO-ExperienceAnalytics", 1, ["Experience Analysts"]],
+      ];
+      const access = [
+        [
+          "Cybersecurity Technology Services",
+          "APPL-ADO-PROD-DEVSECOPS-CICD-PRIVILEGED",
+          "—",
+          "Jahnavi Kurra",
+          "jahnavi.kurra@navyfederal.org",
+          "—",
+        ],
+        [
+          "DevSecOpsAdmin",
+          "ADO-DevSecopsTools-NonProdTechLeads",
+          "—",
+          "Jahnavi Kurra",
+          "jahnavi.kurra@navyfederal.org",
+          "—",
+        ],
+        [
+          "DevSecOpsAdmin",
+          "CICD_DevOps_Staff",
+          "—",
+          "Jahnavi Kurra",
+          "jahnavi.kurra@navyfederal.org",
+          "—",
+        ],
+        [
+          "DevSecOpsAdmin",
+          "Contributors",
+          "—",
+          "Jahnavi Kurra",
+          "jahnavi.kurra@navyfederal.org",
+          "Contributors",
+        ],
+        [
+          "DevSecOpsAdmin",
+          "Endpoint Creators",
+          "—",
+          "Jahnavi Kurra",
+          "jahnavi.kurra@navyfederal.org",
+          "Project Administrators",
+        ],
+        [
+          "APS-Business Technology Services",
+          "Project Valid Users",
+          "—",
+          "Jahnavi Kurra",
+          "jahnavi.kurra@navyfederal.org",
+          "—",
+        ],
+      ];
+      const escapeHtml = (s) =>
+        String(s).replace(
+          /[&<>"']/g,
+          (c) =>
+            ({
+              "&": "&amp;",
+              "<": "&lt;",
+              ">": "&gt;",
+              '"': "&quot;",
+              "'": "&#39;",
+            })[c],
+        );
+      function drawBars(target, items) {
+        let max = Math.max(...items.map((x) => x[1]));
+        document.getElementById(target).innerHTML = items
+          .map(
+            ([name, num]) =>
+              `<div class="bar-line"><span class="bar-label" title="${escapeHtml(name)}">${escapeHtml(name)}</span><div class="bar-track"><div class="bar-fill" style="width:${(100 * num) / max}%"></div></div><span class="bar-count">${num}</span></div>`,
+          )
+          .join("");
+      }
+      drawBars("projectBars", projects);
+      drawBars("groupBars", groups);
+      drawBars(
+        "githubBars",
+        orgs.map((o) => [o[0], o[1]]),
+      );
+      drawBars("overviewAffiliations", [
+        ["ADO: Project Valid Users", 131],
+        ["ADO: Endpoint Creators", 61],
+        ["ADO: CICD Privileged", 37],
+        ["ADO: Endpoint Administrators", 35],
+        ["GitHub: NFC-ETS", 5],
+        ["GitHub: ETS-DES", 4],
+      ]);
+      function renderAccess() {
+        let q = document
+          .getElementById("filterRows")
+          .value.trim()
+          .toLowerCase();
+        let rows = access.filter((row) =>
+          row.some((value) => value.toLowerCase().includes(q)),
+        );
+        document.getElementById("accessBody").innerHTML = rows
+          .map(
+            (r) =>
+              "<tr>" +
+              r.map((v) => `<td>${escapeHtml(v)}</td>`).join("") +
+              "</tr>",
+          )
+          .join("");
+        document.getElementById("emptyState").hidden = rows.length > 0;
+        document.getElementById("clearFilter").classList.toggle("visible", !!q);
+      }
+      document
+        .getElementById("filterRows")
+        .addEventListener("input", renderAccess);
+      document.getElementById("clearFilter").addEventListener("click", () => {
+        document.getElementById("filterRows").value = "";
+        renderAccess();
+        document.getElementById("filterRows").focus();
+      });
+      renderAccess();
+      function renderOrgs() {
+        let q = document
+          .getElementById("filterOrgs")
+          .value.toLowerCase()
+          .trim();
+        let subset = orgs.filter(
+          (o) =>
+            o[0].toLowerCase().includes(q) ||
+            o[2].some((t) => t.toLowerCase().includes(q)),
+        );
+        document.getElementById("orgList").innerHTML = subset.length
+          ? subset
+              .map(
+                (o, i) =>
+                  `<div><button class="org-row" type="button" aria-expanded="false" data-org="${i}"><span>▣ &nbsp; <b>${escapeHtml(o[0])}</b> <span class="count">${o[1]}</span></span><span>⌄</span></button><div class="org-teams" hidden>${o[2].map((x) => `<span class="tag">${escapeHtml(x)}</span>`).join("")}</div></div>`,
+              )
+              .join("")
+          : '<div class="empty">No matching organizations</div>';
+        document.querySelectorAll(".org-row").forEach((btn) =>
+          btn.addEventListener("click", () => {
+            let content = btn.nextElementSibling;
+            content.hidden = !content.hidden;
+            btn.setAttribute("aria-expanded", String(!content.hidden));
+          }),
+        );
+        document.getElementById("clearOrgs").classList.toggle("visible", !!q);
+      }
+      document
+        .getElementById("filterOrgs")
+        .addEventListener("input", renderOrgs);
+      document.getElementById("clearOrgs").addEventListener("click", () => {
+        document.getElementById("filterOrgs").value = "";
+        renderOrgs();
+      });
+      renderOrgs();
+      function activateTab(name) {
+        document.querySelectorAll("[data-tab]").forEach((b) => {
+          b.classList.toggle("active", b.dataset.tab === name);
+          b.setAttribute("aria-selected", String(b.dataset.tab === name));
+        });
+        document
+          .querySelectorAll(".tab-content")
+          .forEach((el) => (el.hidden = el.id !== "view-" + name));
+      }
+      document
+        .querySelectorAll("[data-tab]")
+        .forEach((btn) =>
+          btn.addEventListener("click", () => activateTab(btn.dataset.tab)),
+        );
+      document.getElementById("exportCsv").addEventListener("click", () => {
+        let q = document
+          .getElementById("filterRows")
+          .value.toLowerCase()
+          .trim();
+        let filtered = access.filter((r) =>
+          r.some((c) => c.toLowerCase().includes(q)),
+        );
+        let csv = [
+          [
+            "Project Name",
+            "Group Name",
+            "Department",
+            "Group Users",
+            "Principal Name",
+            "AAD Group Name",
+          ],
+          ...filtered,
+        ]
+          .map((row) =>
+            row.map((s) => '"' + String(s).replace(/"/g, '""') + '"').join(","),
+          )
+          .join("\r\n");
+        let blob = new Blob([csv], { type: "text/csv;charset=utf-8" }),
+          url = URL.createObjectURL(blob),
+          a = document.createElement("a");
+        a.href = url;
+        a.download = "my-teams-access-preview.csv";
+        a.click();
+        URL.revokeObjectURL(url);
+      });
+      const global = document.getElementById("globalSearch"),
+        globalClear = document.getElementById("globalClear");
+      global.addEventListener("input", () =>
+        globalClear.classList.toggle("visible", !!global.value),
+      );
+      globalClear.addEventListener("click", () => {
+        global.value = "";
+        globalClear.classList.remove("visible");
+        global.focus();
+      });
+    </script>
+  </body>
+</html>
