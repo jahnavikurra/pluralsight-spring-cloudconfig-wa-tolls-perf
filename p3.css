@@ -1,13 +1,15 @@
-Before the next push, perform a focused cross-page regression review of all files affected by our shared-component changes.
+Stop expanding the scope of this PR.
 
-1. Review the latest Copilot PR comments and fix confirmed bugs.
-2. Search all ADO and GitHub pages and Playwright tests using FieldLabel, TextAreaField, shared navigation, and related components.
-3. Update outdated accessible-name locators to match the actual rendered controls. Prefer getByRole with accessible labels over placeholder-based assumptions.
-4. Run affected ADO and GitHub Vitest and Playwright tests sequentially with limited workers.
-5. Verify navigation, dropdown selection, form validation, keyboard accessibility, and responsive behavior.
-6. Check the changed code for similar issues before pushing.
-7. Run PR quality checks and production build once.
+Fix only confirmed, unresolved bugs introduced by feature/finalpages that affect functionality, accessibility, or required PR checks.
 
-Do not change existing functionality, weaken tests, or fix unrelated legacy issues.
+For the mobile drawer, ensure all navigation links close it correctly using the existing shared handler.
 
-Report all remaining findings. Do not commit or push automatically.
+Reuse previously passing test results if no related code has changed.
+
+Run only the affected tests and PR quality checks once, sequentially, with limited workers.
+
+Do not investigate unrelated legacy findings, refactor other components, or repeatedly rerun full suites.
+
+If any remaining issue is pre-existing or non-blocking, report it separately without changing code.
+
+Do not commit or push automatically. Provide a concise final readiness report.
