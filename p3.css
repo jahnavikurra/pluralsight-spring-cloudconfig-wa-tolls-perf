@@ -1,17 +1,13 @@
-Preserve all current uncommitted changes.
+Before the next push, perform a focused cross-page regression review of all files affected by our shared-component changes.
 
-Focus only on completing the FieldLabel accessibility refactoring.
+1. Review the latest Copilot PR comments and fix confirmed bugs.
+2. Search all ADO and GitHub pages and Playwright tests using FieldLabel, TextAreaField, shared navigation, and related components.
+3. Update outdated accessible-name locators to match the actual rendered controls. Prefer getByRole with accessible labels over placeholder-based assumptions.
+4. Run affected ADO and GitHub Vitest and Playwright tests sequentially with limited workers.
+5. Verify navigation, dropdown selection, form validation, keyboard accessibility, and responsive behavior.
+6. Check the changed code for similar issues before pushing.
+7. Run PR quality checks and production build once.
 
-First check whether any test processes from the previous Copilot session are still active. Stop only redundant processes started by that session.
+Do not change existing functionality, weaken tests, or fix unrelated legacy issues.
 
-Do not run tests in parallel or start unnecessary background commands.
-
-Run only the affected FieldLabel and ADO form tests sequentially, using one worker.
-
-Fix genuine failures without changing existing functionality or weakening tests.
-
-Run the PR quality check and production build once.
-
-If anything fails or hangs, stop investigating and report the exact issue.
-
-Do not commit or push. Provide a short final summary.
+Report all remaining findings. Do not commit or push automatically.
