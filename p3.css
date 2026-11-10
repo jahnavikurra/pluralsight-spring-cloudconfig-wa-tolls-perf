@@ -1,15 +1,11 @@
-Stop expanding the scope of this PR.
+Quick final PR cleanup for feature/finalpages.
 
-Fix only confirmed, unresolved bugs introduced by feature/finalpages that affect functionality, accessibility, or required PR checks.
+1. Review only active Copilot PR comments and new SonarQube findings.
+2. Fix confirmed issues introduced by this branch.
+3. Skip already-fixed findings and unrelated legacy issues.
+4. Preserve all ADO, GitHub, Boards Only, Full Team Setup, and shared-component functionality.
+5. Run only affected tests, PR quality checks, and build, sequentially with limited workers.
+6. Do not run repeated full test suites, background polling, or unnecessary refactoring.
+7. Stop after one validation pass and report remaining blockers.
 
-For the mobile drawer, ensure all navigation links close it correctly using the existing shared handler.
-
-Reuse previously passing test results if no related code has changed.
-
-Run only the affected tests and PR quality checks once, sequentially, with limited workers.
-
-Do not investigate unrelated legacy findings, refactor other components, or repeatedly rerun full suites.
-
-If any remaining issue is pre-existing or non-blocking, report it separately without changing code.
-
-Do not commit or push automatically. Provide a concise final readiness report.
+Do not commit or push automatically.
