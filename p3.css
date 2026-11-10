@@ -1,9 +1,17 @@
-Check whether feature/finalpages can deploy to Dev using our existing Azure DevOps pipeline.
+Preserve all current uncommitted changes.
 
-Inspect the branch filters and shared deployment template if accessible.
+Focus only on completing the FieldLabel accessibility refactoring.
 
-Confirm whether refs/heads/feature matches refs/heads/feature/finalpages and whether UAT could also run.
+First check whether any test processes from the previous Copilot session are still active. Stop only redundant processes started by that session.
 
-Recommend the smallest safe way to deploy only this feature branch to Dev without changing existing develop, UAT, or Production deployment behavior.
+Do not run tests in parallel or start unnecessary background commands.
 
-Do not change YAML, push, merge, or deploy.
+Run only the affected FieldLabel and ADO form tests sequentially, using one worker.
+
+Fix genuine failures without changing existing functionality or weakening tests.
+
+Run the PR quality check and production build once.
+
+If anything fails or hangs, stop investigating and report the exact issue.
+
+Do not commit or push. Provide a short final summary.
