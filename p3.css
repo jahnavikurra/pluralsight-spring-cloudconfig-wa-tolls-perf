@@ -1,81 +1,56 @@
-Analyze our entire React Developer Hub frontend and generate a comprehensive UI architecture and design system assessment report.
+Implement Phase 1 of Cmd+R v0.8.0 integration in the current feature branch.
 
-**Context:**
-We have already refactored parts of the application using shared React components, SCSS tokens, global styles, and responsive layouts. The application includes ADO onboarding, GitHub onboarding, Self Service Home, dashboards, and other self-service pages.
+Cmd+R is already installed as @nfcu/cmdr-core. Do not reinstall or upgrade the package.
 
-We also plan to adopt our organization's Cmd+R Design System.
+**Step 1 — Inspect before modifying**
 
-**Perform a READ-ONLY audit covering:**
+- Read the installed package's design-tokens/design-tokens.css and package exports.
+- Identify the exact semantic CSS variables for brand, text, backgrounds, surfaces, borders, links, statuses, and focus states.
+- Distinguish semantic tokens from primitive palette tokens.
+- Inspect our existing _tokens.scss, theme.scss, global.scss, global CSS entry points, and import order.
+- Check whether Cmd+R tokens are already imported anywhere.
+- Identify CSS variable naming conflicts, cascade issues, and potential visual changes.
 
-1. **Existing Architecture**
-   - Current React project structure
-   - Shared components and their usage
-   - Application shell, sidebar, header, routing, and page layouts
-   - Existing reusable hooks and UI patterns
+**Step 2 — Minimal implementation**
 
-2. **SCSS and Design Tokens**
-   - Analyze global.scss, tokens.scss, theme.scss, typography, and page-specific SCSS
-   - Identify existing colors, spacing, fonts, borders, shadows, and responsive breakpoints
-   - Find duplicated styles, conflicting declarations, and hardcoded values
-   - Identify opportunities to consolidate styles without affecting functionality
+- Import the official Cmd+R semantic design-token stylesheet exactly once at the appropriate global entry point, following the package's supported import path.
+- Map existing application semantic SCSS tokens to verified Cmd+R semantic CSS variables.
+- Preserve existing token values where no reliable semantic mapping exists.
+- Retain existing application token names where possible to avoid changing consumers.
+- Do not create duplicate token declarations or introduce hardcoded colors.
+- Do not use primitive palette variables where an appropriate semantic token exists.
+- Preserve existing light/dark theme behavior if supported.
 
-3. **Shared Component Reusability**
-   - Identify existing Buttons, Cards, Headers, Tabs, Tables, Forms, Modals, and Navigation components
-   - Show which pages use each component
-   - Identify duplicated components and inconsistent implementations
-   - Recommend which existing components should become the standard
+**Step 3 — Strict scope control**
 
-4. **Page-by-Page UI Consistency**
-   - Analyze Self Service Home, ADO onboarding, GitHub onboarding, Teams, Repositories, Pipelines, Environments, and all dashboards
-   - Identify differences in colors, page headers, sidebars, card layouts, typography, spacing, and responsiveness
-   - Identify pages that do not follow existing shared component standards
+Do not:
+- Enable Cmd+R global resets or typography overrides.
+- Import the complete Cmd+R component stylesheet.
+- Refactor AppShell, Sidebar, Header, shared components, or pages.
+- Change JSX, component behavior, routing, RBAC, APIs, or responsive layouts.
+- Change existing naming conventions or business logic.
+- Modify PR quality gates or suppress validation errors.
+- Upgrade dependencies unnecessarily.
 
-5. **Cmd+R Design System Readiness**
-   - Check whether @nfcu/cmdr-core is installed or available locally
-   - Compare existing styles against verified Cmd+R tokens and components
-   - Identify compatible components and required adjustments
-   - Do not invent undocumented Cmd+R tokens or APIs
-   - Clearly identify anything requiring additional documentation
+**Step 4 — Verification**
 
-6. **Responsive Design**
-   - Review desktop layout behavior across different screen sizes
-   - Check fixed sidebar, header, content scrolling, card grids, tables, and forms
-   - Identify overflow, inconsistent breakpoints, and layout issues
+- Verify the official stylesheet loads exactly once.
+- Check CSS variable resolution and fallback behavior in both supported themes.
+- Check for undefined CSS variables and circular token references.
+- Confirm existing page styling remains visually unchanged, or report any intentional semantic-token differences.
+- Run the relevant Stylelint, hardcoded-color validation, and production build once, sequentially.
+- Run focused tests only if affected by the changes.
 
-7. **Recommended Architecture**
-   - Propose a unified design system using existing shared components
-   - Recommend a reusable AppShell, PageHeader, Card, Form, Table, and Dashboard structure
-   - Avoid unnecessary new components and duplicate styling
-   - Preserve all existing APIs, routing, RBAC, validation, business logic, and functionality
+**Step 5 — Report**
 
-8. **Implementation Roadmap**
-   - Prioritize improvements by impact and risk
-   - Identify exact files requiring changes
-   - Separate changes into safe, incremental phases
-   - Recommend which page should be updated first
-   - Identify potential regression risks and required tests
+Provide:
+1. Exact Cmd+R semantic tokens discovered.
+2. Existing-to-Cmd+R token mapping table.
+3. Files changed and reason for each change.
+4. Any unmapped tokens and compatibility concerns.
+5. Verification results.
+6. Recommendation for Phase 2.
 
-**Output:**
-Create a detailed Markdown report at:
+Choose the smallest safe implementation.
 
-`docs/UI_DESIGN_SYSTEM_AUDIT.md`
-
-Include:
-- Executive summary
-- Existing component inventory with file paths
-- Page-to-component usage matrix
-- SCSS/token inventory
-- UI inconsistencies and duplication
-- Cmd+R integration readiness
-- Recommended architecture
-- File-level implementation roadmap
-- Risks and validation checklist
-
-**Important:**
-- Do not modify application source code.
-- Do not install packages.
-- Do not refactor or delete anything.
-- Do not change existing functionality.
-- Base findings on actual repository code, not assumptions.
-- Clearly distinguish verified findings from recommendations.
-- Generate the report only.
+Do not commit or push automatically.
