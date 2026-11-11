@@ -1,21 +1,63 @@
-Review the Cmd+R warning-color refactoring before we accept or commit it.
+Implement Cmd+R v0.8.0 semantic color adoption in our existing Next.js React Developer Hub.
 
-The existing changes affect warning styles across ADO, GitHub, dashboards, shared components, and other pages.
+Cmd+R is already installed as @nfcu/cmdr-core. Do not reinstall or upgrade it.
 
-Fix only the following remaining issues:
+IMPORTANT CHANGE:
+We are intentionally adopting the official Cmd+R color palette across the entire application. Existing application colors do NOT need to match the Cmd+R hex values.
 
-1. Ensure warning text meets WCAG AA contrast requirements (minimum 4.5:1 for normal text), including StatusBadge at small font sizes.
-2. Ensure meaningful warning icons, dots, and visual indicators meet applicable 3:1 contrast requirements or are accompanied by sufficient non-color cues.
-3. Preserve appropriate dark-mode styling for existing warning components, including the support notice.
-4. Verify that --cmdr-color-status-warning is appropriate for each warning background. Use other verified semantic tokens for warning text, borders, and icons where needed.
-5. Do not change severity scales, brand orange, chart palettes, success, error, or informational colors.
-6. Do not invent new tokens or introduce hardcoded hex colors.
-7. Preserve existing component behavior and accessibility semantics.
-8. Confirm that warning classes are applied only to actual warning states.
-9. Run relevant tests, build, existing quality checks, and automated contrast validation.
-10. Provide a list of remaining visual checks that require browser testing.
+Map tokens based on semantic purpose and documented usage, not exact color equality.
 
-Do not refactor unrelated components or pages.
-Do not commit or push.
+PHASE 1 — SEMANTIC COLOR FOUNDATION
 
-Summarize the corrected contrast ratios, changed files, test results, and remaining exceptions.
+1. Inspect the installed Cmd+R design-tokens.css, package exports, and official documentation available in the repository.
+2. Review existing _tokens.scss, theme.scss, global.scss, global CSS imports, and token dependencies.
+3. Identify any Cmd+R imports or mappings already implemented and reuse them. Do not duplicate imports.
+4. Map existing application color tokens to their appropriate verified Cmd+R semantic equivalents, even when the values differ.
+5. Prioritize brand, background, surface, text, links, borders, dividers, focus, interactive states, and status colors.
+6. Retain existing application token names where possible, so shared components and pages inherit the updated colors automatically.
+7. Follow documented Cmd+R usage: primary brand for approved navigation/header surfaces, appropriate surface tokens for page/card backgrounds, and interactive tokens for links and actions.
+8. Do not automatically map every blue to brand-primary or every orange to brand-secondary. Match by UI purpose.
+9. Preserve unmatched tokens until reviewed. Identify those requiring design approval.
+10. Do not use primitive palette variables, introduce hardcoded colors, or create a second theme system.
+
+ACCESSIBILITY
+
+- Meet WCAG AA contrast requirements for text, controls, and meaningful icons.
+- Verify foreground/background combinations, not individual token values in isolation.
+- Preserve focus visibility and non-color indicators for warning/error/success states.
+- Treat any contrast failures as blockers requiring correction or explicit reporting, not acceptable exceptions.
+
+STRICT SCOPE
+
+- Do not reinstall packages.
+- Do not enable Cmd+R resets, typography overrides, or full component styles.
+- Do not refactor JSX, AppShell, Sidebar, Header, shared components, or individual pages yet.
+- Do not modify business logic, APIs, RBAC, routing, validations, or responsive layouts.
+- Do not change PR checks or suppress linting violations.
+
+VERIFICATION
+
+1. Ensure Cmd+R design tokens are imported only once per applicable application entry point.
+2. Verify all application token references resolve correctly.
+3. Check for duplicate declarations, undefined variables, and circular references.
+4. Verify existing light and dark themes; if Cmd+R lacks dark-theme equivalents, preserve necessary application-specific theme behavior.
+5. Identify all intentional visual color changes.
+6. Run relevant Stylelint, hardcoded-color checks, and production build sequentially.
+7. Run focused tests where affected.
+8. Do not claim visual regression success without browser verification.
+
+DELIVERABLE
+
+Report:
+- Exact Cmd+R semantic tokens used
+- Existing-to-Cmd+R mapping table
+- Tokens intentionally changing color
+- Unmapped tokens and reasons
+- Changed files
+- Build and validation results
+- Remaining accessibility/visual issues
+- Recommended Phase 2 migration order
+
+Implement only the semantic token foundation in this phase.
+
+Do not commit or push automatically.
