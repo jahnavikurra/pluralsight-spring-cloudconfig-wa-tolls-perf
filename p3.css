@@ -1,56 +1,21 @@
-Implement Phase 1 of Cmd+R v0.8.0 integration in the current feature branch.
+Review the Cmd+R warning-color refactoring before we accept or commit it.
 
-Cmd+R is already installed as @nfcu/cmdr-core. Do not reinstall or upgrade the package.
+The existing changes affect warning styles across ADO, GitHub, dashboards, shared components, and other pages.
 
-**Step 1 — Inspect before modifying**
+Fix only the following remaining issues:
 
-- Read the installed package's design-tokens/design-tokens.css and package exports.
-- Identify the exact semantic CSS variables for brand, text, backgrounds, surfaces, borders, links, statuses, and focus states.
-- Distinguish semantic tokens from primitive palette tokens.
-- Inspect our existing _tokens.scss, theme.scss, global.scss, global CSS entry points, and import order.
-- Check whether Cmd+R tokens are already imported anywhere.
-- Identify CSS variable naming conflicts, cascade issues, and potential visual changes.
+1. Ensure warning text meets WCAG AA contrast requirements (minimum 4.5:1 for normal text), including StatusBadge at small font sizes.
+2. Ensure meaningful warning icons, dots, and visual indicators meet applicable 3:1 contrast requirements or are accompanied by sufficient non-color cues.
+3. Preserve appropriate dark-mode styling for existing warning components, including the support notice.
+4. Verify that --cmdr-color-status-warning is appropriate for each warning background. Use other verified semantic tokens for warning text, borders, and icons where needed.
+5. Do not change severity scales, brand orange, chart palettes, success, error, or informational colors.
+6. Do not invent new tokens or introduce hardcoded hex colors.
+7. Preserve existing component behavior and accessibility semantics.
+8. Confirm that warning classes are applied only to actual warning states.
+9. Run relevant tests, build, existing quality checks, and automated contrast validation.
+10. Provide a list of remaining visual checks that require browser testing.
 
-**Step 2 — Minimal implementation**
+Do not refactor unrelated components or pages.
+Do not commit or push.
 
-- Import the official Cmd+R semantic design-token stylesheet exactly once at the appropriate global entry point, following the package's supported import path.
-- Map existing application semantic SCSS tokens to verified Cmd+R semantic CSS variables.
-- Preserve existing token values where no reliable semantic mapping exists.
-- Retain existing application token names where possible to avoid changing consumers.
-- Do not create duplicate token declarations or introduce hardcoded colors.
-- Do not use primitive palette variables where an appropriate semantic token exists.
-- Preserve existing light/dark theme behavior if supported.
-
-**Step 3 — Strict scope control**
-
-Do not:
-- Enable Cmd+R global resets or typography overrides.
-- Import the complete Cmd+R component stylesheet.
-- Refactor AppShell, Sidebar, Header, shared components, or pages.
-- Change JSX, component behavior, routing, RBAC, APIs, or responsive layouts.
-- Change existing naming conventions or business logic.
-- Modify PR quality gates or suppress validation errors.
-- Upgrade dependencies unnecessarily.
-
-**Step 4 — Verification**
-
-- Verify the official stylesheet loads exactly once.
-- Check CSS variable resolution and fallback behavior in both supported themes.
-- Check for undefined CSS variables and circular token references.
-- Confirm existing page styling remains visually unchanged, or report any intentional semantic-token differences.
-- Run the relevant Stylelint, hardcoded-color validation, and production build once, sequentially.
-- Run focused tests only if affected by the changes.
-
-**Step 5 — Report**
-
-Provide:
-1. Exact Cmd+R semantic tokens discovered.
-2. Existing-to-Cmd+R token mapping table.
-3. Files changed and reason for each change.
-4. Any unmapped tokens and compatibility concerns.
-5. Verification results.
-6. Recommendation for Phase 2.
-
-Choose the smallest safe implementation.
-
-Do not commit or push automatically.
+Summarize the corrected contrast ratios, changed files, test results, and remaining exceptions.
