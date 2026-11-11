@@ -1,11 +1,81 @@
-Quick final PR cleanup for feature/finalpages.
+Analyze our entire React Developer Hub frontend and generate a comprehensive UI architecture and design system assessment report.
 
-1. Review only active Copilot PR comments and new SonarQube findings.
-2. Fix confirmed issues introduced by this branch.
-3. Skip already-fixed findings and unrelated legacy issues.
-4. Preserve all ADO, GitHub, Boards Only, Full Team Setup, and shared-component functionality.
-5. Run only affected tests, PR quality checks, and build, sequentially with limited workers.
-6. Do not run repeated full test suites, background polling, or unnecessary refactoring.
-7. Stop after one validation pass and report remaining blockers.
+**Context:**
+We have already refactored parts of the application using shared React components, SCSS tokens, global styles, and responsive layouts. The application includes ADO onboarding, GitHub onboarding, Self Service Home, dashboards, and other self-service pages.
 
-Do not commit or push automatically.
+We also plan to adopt our organization's Cmd+R Design System.
+
+**Perform a READ-ONLY audit covering:**
+
+1. **Existing Architecture**
+   - Current React project structure
+   - Shared components and their usage
+   - Application shell, sidebar, header, routing, and page layouts
+   - Existing reusable hooks and UI patterns
+
+2. **SCSS and Design Tokens**
+   - Analyze global.scss, tokens.scss, theme.scss, typography, and page-specific SCSS
+   - Identify existing colors, spacing, fonts, borders, shadows, and responsive breakpoints
+   - Find duplicated styles, conflicting declarations, and hardcoded values
+   - Identify opportunities to consolidate styles without affecting functionality
+
+3. **Shared Component Reusability**
+   - Identify existing Buttons, Cards, Headers, Tabs, Tables, Forms, Modals, and Navigation components
+   - Show which pages use each component
+   - Identify duplicated components and inconsistent implementations
+   - Recommend which existing components should become the standard
+
+4. **Page-by-Page UI Consistency**
+   - Analyze Self Service Home, ADO onboarding, GitHub onboarding, Teams, Repositories, Pipelines, Environments, and all dashboards
+   - Identify differences in colors, page headers, sidebars, card layouts, typography, spacing, and responsiveness
+   - Identify pages that do not follow existing shared component standards
+
+5. **Cmd+R Design System Readiness**
+   - Check whether @nfcu/cmdr-core is installed or available locally
+   - Compare existing styles against verified Cmd+R tokens and components
+   - Identify compatible components and required adjustments
+   - Do not invent undocumented Cmd+R tokens or APIs
+   - Clearly identify anything requiring additional documentation
+
+6. **Responsive Design**
+   - Review desktop layout behavior across different screen sizes
+   - Check fixed sidebar, header, content scrolling, card grids, tables, and forms
+   - Identify overflow, inconsistent breakpoints, and layout issues
+
+7. **Recommended Architecture**
+   - Propose a unified design system using existing shared components
+   - Recommend a reusable AppShell, PageHeader, Card, Form, Table, and Dashboard structure
+   - Avoid unnecessary new components and duplicate styling
+   - Preserve all existing APIs, routing, RBAC, validation, business logic, and functionality
+
+8. **Implementation Roadmap**
+   - Prioritize improvements by impact and risk
+   - Identify exact files requiring changes
+   - Separate changes into safe, incremental phases
+   - Recommend which page should be updated first
+   - Identify potential regression risks and required tests
+
+**Output:**
+Create a detailed Markdown report at:
+
+`docs/UI_DESIGN_SYSTEM_AUDIT.md`
+
+Include:
+- Executive summary
+- Existing component inventory with file paths
+- Page-to-component usage matrix
+- SCSS/token inventory
+- UI inconsistencies and duplication
+- Cmd+R integration readiness
+- Recommended architecture
+- File-level implementation roadmap
+- Risks and validation checklist
+
+**Important:**
+- Do not modify application source code.
+- Do not install packages.
+- Do not refactor or delete anything.
+- Do not change existing functionality.
+- Base findings on actual repository code, not assumptions.
+- Clearly distinguish verified findings from recommendations.
+- Generate the report only.
