@@ -1,63 +1,14 @@
-Implement Cmd+R v0.8.0 semantic color adoption in our existing Next.js React Developer Hub.
+I want to deploy the current Cmd+R v0.8.0 Phase 1 feature branch to our DEV Azure Container App for visual testing.
 
-Cmd+R is already installed as @nfcu/cmdr-core. Do not reinstall or upgrade it.
+Our tests and production build have already passed. Do not rerun them unnecessarily.
 
-IMPORTANT CHANGE:
-We are intentionally adopting the official Cmd+R color palette across the entire application. Existing application colors do NOT need to match the Cmd+R hex values.
+1. Inspect the existing Azure DevOps deployment pipeline, Dockerfile, container registry configuration, and DEV Azure Container App deployment process.
+2. Identify how to build and deploy the current feature branch without merging into develop.
+3. Verify @nfcu/cmdr-core is available during the Docker build, including any local tarball dependency.
+4. Use our existing pipeline and deployment conventions. Do not create a new pipeline unless necessary.
+5. Prefer an isolated test revision without affecting existing DEV users or traffic.
+6. Preserve all existing DEV environment variables, secrets, authentication, RBAC, and backend configurations.
+7. Provide the exact steps to deploy and access the test revision.
+8. Do not modify files, commit, push, merge, or trigger deployment automatically.
 
-Map tokens based on semantic purpose and documented usage, not exact color equality.
-
-PHASE 1 — SEMANTIC COLOR FOUNDATION
-
-1. Inspect the installed Cmd+R design-tokens.css, package exports, and official documentation available in the repository.
-2. Review existing _tokens.scss, theme.scss, global.scss, global CSS imports, and token dependencies.
-3. Identify any Cmd+R imports or mappings already implemented and reuse them. Do not duplicate imports.
-4. Map existing application color tokens to their appropriate verified Cmd+R semantic equivalents, even when the values differ.
-5. Prioritize brand, background, surface, text, links, borders, dividers, focus, interactive states, and status colors.
-6. Retain existing application token names where possible, so shared components and pages inherit the updated colors automatically.
-7. Follow documented Cmd+R usage: primary brand for approved navigation/header surfaces, appropriate surface tokens for page/card backgrounds, and interactive tokens for links and actions.
-8. Do not automatically map every blue to brand-primary or every orange to brand-secondary. Match by UI purpose.
-9. Preserve unmatched tokens until reviewed. Identify those requiring design approval.
-10. Do not use primitive palette variables, introduce hardcoded colors, or create a second theme system.
-
-ACCESSIBILITY
-
-- Meet WCAG AA contrast requirements for text, controls, and meaningful icons.
-- Verify foreground/background combinations, not individual token values in isolation.
-- Preserve focus visibility and non-color indicators for warning/error/success states.
-- Treat any contrast failures as blockers requiring correction or explicit reporting, not acceptable exceptions.
-
-STRICT SCOPE
-
-- Do not reinstall packages.
-- Do not enable Cmd+R resets, typography overrides, or full component styles.
-- Do not refactor JSX, AppShell, Sidebar, Header, shared components, or individual pages yet.
-- Do not modify business logic, APIs, RBAC, routing, validations, or responsive layouts.
-- Do not change PR checks or suppress linting violations.
-
-VERIFICATION
-
-1. Ensure Cmd+R design tokens are imported only once per applicable application entry point.
-2. Verify all application token references resolve correctly.
-3. Check for duplicate declarations, undefined variables, and circular references.
-4. Verify existing light and dark themes; if Cmd+R lacks dark-theme equivalents, preserve necessary application-specific theme behavior.
-5. Identify all intentional visual color changes.
-6. Run relevant Stylelint, hardcoded-color checks, and production build sequentially.
-7. Run focused tests where affected.
-8. Do not claim visual regression success without browser verification.
-
-DELIVERABLE
-
-Report:
-- Exact Cmd+R semantic tokens used
-- Existing-to-Cmd+R mapping table
-- Tokens intentionally changing color
-- Unmapped tokens and reasons
-- Changed files
-- Build and validation results
-- Remaining accessibility/visual issues
-- Recommended Phase 2 migration order
-
-Implement only the semantic token foundation in this phase.
-
-Do not commit or push automatically.
+Keep the process minimal and fast.
